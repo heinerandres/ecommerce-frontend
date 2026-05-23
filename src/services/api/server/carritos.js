@@ -1,0 +1,44 @@
+import { apiFetch } from "../api";
+
+export async function getCarrito(usuario_id) {
+  return apiFetch("/api/carrito/obtenerCarrito", {
+    method: "POST",
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({usuario_id,}),
+  });
+}
+
+export async function getCarritos() {
+  return apiFetch(`/api/carrito/`);
+}
+
+export async function crearCarrito(data){
+  return apiFetch('/api/carrito/insertar', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+}
+export async function actualizarCarrito(data){
+  return apiFetch('/api/carrito/actualizarCarrito', {
+    method: 'PUT',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+}
+
+/* export async function createProducto(data) {
+  return apiFetch('/api/producto/insertar', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+} */
