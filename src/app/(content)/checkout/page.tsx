@@ -21,7 +21,7 @@ const Carts = [{
 
 export default function CheckoutPage() {
   return (
-    <div className="flex justify-center h-[80vh]">
+    <div className="flex justify-center h-[80vh] md:text-sm 2xl:text-lg">
         <div className="flex w-[60%]">
             <div className="w-[50%] p-[2%]">
                 <h5 className="text-4xl font-bold">Verificar orden</h5>
@@ -35,7 +35,7 @@ export default function CheckoutPage() {
                     }
                 </div>
             </div>
-            <div className="w-[35%] h-[68%] mt-[5%] ml-[5%] p-8 rounded-2xl shadow-xl">
+            <div className="md:w-[47%] 2xl:w-[35%] md:h-[85%] 2xl:h-[68%] mt-[5%] md:ml-[15%] 2xl:ml-[5%] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold">Dirección de entrega</h4>
               <div className="mb-4">
                 <p className="">Heiner Andrés Solano Arguedas</p>

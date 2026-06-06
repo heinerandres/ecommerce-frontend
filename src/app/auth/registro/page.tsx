@@ -28,7 +28,7 @@ export default function () {
   }
 
   return (
-    <div className="flex justify-center min-h-screen pt-32 sm:pt-52">
+    <div className="flex justify-center min-h-screen md:pt-30 2xl:pt-52">
 
       <div className="w-80">
         <h1 className=" text-4xl mb-5" >Ingresar</h1>
