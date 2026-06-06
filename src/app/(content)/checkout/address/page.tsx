@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 export default function NamePage() {
   return (
-    <div className="flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0">
+    <div className="flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0 md:text-sm 2xl:text-lg">
 
 
 
       <div className="w-full  xl:w-250 flex flex-col justify-center text-left">
         
-        <h5 className="text-4xl font-bold mt-[5%]">Dirección</h5>
-        <h3 className="text-lg py-[2%]">Dirección de entrega</h3>
+        <h5 className="md:text-3xl 2xl:text-4xl font-bold mt-[5%]">Dirección</h5>
+        <h3 className="md:text-sm 2xl:text-lg py-[2%]">Dirección de entrega</h3>
 
         <div className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2">
 

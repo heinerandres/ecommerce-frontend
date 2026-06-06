@@ -13,6 +13,6 @@ export const NavCart = () => {
     //consultar carro y hacer uno si no tiene
 
   return (
-    <Link href="/cart" className="flex items-center font-bold px-[4%] cursor-pointer"><i className="fa fa-shopping-cart mr-[5%]"></i>Carrito</Link>
+    <Link href="/cart" className="flex items-center font-bold px-[4%] cursor-pointer md:text-sm 2xl:text-lg"><i className="fa fa-shopping-cart mr-[5%]"></i>Carrito</Link>
   )
 }
