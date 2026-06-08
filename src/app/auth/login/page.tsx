@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Ingresar } from './Ingresar';
 import { GoogleLogin } from '../../components/login/GoogleLogin';
 
-export default function () {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

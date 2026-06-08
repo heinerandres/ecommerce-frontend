@@ -6,6 +6,11 @@ import { getGeneralInformation } from "@/src/utilities/getGeneralInfo";
 export default async function ProductoPage ({ params }: { params: { slug:string }}) {
     const _params = await params;
     const {productos, tallas, colores, errorMsg} = await getGeneralInformation(_params.slug);
+
+    const tieneTalla = productos?.some(producto => producto.talla !== undefined);
+    const tieneColor = productos?.some(producto => producto.color !== undefined);
+
+
   return (
     <div className="flex justify-center h-[80vh] mt-[2%]">
       <div className="flex h-full w-[80%]">
@@ -16,7 +21,17 @@ export default async function ProductoPage ({ params }: { params: { slug:string 
           {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           <h4 className="text-2xl font-bold">{ productos?.[0].nombre }</h4>
           <p className="mt-[4%]">{ productos?.[0].descripcion }</p>
-          <ProductoClient productos = { productos } tallas={ tallas } colores={ colores }/>
+
+          {!tieneTalla && !tieneColor ? ( 
+            <div>sin talla, sin color</div>
+          ) : !tieneTalla && tieneColor ? (
+            <div>solo color</div>
+          ) : (
+            <ProductoClient productos= {productos} tallas={tallas} colores={colores}/>
+          )
+          }
+
+          
       </div>
       </div>
     </div>
