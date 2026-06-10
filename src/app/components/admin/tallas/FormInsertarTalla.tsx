@@ -1,0 +1,58 @@
+'use client';
+import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import Link from "next/link";
+import { insertarTalla } from "@/src/services/api/server/tallas";
+
+
+export default function FormInsertarTalla() {
+    const [errorMsg, setErrorMsg] = useState('');
+    const [valor, setValor] = useState('');
+    const router = useRouter();
+
+    const handleInsertar = async(e:any) => {
+        e.preventDefault();
+
+        const respuesta = await insertarTalla({valor: valor});
+
+        if (respuesta.ok) {
+          router.push('/admin/tallas');
+        } else {
+          setErrorMsg(respuesta.msg);
+        }
+    }
+
+    return (
+        <>
+            <h1 className="md:text-2xl 2xl:text-4xl mb-5" >Insertar</h1>
+            <form onSubmit={handleInsertar} className="flex flex-col">
+                <label htmlFor="nombre" className="md:text-sm 2xl:text-lg">Nombre</label>
+                <input
+                    minLength={2}
+                    required
+                    className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-gray-200 rounded mb-5"
+                    type="text" 
+                    placeholder="Nombre"
+                    name="nombre"
+                    value={valor}
+                    onChange={(e) => setValor(e.target.value)}
+                />
+
+                { errorMsg !== "" &&
+                    <span className="text-red-500">
+                    {errorMsg}
+                    </span>
+                }
+                <div className="w-full flex justify-around md:mt-10 2xl:mt-10 md:text-sm 2xl:text-lg">
+                <Link href="./" className="border border-blue-600 md:py-1.5 2xl:py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
+                <button
+                    type="submit"
+                    className="bg-blue-600 md:py-1.5 2xl:py-2 rounded text-white cursor-pointer w-[45%]">
+                    Insertar
+                </button>
+            </div>
+            </form>
+        </>
+        
+    )
+}

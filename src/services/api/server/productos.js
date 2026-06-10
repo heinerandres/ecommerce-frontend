@@ -7,6 +7,7 @@ export async function getProductos() {
 }
 
 export async function getProductoBySlug(slug) {
+  console.log(slug);
   return apiFetch("/api/producto/obtenerProductoBySlug", {
     method: "POST",
     cache: 'no-store',
