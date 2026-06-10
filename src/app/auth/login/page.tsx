@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import Link from 'next/link';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { Ingresar } from './Ingresar';
 import { GoogleLogin } from '../../components/login/GoogleLogin';
 
-export default function () {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();  
+
+  
   enum LoginType {
     REGISTRAR,
     USERPASS,
@@ -25,7 +26,7 @@ export default function () {
     await Ingresar({email, password, setErrorMessage, dispatch, loginType: LoginType.USERPASS, router});
   }
   return (
-    <div className="flex justify-center min-h-screen pt-32 sm:pt-52">
+    <div className="flex justify-center min-h-screen md:pt-30 2xl:pt-52">
       <div className="w-80">
         <h1 className=" text-4xl mb-5" >Ingresar</h1>
         <form onSubmit={handleIngresar} className="flex flex-col">

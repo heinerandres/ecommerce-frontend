@@ -82,7 +82,7 @@ export const CartClient = ({ tallas, colores }: Props) => {
               }
           </div>
         </div>
-        <div className="w-[35%] h-[40%] mt-[5%] ml-[5%] p-8 rounded-2xl shadow-xl">
+        <div className="md:w-[45%] 2xl:w-[35%] md:h-[50%] 2xl:h-[40%] mt-[5%] ml-[5%] p-8 rounded-2xl shadow-xl">
           <h4 className="text-xl font-bold">Resumen de orden</h4>
           <div className="flex justify-between mt-4">
             <p>Número de productos</p>

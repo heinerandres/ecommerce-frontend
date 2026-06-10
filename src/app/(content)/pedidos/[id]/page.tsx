@@ -30,14 +30,14 @@ export default async function OrdersPage( { params }: Props ) {
     const _params = await params;
 
   return (
-    <div className="flex justify-center h-[80vh]">
+    <div className="flex justify-center h-[80vh] md:text-sm 2xl:text-lg">
         <div className="flex w-[60%]">
             <div className="w-[50%] p-[2%]">
                 <h5 className="text-4xl font-bold">Orden { _params.id }</h5>
-                <div className="h-[65vh] mt-[2%] overflow-y-auto">
+                <div className="h-[65vh] md:mt-[4%] 2xl:mt-[2%] overflow-y-auto">
                     <div className={
                         clsx(
-                            "flex items-center rounded-lg py-3 px-3.5 text-base font-bold text-white mb-5",
+                            "flex items-center rounded-lg md:py-2 2xl:py-3 px-3.5 text-base font-bold text-white mb-5",
                             {
                                 'bg-red-500': false,
                                 'bg-green-700': true,
@@ -57,7 +57,7 @@ export default async function OrdersPage( { params }: Props ) {
                     }
                 </div>
             </div>
-            <div className="w-[35%] h-[68%] mt-[5%] ml-[5%] p-8 rounded-2xl shadow-xl">
+            <div className="md:w-[50%] 2xl:w-[35%] sm:h-[75%] 2xl:h-[68%] mt-[5%] md:ml-[20%] 2xl:ml-[5%] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold">Dirección de entrega</h4>
               <div className="mb-4">
                 <p className="">Heiner Andrés Solano Arguedas</p>
@@ -92,7 +92,7 @@ export default async function OrdersPage( { params }: Props ) {
 
                 <div className={
                     clsx(
-                        "flex items-center rounded-lg py-3 px-3.5 text-base font-bold text-white mb-5",
+                        "flex items-center rounded-lg md:py-2 2xl:py-3 px-3.5 text-base font-bold text-white mb-5",
                         {
                             'bg-red-500': false,
                             'bg-green-700': true,

@@ -15,7 +15,7 @@ export default async function Home() {
       //agrupa los productos por slug
       productos = [
         ...new Map<string, IProducto>(
-          respuesta.producto.map((producto: IProducto) => [producto.slug, producto])
+          respuesta.productos.map((producto: IProducto) => [producto.slug, producto])
         ).values()
       ];
       console.log(productos);
@@ -28,7 +28,7 @@ export default async function Home() {
     error = "Error cargando productos";
   }
   return (
-    <div className="">
+    <div className="md:text-sm 2xl:text-lg">
       <ImageBanner />
       <div className="relative flex justify-center h-[85vh] mt-[-28vh] z-10">
         {error && <p className="text-red-500">{error}</p>}
