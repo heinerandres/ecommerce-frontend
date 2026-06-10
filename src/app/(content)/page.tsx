@@ -15,7 +15,7 @@ export default async function Home() {
       //agrupa los productos por slug
       productos = [
         ...new Map<string, IProducto>(
-          respuesta.producto.map((producto: IProducto) => [producto.slug, producto])
+          respuesta.productos.map((producto: IProducto) => [producto.slug, producto])
         ).values()
       ];
       console.log(productos);

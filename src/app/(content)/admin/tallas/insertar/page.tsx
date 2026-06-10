@@ -1,9 +1,8 @@
-
-import FormInsertarColor from "@/src/app/components/admin/colores/FormInsertarColor";
-import { getColorByNombre } from "@/src/services/api/server/colores";
+import FormInsertarTalla from "@/src/app/components/admin/tallas/FormInsertarTalla";
 
 
-export default async function InsertarColorPage() {
+
+export default async function InsertarTallaPage() {
     let errorMsg = null;
 
     return(
@@ -14,7 +13,7 @@ export default async function InsertarColorPage() {
                     {errorMsg}
                     </span>
                 }
-                <FormInsertarColor />
+                <FormInsertarTalla />
             </div>
         </div>
     )

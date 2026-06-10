@@ -1,25 +1,24 @@
 'use client';
-import { insertarColor } from "@/src/services/api/server/colores";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { insertarTalla } from "@/src/services/api/server/tallas";
 
 
-export default function FormInsertarColor() {
+export default function FormInsertarTalla() {
     const [errorMsg, setErrorMsg] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [valor, setValor] = useState('#FFFFFF');
+    const [valor, setValor] = useState('');
     const router = useRouter();
 
     const handleInsertar = async(e:any) => {
         e.preventDefault();
 
-        const respuestaInsertar = await insertarColor({nombre: nombre, valor: valor});
+        const respuesta = await insertarTalla({valor: valor});
 
-        if (respuestaInsertar.ok) {
-          router.push('/admin/colores');
+        if (respuesta.ok) {
+          router.push('/admin/tallas');
         } else {
-          setErrorMsg(respuestaInsertar.msg);
+          setErrorMsg(respuesta.msg);
         }
     }
 
@@ -35,27 +34,16 @@ export default function FormInsertarColor() {
                     type="text" 
                     placeholder="Nombre"
                     name="nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                />
-                <label htmlFor="color" className="md:text-sm 2xl:text-lg">Color</label>
-                <input
-                    minLength={2}
-                    required
-                    className="md:px-2 2xl:px-1 py-1 bg-gray-200 rounded-lg mb-8 w-full h-12 cursor-pointer"
-                    type="color" 
-                    placeholder="Color"
-                    name="valor"
                     value={valor}
                     onChange={(e) => setValor(e.target.value)}
-                /> 
+                />
 
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}
                     </span>
                 }
-                <div className="w-full flex justify-around md:mt-4 2xl:mt-10 md:text-sm 2xl:text-lg">
+                <div className="w-full flex justify-around md:mt-10 2xl:mt-10 md:text-sm 2xl:text-lg">
                 <Link href="./" className="border border-blue-600 md:py-1.5 2xl:py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
                 <button
                     type="submit"

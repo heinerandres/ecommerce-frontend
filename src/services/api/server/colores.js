@@ -40,3 +40,15 @@ export async function insertarColor(data){
     body: JSON.stringify(data)
   });
 }
+
+export async function eliminarColor(data){
+  console.log(data);
+  return apiFetch('/api/color/eliminar', {
+    method: 'DELETE',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+}
