@@ -1,15 +1,18 @@
+'use client';
 /* import { eliminarColor } from '@/src/services/api/server/colores';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';*/
 
 import { IProducto } from "@/src/interfaces/producto";
+import { useRouter } from "next/navigation";
+
 
 type Props = {
     producto: IProducto | null;
 } 
 
 export default function EliminarProducto({producto} : Props) {
-    /* const router = useRouter();
+    const router = useRouter();
     
     const handleEliminar = async() => {
         if((color?.cantidadProductos ?? 0) === 0){
@@ -33,7 +36,7 @@ export default function EliminarProducto({producto} : Props) {
             });
         }
             
-    } */
+    } 
     return(
         <button className="hover:underline text-red-400 cursor-pointer">
             <i className="fa-solid fa-trash mr-2"></i>

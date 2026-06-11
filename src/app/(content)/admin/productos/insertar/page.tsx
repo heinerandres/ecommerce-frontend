@@ -8,7 +8,7 @@ export default async function InsertarProductoPage() {
 
     return(
         <div className="flex justify-center min-h-screen pt-30">
-            <div className="w-[20%]">
+            <div className="w-[21%]">
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}

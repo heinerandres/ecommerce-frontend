@@ -3,7 +3,6 @@ export async function apiFetch(endpoint, options = {}) {
   const res = await fetch(`http://localhost:4000${endpoint}`, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
       ...options.headers
     }
   });
