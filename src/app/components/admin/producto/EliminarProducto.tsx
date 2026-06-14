@@ -14,7 +14,7 @@ type Props = {
 export default function EliminarProducto({producto} : Props) {
     const router = useRouter();
     
-    const handleEliminar = async() => {
+    /* const handleEliminar = async() => {
         if((color?.cantidadProductos ?? 0) === 0){
             const respuesta = await eliminarColor({_id: color?._id});
     
@@ -36,7 +36,7 @@ export default function EliminarProducto({producto} : Props) {
             });
         }
             
-    } 
+    }  */
     return(
         <button className="hover:underline text-red-400 cursor-pointer">
             <i className="fa-solid fa-trash mr-2"></i>

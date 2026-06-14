@@ -1,6 +1,7 @@
-import FormInsertarTalla from "@/src/app/components/admin/tallas/FormInsertarTalla";
+import FormInsertarSlug from "@/src/app/components/admin/slugs/FormInsertarSlug";
 
-export default async function InsertarTallaPage() {
+
+export default async function InsertarSlugPage() {
     let errorMsg = null;
 
     return(
@@ -11,7 +12,7 @@ export default async function InsertarTallaPage() {
                     {errorMsg}
                     </span>
                 }
-                <FormInsertarTalla />
+                <FormInsertarSlug />
             </div>
         </div>
     )

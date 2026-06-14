@@ -76,7 +76,7 @@ export default function FormInsertarProducto() {
         inputImg4Ref.current!.value = "";
     }
 
-    const handleEditar = async(e:any) => {
+    const handleInsertar = async(e:any) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -103,7 +103,7 @@ export default function FormInsertarProducto() {
     return (
         <>
             <h1 className=" text-4xl mb-5" >Nuevo Producto</h1>
-            <form onSubmit={handleEditar} className="flex flex-col">
+            <form onSubmit={handleInsertar} className="flex flex-col">
                 <label htmlFor="nombre">Nombre</label>
                 <input
                     minLength={2}
