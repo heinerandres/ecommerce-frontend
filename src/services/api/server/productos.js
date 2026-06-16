@@ -18,9 +18,11 @@ export async function getProductoBySlug(slug) {
   });
 }
 
-export async function createProducto(data) {
+export async function insertarProducto(data) {
+  console.log(data);
   return apiFetch('/api/producto/insertar', {
     method: 'POST',
-    body: JSON.stringify(data)
+    cache: 'no-store',
+    body: data
   });
 }
