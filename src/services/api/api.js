@@ -8,6 +8,7 @@ export async function apiFetch(endpoint, options = {}) {
     }
   });
 
+
   if (!res.ok) {
     console.log('Error en la petición');
   }

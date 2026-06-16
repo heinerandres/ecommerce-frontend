@@ -56,13 +56,16 @@ export default async function CategoriasPage() {
                           {categoria.cantidadCategorias}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                            <Link href={`/admin/categoria/${categoria.nombre}`} className="hover:underline">
+                            <Link href={`/admin/categorias/${categoria.nombre}`} className="hover:underline">
                                 <i className="fa-solid fa-pen-to-square md:text-md 2xl:text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
                                  Editar Categoria
                             </Link>
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                          
+                            <Link href={`/admin/categoria/${categoria.nombre}`} className="hover:underline">
+                                <i className="fa-solid fa-pen-to-square md:text-md 2xl:text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
+                                 Eliminar Categoria
+                            </Link>
                       </td>
                     </tr>
                 ))

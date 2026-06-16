@@ -16,6 +16,7 @@ export default async function EditarTallaPage( { params }: Props ) {
     let talla: {_id: string, valor:string} | null = null;
 
     const respuesta = await getTallaByValor({valor: _params.valor});
+    console.log(respuesta)
         if (respuesta.ok) {
           talla = respuesta.talla;
         } else {
