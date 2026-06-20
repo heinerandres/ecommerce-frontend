@@ -34,19 +34,19 @@ export default async function ProductosPage() {
                 Nombre
               </th>
               <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Categoría
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Talla
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Color
+                Categoria
               </th>
               <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Ver detalles
               </th>
               <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Editar
+              </th>
+              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Variantes
+              </th>
+              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Agregar Precio y Cantidad (Producto sin variantes)
               </th>
               <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Eliminar
@@ -64,22 +64,28 @@ export default async function ProductosPage() {
                           {categorias?.find(categoria => categoria._id === producto.categoria)?.nombre}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                          {tallas?.find(talla => talla._id === producto.talla)?.valor}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                          {colores?.find(color => color._id === producto.color)?.nombre}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                            <button className="cursor-pointer hover:underline">
+                            <Link href={`/admin/productos/detalles/${producto.slug}`} className="cursor-pointer hover:underline">
                               <i className="fa-solid fa-circle-info mr-2"></i>
                               Ver detalles
-                            </button>
+                            </Link>
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
                             <Link href={`/admin/productos/${producto.slug}`} className="hover:underline">
                                 <i className="fa-solid fa-pen-to-square text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
                                  Editar producto
                             </Link>
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 ">
+                          <Link href={`/admin/productos/${producto.slug}`} className="hover:underline">
+                            <i className="fa-solid fa-sitemap text-xl mr-2"></i>
+                              Variantes del Producto
+                          </Link>
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 ">
+                          <Link href={`/admin/productos/individual/${producto.slug}`} className="hover:underline">
+                            <i className="fa-solid fa-tag text-xl mr-2"></i>
+                              Agregar Precio, Cantidad e Imagenes
+                          </Link>
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
                           <EliminarProducto producto={producto} /> 

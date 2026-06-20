@@ -1,10 +1,15 @@
 'use server';
 
 import FormInsertarProducto from "@/src/app/components/admin/producto/FormInsertarProducto";
+import { getCategorias } from "@/src/services/api/server/categorias";
 
 
 export default async function InsertarProductoPage() {
-    let errorMsg = null;
+
+    let errorMsg, categorias = null;
+    const respuesta = await getCategorias();
+    if(respuesta.ok) categorias = respuesta.categorias;
+    else errorMsg = respuesta.msg;
 
     return(
         <div className="flex justify-center min-h-screen pt-30">
@@ -14,7 +19,8 @@ export default async function InsertarProductoPage() {
                     {errorMsg}
                     </span>
                 }
-                <FormInsertarProducto />
+                <FormInsertarProducto 
+                    categorias={categorias}/>
             </div>
         </div>
     )

@@ -23,6 +23,18 @@ export async function insertarProducto(data) {
   return apiFetch('/api/producto/insertar', {
     method: 'POST',
     cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+export async function editarProducto(data){
+  console.log(data);
+  return apiFetch('/api/producto/editar', {
+    method: 'PUT',
+    cache: 'no-store',
     body: data
   });
 }
