@@ -1,28 +1,25 @@
 'use server';
 
-
-
 import EliminarProducto from "@/src/app/components/admin/producto/EliminarProducto";
-import { IProducto } from "@/src/interfaces/producto";
-import { getProductos } from "@/src/services/api/server/productos";
+import { getCategorias } from "@/src/services/api/server/categorias";
 import Link from "next/link";
+import { getGeneralInformation } from "@/src/utilities/getGeneralInfo";
 
 
-export default async function TallasPage() {
-    let productos: IProducto[] | null = null;
-    let errorMsg = null;
+export default async function ProductosPage() {
+  let errorMsgCategorias = null;
+    const {productos, tallas, colores, errorMsg} = await getGeneralInformation();
+    let categorias : {_id: string, nombre:string }[] | null = null;
 
-    const respuesta = await getProductos();
-    if (respuesta.ok) {
-      productos = respuesta.productos;
-    } else {
-      errorMsg = respuesta.msg;
-    }
+    const respuestaCategoria = await getCategorias();
+    if(respuestaCategoria.ok) categorias = respuestaCategoria.categorias;
+    else errorMsgCategorias = respuestaCategoria.msg;
 
     return (
         <div className="min-h-[70vh]">
       <h5 className="mt-10 ml-20 text-2xl font-bold">Productos</h5>
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+      {errorMsgCategorias && <p className="text-red-500">{errorMsgCategorias}</p>}
       <div className="mt-10 px-20">
         <Link href="/admin/productos/insertar" 
             className=" px-4 py-4 cursor-pointer rounded-lg bg-blue-300 text-sm font-medium">
@@ -64,16 +61,19 @@ export default async function TallasPage() {
                             {producto.nombre}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                          {producto.categoria}
+                          {categorias?.find(categoria => categoria._id === producto.categoria)?.nombre}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                          {producto.talla}
+                          {tallas?.find(talla => talla._id === producto.talla)?.valor}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                          {producto.color}
+                          {colores?.find(color => color._id === producto.color)?.nombre}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
-                            
+                            <button className="cursor-pointer hover:underline">
+                              <i className="fa-solid fa-circle-info mr-2"></i>
+                              Ver detalles
+                            </button>
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 ">
                             <Link href={`/admin/productos/${producto.slug}`} className="hover:underline">
