@@ -9,8 +9,9 @@ export default async function ColoresPage() {
     let errorMsg = null;
 
     const respuestaColor = await getColores();
+    console.log(respuestaColor)
     if (respuestaColor.ok) {
-      colores = respuestaColor.colores;
+      colores = respuestaColor.color;
       console.log(colores);
     } else {
       errorMsg = respuestaColor.msg;
