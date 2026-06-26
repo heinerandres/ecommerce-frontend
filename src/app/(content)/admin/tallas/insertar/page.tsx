@@ -1,7 +1,5 @@
 import FormInsertarTalla from "@/src/app/components/admin/tallas/FormInsertarTalla";
 
-
-
 export default async function InsertarTallaPage() {
     let errorMsg = null;
 
