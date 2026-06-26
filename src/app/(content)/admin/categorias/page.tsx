@@ -1,7 +1,6 @@
 'use server';
 
-
-//import EliminarCategoria from "@/src/app/components/admin/categorias/EliminarCategorias";
+import EliminarCategoria from "@/src/app/components/admin/categoria/EliminarCategoria";
 import { getCategoria } from "@/src/services/api/server/categorias";
 import Link from "next/link";
 
@@ -11,11 +10,11 @@ export default async function CategoriasPage() {
     let errorMsg = null;
 
     const respuesta = await getCategoria();
+
     if (respuesta.ok) {
       categorias = respuesta.categorias;
-      console.log(categorias);
     } else {
-      errorMsg = respuesta.msg;
+      errorMsg = respuesta.msg;    
     }
 
     return (
@@ -61,12 +60,9 @@ export default async function CategoriasPage() {
                                  Editar Categoria
                             </Link>
                         </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                            <Link href={`/admin/categoria/${categoria.nombre}`} className="hover:underline">
-                                <i className="fa-solid fa-pen-to-square md:text-md 2xl:text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
-                                 Eliminar Categoria
-                            </Link>
-                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 ">
+                                                <EliminarCategoria categoria={categoria} />
+                                            </td>
                     </tr>
                 ))
             }

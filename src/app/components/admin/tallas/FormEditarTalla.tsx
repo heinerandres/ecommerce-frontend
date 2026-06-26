@@ -27,6 +27,7 @@ export default function FormEditarTalla({talla} : Props) {
     }
 
     return (
+        
         <>
             <h1 className="md:text-2xl 2xl:text-4xl mb-5" >Editar Talla</h1>
             <form onSubmit={handleEditar} className="flex flex-col">

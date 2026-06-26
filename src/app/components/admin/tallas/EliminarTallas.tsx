@@ -9,12 +9,15 @@ type Props = {
 }
 
 export default function EliminarTallas({talla} : Props) {
+
+
     const router = useRouter();
-    
     const handleEliminar = async() => {
+
         if((talla?.cantidadProductos ?? 0) === 0){
             const respuesta = await eliminarTalla({_id: talla?._id});
-    
+
+        
             if (respuesta.ok) {
               router.push('/admin/tallas');
             } else {

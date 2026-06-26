@@ -11,8 +11,7 @@ export default async function TallasPage() {
 
     const respuesta = await getTallas();
     if (respuesta.ok) {
-      tallas = respuesta.talla;
-      console.log(tallas);
+      tallas = respuesta.tallas;
     } else {
       errorMsg = respuesta.msg;
     }

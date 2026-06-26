@@ -8,7 +8,7 @@ export async function getCategoria() {
 
 
 export async function insertarCategoria(data){
-  console.log(data);
+ 
   return apiFetch('/api/categoria/insertar', {
     method: 'POST',
     cache: 'no-store',
@@ -20,7 +20,7 @@ export async function insertarCategoria(data){
 }
 
 export async function editarCategoria(data){
-  console.log(data);
+ 
   return apiFetch('/api/categoria/editar', {
     method: 'PUT',
     cache: 'no-store',
@@ -32,9 +32,9 @@ export async function editarCategoria(data){
 }
 
 export async function getCategoriaByNombre(data){
-   console.log("Hola")
    
-  return apiFetch('/api/categoria/categoriaByNombre', {
+   
+  return apiFetch('/api/categoria/obtenerCategoriaByNombre', {
     
     method: 'POST',
     cache: 'no-store',
@@ -43,6 +43,22 @@ export async function getCategoriaByNombre(data){
     },
     body: JSON.stringify(data)
   });
-  console.log("Hola")
+ 
  
 }
+
+
+export async function eliminarCategoria(data){
+
+  
+   console.log(data)
+  return apiFetch('/api/categoria/eliminarCategoria', {
+    method: 'DELETE',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+}
+

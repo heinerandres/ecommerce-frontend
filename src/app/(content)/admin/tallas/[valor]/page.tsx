@@ -19,6 +19,8 @@ export default async function EditarTallaPage( { params }: Props ) {
     console.log(respuesta)
         if (respuesta.ok) {
           talla = respuesta.talla;
+           console.log("if de editar talla")
+           console.log(talla)
         } else {
           errorMsg = respuesta.msg;
         }

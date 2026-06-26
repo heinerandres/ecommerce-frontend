@@ -13,8 +13,14 @@ export default async function EditarCategoriaPage( { params }: Props ) {
     let categoria: {_id: string, nombre:string} | null = null;
 
     const respuestaCategoria= await getCategoriaByNombre({nombre: _params.nombre});
+
+        console.log(respuestaCategoria)
+
         if (respuestaCategoria.ok) {
-          categoria = respuestaCategoria.nombre;
+          categoria = respuestaCategoria.categoria;
+        console.log(respuestaCategoria)
+        console.log("if de editar categoria")
+        console.log(categoria)
         } else {
           errorMsg = respuestaCategoria.msg;
         }
