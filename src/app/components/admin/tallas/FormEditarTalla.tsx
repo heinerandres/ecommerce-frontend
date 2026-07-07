@@ -16,14 +16,9 @@ export default function FormEditarTalla({talla} : Props) {
 
     const handleEditar = async(e:any) => {
         e.preventDefault();
-
         const respuestaEditar = await editarTalla({_id: talla?._id, valor: valor});
-
-        if (respuestaEditar.ok) {
-          router.push('/admin/tallas');
-        } else {
-          setErrorMsg(respuestaEditar.msg);
-        }
+        if (respuestaEditar.ok) router.push('/admin/tallas');
+        else setErrorMsg(respuestaEditar.msg);
     }
 
     return (
@@ -55,7 +50,6 @@ export default function FormEditarTalla({talla} : Props) {
                         Editar
                     </button>
                 </div>
-                
             </form>
         </>
     )

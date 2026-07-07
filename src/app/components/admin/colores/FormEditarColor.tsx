@@ -16,14 +16,9 @@ export default function FormEditarColor({color} : Props) {
 
     const handleEditar = async(e:any) => {
         e.preventDefault();
-
-        const respuesta = await editarColor({_id: color?._id, nombre: nombre, valor: valor});
-
-        if (respuesta.ok) {
-          router.push('/admin/colores');
-        } else {
-          setErrorMsg(respuesta.msg);
-        }
+        const respuesta = await editarColor({_id: color?._id, nombre, valor});
+        if (respuesta.ok) router.push('/admin/colores');
+        else setErrorMsg(respuesta.msg);
     }
 
     return (

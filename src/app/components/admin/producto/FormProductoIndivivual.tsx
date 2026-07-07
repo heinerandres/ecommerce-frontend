@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { IProducto } from "@/src/interfaces/producto";
-import { useState } from "react";
-import { editarProducto } from "@/src/services/api/server/productos";
+import { useEffect, useState } from "react";
+import { editarProductoConImagenes } from "@/src/services/api/server/productos";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -17,7 +17,6 @@ export default function FormProductoIndividual({producto, categorias, imagenes}:
     const [cantidad, setCantidad] = useState(producto?.cantidad ?? '');
     const [errorMsg, setErrorMsg] = useState('');
     const router = useRouter();
-    console.log(imagenes);
 
     //estados de las imagenes
     const [img1, setImg1] = useState<string | undefined>(undefined);
@@ -28,6 +27,20 @@ export default function FormProductoIndividual({producto, categorias, imagenes}:
     const [file2, setFile2] = useState<File | undefined>(undefined);
     const [file3, setFile3] = useState<File | undefined>(undefined);
     const [file4, setFile4] = useState<File | undefined>(undefined);
+
+    
+
+    useEffect(() => {
+        const setImages = (data: {_id: string, producto: string, url: string }[] | null) => {
+            const base = "http://localhost:4000/uploads/";
+
+            setImg1(data?.[0] ? base + data[0].url : undefined);
+            setImg2(data?.[1] ? base + data[1].url : undefined);
+            setImg3(data?.[2] ? base + data[2].url : undefined);
+            setImg4(data?.[3] ? base + data[3].url : undefined);
+        };
+        setImages(imagenes);
+    }, []);
 
     const handleImages = (
         e: React.ChangeEvent<HTMLInputElement>,
@@ -56,13 +69,8 @@ export default function FormProductoIndividual({producto, categorias, imagenes}:
         if(file2) formData.append("img2", file2);
         if(file3) formData.append("img3", file3);
         if(file4) formData.append("img4", file4);
-
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
         
-        const respuestaEditar = await editarProducto(formData);
-        console.log(respuestaEditar);
+        const respuestaEditar = await editarProductoConImagenes(formData);
         if (respuestaEditar.ok) {
           router.push('/admin/productos');
         } else {
@@ -152,6 +160,7 @@ export default function FormProductoIndividual({producto, categorias, imagenes}:
                     <label htmlFor="img1">Imagen 1</label>
                     <input
                         minLength={2}
+                        required
                         className="mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
                         type="file" 
                         placeholder="Imagen"

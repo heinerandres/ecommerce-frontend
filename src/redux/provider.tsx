@@ -32,8 +32,6 @@ function AuthListener({children,}: {children: React.ReactNode;}) {
         }
         //almacenar en estado global
         dispatch(login({user: user.email, email: user.email, uid:user.uid}));
-        console.log("provider");
-        console.log(resConsulta.productos);
         dispatch(setCarritox({
           _id: resConsulta.carrito._id, 
           usuario_id: user.uid, 

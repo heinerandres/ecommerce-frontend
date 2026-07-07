@@ -1,29 +1,16 @@
 'use client';
+import { IProducto } from "@/src/interfaces/producto";
 import Link from "next/link";
 import { useState } from "react";
 
-interface Producto {
-  _id: string;
-  nombre: string;
-  slug: string;
-  categoria: string;
-  img1: string;
-  img2: string;
-  img3: string;
-  img4: string;
-  descripcion: string;
-  talla: string;
-  color: string;
-  precio: number;
-  cantidad: number;
-}
-
 type Props = {
-    producto: Producto;
+    producto: IProducto;
+    imgs: {_id: string, producto: string, url: string}[];
 }
 
-export const Producto = ({ producto }: Props) => {
+export const Producto = ({ producto, imgs }: Props) => {
     const [hover, setHover] = useState(false);
+    const base = "http://localhost:4000/uploads/";
   return (
     <Link 
         href = {`./${producto.slug}`}
@@ -35,7 +22,7 @@ export const Producto = ({ producto }: Props) => {
         <h2 className="absolute text-xl font-bold my-[3%] text-center">{ producto.nombre }</h2>
 
         <img 
-            src={ `${producto.img1}`  }
+            src={ base + imgs[0].url }
             alt={producto.nombre}
             className="absolute top-[15%] w-[90%] h-[80%] shadow-lg rounded-xl"
             style={{
@@ -44,7 +31,7 @@ export const Producto = ({ producto }: Props) => {
             }}
         />
         <img 
-            src={ `${producto.img2}`  }
+            src={ base + imgs[1].url }
             alt={producto.nombre}
             className="absolute top-[15%] w-[90%] h-[80%] shadow-lg rounded-xl"
             style={{

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "@/src/redux/slices/userSlice";
+import { logoutCart } from "@/src/redux/slices/carritoSlice";
 import { logoutUser } from '@/src/services/google/auth';
 
 
@@ -13,8 +14,8 @@ export const LogOut = () => {
     const handleLogout = () => {
         try{
             logoutUser()
-
             dispatch(logout());
+            dispatch(logoutCart());
 
             router.replace("/auth/login");
         }

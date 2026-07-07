@@ -10,14 +10,11 @@ type Props = {
 
 export default function EliminarTallas({talla} : Props) {
     const router = useRouter();
-    
     const handleEliminar = async() => {
         if((talla?.cantidadProductos ?? 0) === 0){
             const respuesta = await eliminarTalla({_id: talla?._id});
-    
-            if (respuesta.ok) {
-              router.push('/admin/tallas');
-            } else {
+            if (respuesta.ok) router.push('/admin/tallas');
+            else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -31,8 +28,7 @@ export default function EliminarTallas({talla} : Props) {
                 title: 'Error',
                 text: 'No puede eliminar colores con productos asociados'
             });
-        }
-            
+        } 
     }
     return(
         <button onClick={handleEliminar} className="hover:underline text-red-400 cursor-pointer">

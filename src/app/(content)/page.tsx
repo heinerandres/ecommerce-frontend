@@ -2,31 +2,23 @@ import { ImageBanner } from "../components/main/ImageBanner";
 import { getProductos } from '@/src/services/api/server/productos';
 import { IProducto } from '@/src/interfaces/producto';
 import { Producto } from "../components/ProductosInicio/Producto";
+import { getImagenes } from "@/src/services/api/server/imagenes";
 
 export default async function Home() {
   let productos: IProducto[] = [];
+  let imagenes: {_id: string, producto: string, url: string}[];
   let error = null;
 
-  try {
-    const respuesta = await getProductos();
+  const respuesta = await getProductos();
+  if (respuesta.ok) productos = respuesta.productos;
+  else error = respuesta.msg;
 
-    if (respuesta.ok) {
-      //productos = respuesta.producto;
-      //agrupa los productos por slug
-      productos = [
-        ...new Map<string, IProducto>(
-          respuesta.productos.map((producto: IProducto) => [producto.slug, producto])
-        ).values()
-      ];
-      console.log(productos);
-    } else {
-      error = respuesta.msg;
-    }
-  }
-  catch (error) {
-    console.log(error);
-    error = "Error cargando productos";
-  }
+  const respuestaImagenes = await getImagenes();
+  if(respuestaImagenes.ok) imagenes = respuestaImagenes.imagenes;
+  else error = respuestaImagenes.msg;
+
+  
+  
   return (
     <div className="md:text-sm 2xl:text-lg">
       <ImageBanner />
@@ -35,7 +27,7 @@ export default async function Home() {
         <div className="w-[75vw] grid grid-cols-4 grid-rows-2 gap-4">
           {
             productos.map((producto, index) => (
-              <Producto key={ index } producto = { producto }/>
+              <Producto key={ index } producto = { producto } imgs={imagenes.filter(imagen => imagen.producto === producto._id)}/>
             ))
           }
         </div>

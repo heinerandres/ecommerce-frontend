@@ -25,10 +25,9 @@ export default async function ProductoIndividualPage( { params }: Props ) {
   if(respuesta.ok) categorias = respuesta.categorias;
   else errorMsg = respuesta.msg;
 
-  const respuestaImagenes = await getImagenesByProducto({producto : producto?._id})
-  console.log(respuestaImagenes);
-  if(respuestaImagenes.ok) imagenes = respuesta.imagenes;
-  else errorMsg = respuesta.msg;
+  const respuestaImagenes = await getImagenesByProducto({producto : producto?._id});
+  if(respuestaImagenes.ok) imagenes = respuestaImagenes.imagenes;
+  else errorMsg = respuestaImagenes.msg;
 
   return (
     <div className="flex justify-center min-h-screen pt-30">

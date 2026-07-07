@@ -9,12 +9,8 @@ export default async function ColoresPage() {
     let errorMsg = null;
 
     const respuestaColor = await getColores();
-    if (respuestaColor.ok) {
-      colores = respuestaColor.colores;
-      console.log(colores);
-    } else {
-      errorMsg = respuestaColor.msg;
-    }
+    if (respuestaColor.ok) colores = respuestaColor.colores;
+    else errorMsg = respuestaColor.msg;
 
     return (
         <div className="min-h-[70vh]">

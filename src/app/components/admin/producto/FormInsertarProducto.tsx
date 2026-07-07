@@ -17,10 +17,6 @@ export default function FormInsertarProducto({categorias}:Props) {
     const [errorMsg, setErrorMsg] = useState('');
     const router = useRouter();
 
-
-
-    
-
     const handleInsertar = async(e:any) => {
         e.preventDefault();
 

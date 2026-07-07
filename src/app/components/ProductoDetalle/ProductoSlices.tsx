@@ -14,30 +14,17 @@ import Image from "next/image";
 import { IProducto } from "@/src/interfaces/producto";
 
 type Props = {
-  producto: IProducto | null,
+  imagenes: {_id: string, producto: string, url: string}[] | null,
 }
 
-
-//export const ProductSlideshow = ({ images, title, className}: Props) => {
-export const ProductoSlides = ({producto}: Props) => {
-
-  const images = Object.keys(producto!)
-  .filter(key => key.startsWith("img"))
-  .map(key => producto![key as keyof typeof producto] as string)
-  .filter(Boolean);
-
-  console.log(images);
-
-
-    const title = "producto.nombre";
-    const className="";
+export const ProductoSlides = ({imagenes}: Props) => {
+    const title = "Imagen";
+    const base = "http://localhost:4000/uploads/";
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>(); 
 
   return (
     <div className = "">
-
-
         <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -56,14 +43,15 @@ export const ProductoSlides = ({producto}: Props) => {
         className="mySwiper2"
       >
         {
-            images.map( (image, index) =>(
+            imagenes?.map( (image, index) =>(
                 <SwiperSlide key={ index }>
                     <Image
                         width={ 1024 }
                         height={ 700 }
-                        src={ image }
+                        src={ base + image.url }
                         alt={ title }
                         className="rounded-lg"
+                        unoptimized
                     />
                 </SwiperSlide>
             ))
@@ -80,14 +68,15 @@ export const ProductoSlides = ({producto}: Props) => {
         className="mySwiper"
       >
         {
-            images.map( (image, index) =>(
+            imagenes?.map( (image, index) =>(
                 <SwiperSlide key={ index }>
                     <Image
                         width={ 300 }
                         height={ 1000 }
-                        src={ image }
+                        src={ base + image.url }
                         alt={ title }
                         className="rounded-lg object-fill cursor-pointer"
+                        unoptimized
                     />
                 </SwiperSlide>
             ))

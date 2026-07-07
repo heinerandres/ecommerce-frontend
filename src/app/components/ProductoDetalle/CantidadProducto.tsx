@@ -1,7 +1,7 @@
 'use client';
 
 type Props = {
-  cantidad: number | null,
+  cantidad: number,
   setCantidad : React.Dispatch<React.SetStateAction<number>>,
   stock: number,
 }

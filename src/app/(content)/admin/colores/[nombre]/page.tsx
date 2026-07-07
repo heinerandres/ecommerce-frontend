@@ -13,11 +13,8 @@ export default async function EditarColorPage( { params }: Props ) {
     let color: {_id: string, nombre:string, valor:string} | null = null;
 
     const respuestaColor = await getColorByNombre({nombre: _params.nombre});
-        if (respuestaColor.ok) {
-          color = respuestaColor.color;
-        } else {
-          errorMsg = respuestaColor.msg;
-        }
+        if (respuestaColor.ok) color = respuestaColor.color;
+        else errorMsg = respuestaColor.msg;
     return(
         <div className="flex justify-center min-h-screen pt-30">
             <div className="w-[20%]">

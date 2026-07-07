@@ -25,8 +25,8 @@ export async function crearCarrito(data){
     body: JSON.stringify(data)
   });
 }
-export async function actualizarCarrito(data){
-  return apiFetch('/api/carrito/actualizarCarrito', {
+export async function agregarProductoCarrito(data){
+  return apiFetch('/api/carrito/insertarProducto', {
     method: 'PUT',
     cache: 'no-store',
     headers: {

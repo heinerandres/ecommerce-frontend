@@ -7,7 +7,6 @@ export async function getProductos() {
 }
 
 export async function getProductoBySlug(slug) {
-  console.log(slug);
   return apiFetch("/api/producto/obtenerProductoBySlug", {
     method: "POST",
     cache: 'no-store',
@@ -19,7 +18,6 @@ export async function getProductoBySlug(slug) {
 }
 
 export async function insertarProducto(data) {
-  console.log(data);
   return apiFetch('/api/producto/insertar', {
     method: 'POST',
     cache: 'no-store',
@@ -30,11 +28,21 @@ export async function insertarProducto(data) {
   });
 }
 
-export async function editarProducto(data){
-  console.log(data);
-  return apiFetch('/api/producto/editar', {
+export async function editarProductoConImagenes(data){
+  return apiFetch('/api/producto/editarProductoConImagenes', {
     method: 'PUT',
     cache: 'no-store',
     body: data
+  });
+}
+
+export async function editarProducto(data) {
+  return apiFetch('/api/producto/editar', {
+    method: 'PUT',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 }

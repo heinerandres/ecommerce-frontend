@@ -12,16 +12,10 @@ export default function FormInsertarTalla() {
 
     const handleInsertar = async(e:any) => {
         e.preventDefault();
-
         const respuesta = await insertarTalla({valor: valor});
-
-        if (respuesta.ok) {
-          router.push('/admin/tallas');
-        } else {
-          setErrorMsg(respuesta.msg);
-        }
+        if (respuesta.ok) router.push('/admin/tallas');
+        else setErrorMsg(respuesta.msg);
     }
-
     return (
         <>
             <h1 className="md:text-2xl 2xl:text-4xl mb-5" >Insertar</h1>
