@@ -48,6 +48,9 @@ export default async function ProductosPage() {
                   Editar
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Imagenes
+                </th>
+                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                   Variantes
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -70,25 +73,31 @@ export default async function ProductosPage() {
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
                               <Link href={`/admin/productos/detalles/${producto.slug}`} className="cursor-pointer hover:underline">
-                                <i className="fa-solid fa-circle-info mr-2"></i>
+                                <i className="fa-solid fa-circle-info text-md mr-2"></i>
                                 Ver detalles
                               </Link>
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
                               <Link href={`/admin/productos/editar/${producto.slug}`} className="hover:underline">
-                                  <i className="fa-solid fa-pen-to-square text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
+                                  <i className="fa-solid fa-pen-to-square text-lg drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
                                   Editar producto
                               </Link>
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
+                              <Link href={`/admin/productos/imagenes/${producto.slug}`} className="hover:underline">
+                                  <i className="fa-solid fa-images text-md drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
+                                  Administrar Imagenes
+                              </Link>
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 ">
                             <Link href={`/admin/productos/variantes/${producto.slug}`} className="hover:underline">
-                              <i className="fa-solid fa-sitemap text-xl mr-2"></i>
+                              <i className="fa-solid fa-sitemap text-lg mr-2"></i>
                                 Variantes del Producto
                             </Link>
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
                             <Link href={`/admin/productos/individual/${producto.slug}`} className="hover:underline">
-                              <i className="fa-solid fa-tag text-xl mr-2"></i>
+                              <i className="fa-solid fa-tag text-lg mr-2"></i>
                                 Agregar Precio, Cantidad e Imagenes
                             </Link>
                           </td>

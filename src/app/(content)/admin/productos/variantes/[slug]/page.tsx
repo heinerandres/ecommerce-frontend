@@ -33,7 +33,7 @@ export default async function ProductoIndividualPage( { params }: Props ) {
   else errorMsg = respuestaColores.msg;
 
   const respuestaTallas = await getTallas();
-  if(respuesta.ok) tallas = respuestaTallas.tallas;
+  if(respuestaTallas.ok) tallas = respuestaTallas.tallas;
   else errorMsg = respuestaTallas.msg;
 
   const respuestaVariantes = await getVariantes();
@@ -41,7 +41,7 @@ export default async function ProductoIndividualPage( { params }: Props ) {
   else errorMsg = respuestaVariantes.msg;
 
   return (
-    <>
+    <div>
         { errorMsg !== "" &&
             <span className="text-red-500">
             {errorMsg}
@@ -54,6 +54,6 @@ export default async function ProductoIndividualPage( { params }: Props ) {
             colores={colores}
             tallas={tallas}
             />
-    </>
+    </div>
   )
 }

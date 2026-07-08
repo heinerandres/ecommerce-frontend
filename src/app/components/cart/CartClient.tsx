@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Cart from './Cart';
 import { IProducto } from '@/src/interfaces/producto';
 import { currencyFormat } from '@/src/utilities/currencyFormat';
+import { obtenerProductosCarrito } from '@/src/services/api/server/carritos';
 
 type Props = {
   tallas: {_id: string, valor:string}[] | null,
@@ -16,46 +17,46 @@ type Props = {
 export const CartClient = ({ tallas, colores }: Props) => {
   const router = useRouter();
   const [subtotal, setSubtotal] = useState(0);
+  const [productosEnCarrito, setProductosEnCarrito] = useState([]);
+  const [errorMsg, setErrorMsg] = useState('');
   
   //redux, consultar si estoy logueado
   const usuario = useSelector((state: RootState) => state.user);
   const { checking } = useSelector((state: RootState) => state.user);
+  const carrito = useSelector((state: RootState) => state.carrito.carrito);
+
+  //productos
+  //variantes
+
+  const productosCarrito = async () => {
+    try {
+        const idsProductos = carrito.productos.map(p => p.id);
+        console.log(idsProductos);
+        const res = await obtenerProductosCarrito({idsProductos});
+        console.log(res);
+        if(res.ok) setProductosEnCarrito(res.productos);
+        else setErrorMsg(JSON.stringify(res));
+    } catch (error) {
+        console.error(error);
+    }
+  }
 
   //redirigir
   useEffect(() => {
     if(checking) return;
-    setSubtotal(subtotalx);
-      if (!usuario.uid) {
-         router.push("/auth/login");
-      }
+    if (!usuario.uid) {
+        router.push("/auth/login");
+    }
+    productosCarrito();
+    console.log(productosEnCarrito);
    }, [usuario, checking]);
 
-   
-
-  //consultar datos del carrito
-  const carritoCompleto = useSelector((state: RootState) => state.carrito);
-  console.log("redux en cart");
-  console.log(carritoCompleto.carrito.productos);
-  //separo los datos del carrito y los datos completos de los productos del carrito
-  const carrito = carritoCompleto.carrito;
-  const cartProducts: IProducto[] = carritoCompleto.productos;
+  //consultar productos del carrito
+   //carrito.productos
+  
 
   //calcular subtotal
-  const subtotalx = carrito.productos.reduce((acc, itemCarrito) => {
-
-    const producto = cartProducts?.find(
-      (p: IProducto) => p._id === itemCarrito._id
-    );
-
-    if(!producto) return acc;
-
-    return acc + (producto.precio * itemCarrito.cantidad);
-
-  }, 0);
-
-  useEffect(() => {
-    
-  }, []);
+  
 
   //remover
 
@@ -67,18 +68,19 @@ export const CartClient = ({ tallas, colores }: Props) => {
     <div className="flex w-[60%]">
         <div className="w-[50%] p-[2%]">
           <h5 className="text-4xl font-bold">Carrito</h5>
+          {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           <div className="h-[65vh] mt-[2%] overflow-y-auto">
               <p className="text-lg">Agregar más items</p>
               <Link href="/" className="underline cursor-pointer">Continuar comprando</Link>
               {
 
-                  cartProducts?.map((producto: IProducto, index) => (
+                  /* cartProducts?.map((producto: IProducto, index) => (
                       <Cart key={index}  
                       producto={producto} 
                       setSubtotal={setSubtotal} 
                       tallas={tallas} 
                       colores={colores} />
-                  ))
+                  )) */
               }
           </div>
         </div>
@@ -86,7 +88,7 @@ export const CartClient = ({ tallas, colores }: Props) => {
           <h4 className="text-xl font-bold">Resumen de orden</h4>
           <div className="flex justify-between mt-4">
             <p>Número de productos</p>
-            <p className="">{ cartProducts?.length }</p>
+            {/* <p className="">{ cartProducts?.length }</p> */}
           </div>
           <div className="flex justify-between">
             <p>Subtotal</p>

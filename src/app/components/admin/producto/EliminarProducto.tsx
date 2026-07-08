@@ -39,7 +39,7 @@ export default function EliminarProducto({producto} : Props) {
     }  */
     return(
         <button className="hover:underline text-red-400 cursor-pointer">
-            <i className="fa-solid fa-trash mr-2"></i>
+            <i className="fa-solid fa-trash mr-2 text-lg"></i>
                 Eliminar producto
         </button>
     )

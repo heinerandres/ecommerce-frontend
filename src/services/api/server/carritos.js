@@ -36,9 +36,13 @@ export async function agregarProductoCarrito(data){
   });
 }
 
-/* export async function createProducto(data) {
-  return apiFetch('/api/producto/insertar', {
+export async function obtenerProductosCarrito(data) {
+  return apiFetch('/api/carrito/obtenerProductosCarrito', {
     method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data)
   });
-} */
+} 
