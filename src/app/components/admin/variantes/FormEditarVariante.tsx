@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
 import { editarVariante } from "@/src/services/api/server/variantes";
+import { IVariante } from "@/src/interfaces/variante";
 
 type Props = {
-    variante: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number} | null;
+    variante: IVariante | null;
     colores: {_id: string, nombre:string, valor:string}[] | null;
     tallas: {_id: string, valor:string}[] | null;
     onSuccess: () => void;
@@ -14,8 +15,8 @@ type Props = {
 
 export default function FormEditarVariante({variante, colores, tallas, onSuccess}:Props) {
 
-    const [color, setColor] = useState(variante?.color);
-    const [talla, setTalla] = useState(variante?.talla);
+    const [color, setColor] = useState(variante?.color.nombre);
+    const [talla, setTalla] = useState(variante?.talla.valor);
     const [precio, setPrecio] = useState(variante?.precio);
     const [cantidad, setCantidad] = useState(variante?.cantidad);
     const [errorMsg, setErrorMsg] = useState('');

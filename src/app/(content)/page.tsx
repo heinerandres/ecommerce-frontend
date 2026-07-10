@@ -1,5 +1,5 @@
 import { ImageBanner } from "../components/main/ImageBanner";
-import { getProductos } from '@/src/services/api/server/productos';
+import { getProductos, getProductosConImagenes } from '@/src/services/api/server/productos';
 import { IProducto } from '@/src/interfaces/producto';
 import { Producto } from "../components/ProductosInicio/Producto";
 import { getImagenes } from "@/src/services/api/server/imagenes";
@@ -9,7 +9,7 @@ export default async function Home() {
   let imagenes: {_id: string, producto: string, url: string}[];
   let error = null;
 
-  const respuesta = await getProductos();
+  const respuesta = await getProductosConImagenes();
   if (respuesta.ok) productos = respuesta.productos;
   else error = respuesta.msg;
 
@@ -17,8 +17,6 @@ export default async function Home() {
   if(respuestaImagenes.ok) imagenes = respuestaImagenes.imagenes;
   else error = respuestaImagenes.msg;
 
-  
-  
   return (
     <div className="md:text-sm 2xl:text-lg">
       <ImageBanner />

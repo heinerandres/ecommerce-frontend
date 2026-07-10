@@ -9,43 +9,34 @@ import FormEditarVariante from "../variantes/FormEditarVariante";
 import EliminarVariante from "../variantes/EliminarVariante";
 import { useRouter } from "next/navigation";
 import FormImagenesVariante from "./FormImagenesVariante";
-
-type Variante = {
-  _id: string;
-  producto: string;
-  color: string;
-  talla: string;
-  precio: number;
-  cantidad: number;
-};
-
+import { IVariante } from "@/src/interfaces/variante";
+import { IColor } from "@/src/interfaces/color";
+import { ITalla } from "@/src/interfaces/talla";
 
 type Props = {
     producto: IProducto | null;
-    variantes: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number}[] | null;
-    categorias: {_id: string, nombre: string}[] | null;
-    colores: {_id: string, nombre:string, valor:string}[] | null;
-    tallas: {_id: string, valor:string}[] | null;
+    colores: IColor[] | null;
+    tallas: ITalla[] | null;
     /* variantes: {producto: string, color: string, talla: string, precio: string, cantidad: string}[] | null; */
 }
 
-export default function FormVariantesProducto({producto, variantes, categorias, colores, tallas}:Props) {
+export default function FormVariantesProducto({producto, colores, tallas}:Props) {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [openEditar, setOpenEditar] = useState(false);
     const [openImagenes, setOpenImagenes] = useState(false);
-    const [varianteEditar, setVarianteEditar] = useState<Variante | null>(null);
+    const [varianteEditar, setVarianteEditar] = useState<IVariante | null>(null);
 
     const onSuccess = (setOpen: Dispatch<SetStateAction<boolean>>) => {
         setOpen(false);
         router.push(`/admin/productos/variantes/${producto?.slug}`);
     }
 
-    const handleEditar = (variante: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number}) => {
+    const handleEditar = (variante: IVariante) => {
         setVarianteEditar(variante);
         setOpenEditar(true);
     }
-    const handleAdministrarImagenes = (variante: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number}) => {
+    const handleAdministrarImagenes = (variante: IVariante) => {
         setVarianteEditar(variante);
         setOpenImagenes(true);
     }
@@ -78,7 +69,6 @@ export default function FormVariantesProducto({producto, variantes, categorias, 
                                     placeholder="Slug"
                                     name="slug"
                                     value={producto?.slug}
-                                    
                                 />
                             </div>
                         </div>
@@ -93,15 +83,11 @@ export default function FormVariantesProducto({producto, variantes, categorias, 
                         />
                         <label className="font-bold" htmlFor="categoria">Categoria</label>
                         <input
-                            value={categorias?.find(c => c._id === producto?.categoria)?.nombre}
+                            value={producto?.categoria.nombre}
                             disabled
                             type="text"
                             className="rounded p-2 mb-2 disabled:cursor-default"
                         />
-                        
-                        {/* <div className="w-full flex justify-around mt-10">
-                            <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
-                        </div> */}
                     </div>
                 </div>
                 <div className="mt-20 w-[65vw] ">
@@ -149,13 +135,13 @@ export default function FormVariantesProducto({producto, variantes, categorias, 
                 </thead>
                 <tbody>
                 {
-                    variantes?.map((variante, index) => (
+                    producto?.variantes?.map((variante, index) => (
                         <tr key={index} className="bg-white border-b border-gray-300 transition duration-300 ease-in-out hover:bg-gray-100">
                             <td className="text-sm text-gray-900 font-light px-6 py-4">
-                                {colores?.find(color => color._id === variante?.color)?.nombre}
+                                {variante.color.nombre}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
-                                {tallas?.find(talla => talla._id === variante?.talla)?.valor}
+                                {variante.talla.valor}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
                                 {variante.precio}
@@ -183,6 +169,9 @@ export default function FormVariantesProducto({producto, variantes, categorias, 
                 }
                 </tbody>
             </table>
+            <div className="w-full flex mt-10">
+                <Link href="/admin/productos" className="border border-blue-600 py-2 px-5 mt-25 rounded text-black cursor-pointer text-center hover:bg-blue-200">Regresar</Link>
+            </div> 
             <Modal 
                 open={openEditar}
                 setOpen={setOpenEditar}
@@ -197,7 +186,7 @@ export default function FormVariantesProducto({producto, variantes, categorias, 
                 title="Crear variante"
                 size="lg"
             >
-                {<FormImagenesVariante variante={varianteEditar} onSuccess={() => onSuccess(setOpenEditar)}/>}
+                {<FormImagenesVariante variante={varianteEditar} onSuccess={() => onSuccess(setOpenImagenes)}/>}
             </Modal>
 
 

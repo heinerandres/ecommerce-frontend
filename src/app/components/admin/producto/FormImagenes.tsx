@@ -8,6 +8,7 @@ import FormEditarVariante from "../variantes/FormEditarVariante";
 import EliminarVariante from "../variantes/EliminarVariante";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { editarProductoConImagenes } from "@/src/services/api/server/productos";
 
 type Variante = {
   _id: string;
@@ -51,12 +52,9 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
         if(file3) formData.append("img3", file3);
         if(file4) formData.append("img4", file4);
         
-        /* const respuestaEditar = await editarProductoConImagenes(formData);
-        if (respuestaEditar.ok) {
-            router.push('/admin/productos');
-        } else {
-            setErrorMsg(respuestaEditar.msg);
-        } */
+        const respuestaEditar = await editarProductoConImagenes(formData);
+        if (respuestaEditar.ok) router.push('/admin/productos');
+        else setErrorMsg(JSON.stringify(respuestaEditar));
     }
     useEffect(() => {
         const setImages = (data: {_id: string, producto: string, url: string }[] | null) => {

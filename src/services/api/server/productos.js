@@ -6,6 +6,12 @@ export async function getProductos() {
   });
 }
 
+export async function getProductosConImagenes() {
+  return apiFetch('/api/producto/productosConImagenes', {
+    cache: 'no-store'
+  });
+}
+
 export async function getProductoBySlug(slug) {
   return apiFetch("/api/producto/obtenerProductoBySlug", {
     method: "POST",
@@ -44,5 +50,16 @@ export async function editarProducto(data) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  });
+}
+
+export async function eliminarProducto(data){
+  return apiFetch('/api/producto/eliminar', {
+    method: 'DELETE',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
   });
 }

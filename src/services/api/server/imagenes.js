@@ -29,3 +29,11 @@ export async function getImagenes() {
   });
 }
 
+export async function editarImagenesVariante(data){
+  return apiFetch('/api/imagenes/editarImagenesVariante', {
+    method: 'PUT',
+    cache: 'no-store',
+    body: data
+  });
+}
+

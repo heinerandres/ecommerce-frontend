@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { editarVariante } from "@/src/services/api/server/variantes";
-import { getImagenesByVariante } from "@/src/services/api/server/imagenes";
+import { editarImagenesVariante, getImagenesByVariante } from "@/src/services/api/server/imagenes";
 import Link from "next/link";
+import { IVariante } from "@/src/interfaces/variante";
 
 type Props = {
-    variante: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number} | null;
+    variante: IVariante | null;
     onSuccess: () => void;
 }
 
@@ -25,47 +26,47 @@ export default function FormImagenesVariante({variante, onSuccess}:Props) {
     const [file4, setFile4] = useState<File | undefined>(undefined);
     const router = useRouter();
 
+    //inicializar la función antes de llamarla
+    //crea la url de imagenes para mostrarlas
+    const setImages = (data: {_id: string, variante: string, url: string }[] | null) => {
+        const base = "http://localhost:4000/uploads/";
+        setImg1(data?.[0] ? base + data[0].url : undefined);
+        setImg2(data?.[1] ? base + data[1].url : undefined);
+        setImg3(data?.[2] ? base + data[2].url : undefined);
+        setImg4(data?.[3] ? base + data[3].url : undefined);
+    };
+    //consultar las imagenes por variante
     useEffect(() => {
+        
         const obtenerImagenesVariante = async () => {
-            //
-            //inicializar la función antes de llamarla
-            const setImages = (data: {_id: string, producto: string, url: string }[] | null) => {
-                const base = "http://localhost:4000/uploads/";
-                setImg1(data?.[0] ? base + data[0].url : undefined);
-                setImg2(data?.[1] ? base + data[1].url : undefined);
-                setImg3(data?.[2] ? base + data[2].url : undefined);
-                setImg4(data?.[3] ? base + data[3].url : undefined);
-            };
-            //consultar las imagenes por variante
-            const respuestaImagenes = await getImagenesByVariante({_id: variante?._id});
+            const respuestaImagenes = await getImagenesByVariante({variante: variante?._id});
             if(respuestaImagenes.ok) {
-                setImagenesVariante(respuestaImagenes.imagenes);
-                setImages(imagenesVariante);
+                const _imagenes = respuestaImagenes.imagenes;
+                setImagenesVariante(_imagenes);
             }
-            else setErrorMsg(respuestaImagenes.msg);
+            else setErrorMsg(JSON.stringify(respuestaImagenes));
         }
         obtenerImagenesVariante();
     }, []);
-
+    //despues de consultar las imagenes enviarlas al <img>
+    useEffect(() => {
+        if(!imagenesVariante) return;
+        setImages(imagenesVariante);
+    }, [imagenesVariante]);
+    //editar imagenes de la variante
     const handleEditar = async(e:any) => {
         e.preventDefault();
-
-        const _variante = {
-            _id: variante?._id,
-        };
-
         const formData = new FormData();
-
         formData.append("_id", variante?._id!);
         if(file1) formData.append("img1", file1);
         if(file2) formData.append("img2", file2);
         if(file3) formData.append("img3", file3);
         if(file4) formData.append("img4", file4);
-
-        const respuesta = await editarVariante(_variante);
+        const respuesta = await editarImagenesVariante(formData);
         if (respuesta.ok) onSuccess();
-        else setErrorMsg(respuesta.msg); 
+        else setErrorMsg(JSON.stringify(respuesta)); 
     }
+    //si el archivo del input cambia, cambia el <img>
     const handleImages = (
         e: React.ChangeEvent<HTMLInputElement>,
         setFile: React.Dispatch<React.SetStateAction<File | undefined>>,
@@ -76,11 +77,19 @@ export default function FormImagenesVariante({variante, onSuccess}:Props) {
             setFile(e.target.files?.[0] || undefined);
             setImage(URL.createObjectURL(file));
         }
-
     return (
         <>
             <h1 className=" text-4xl mb-5" >Variante</h1>
             <form onSubmit={handleEditar} className="flex flex-col px-10">
+                <div className="flex">
+                    <div className="flex flex-col border border-gray-300 p-4 rounded-xl shadow-md">
+                        <label className="font-bold">Color: <span className="font-normal ml-3">{variante?.color.nombre}</span></label>
+                        <label className="font-bold">Talla: <span className="font-normal ml-3">{variante?.talla.valor}</span></label>
+                        <label className="font-bold">Precio: <span className="font-normal ml-3">{variante?.precio}</span></label>
+                        <label className="font-bold">Cantidad: <span className="font-normal ml-3">{variante?.cantidad}</span></label>
+                    </div>
+                </div>
+                
                 <h1 className="flex justify-center text-2xl mb-5 pt-5">Imágenes de la variante</h1>
                 <div className="flex gap-5 items-center">
                     <div className="h-15 w-20">
@@ -157,7 +166,7 @@ export default function FormImagenesVariante({variante, onSuccess}:Props) {
                     </span>
                 }
                 <div className="w-full flex justify-around mt-10">
-                    <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[35%] text-center hover:bg-blue-200">Regresar</Link>
+                    <button onClick={onSuccess} className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[35%] text-center hover:bg-blue-200">Regresar</button>
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[35%]">

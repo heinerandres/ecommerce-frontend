@@ -10,16 +10,10 @@ import { IProducto } from "@/src/interfaces/producto";
 export default async function ProductosPage() {
   let errorMsg = null;
   let productos : IProducto[] | null = null;
-  let categorias : {_id: string, nombre:string }[] | null = null;
-  
 
   const respuestaProductos = await getProductos();
   if(respuestaProductos.ok) productos = respuestaProductos.productos;
   else errorMsg = respuestaProductos.msg;
-
-  const respuestaCategoria = await getCategorias();
-  if(respuestaCategoria.ok) categorias = respuestaCategoria.categorias;
-  else errorMsg = respuestaCategoria.msg;
 
     return (
         <div className="min-h-[70vh]">
@@ -40,6 +34,9 @@ export default async function ProductosPage() {
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                   Categoria
+                </th>
+                <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Estado
                 </th>
                 <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                   Ver detalles
@@ -69,7 +66,12 @@ export default async function ProductosPage() {
                               {producto.nombre}
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
-                            {categorias?.find(categoria => categoria._id === producto.categoria)?.nombre}
+                            {producto.categoria.nombre}
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-6 ">
+                            { (producto.cantidad || producto.precio) && <span className="text-balck-500 font-semibold">Sin variantes</span>}   
+                            { (producto.variantes?.length !== 0 && (!producto.cantidad || !producto.precio)) && <span className="text-orange-400 font-semibold">Con variantes</span>}          
+                            { ((!producto.cantidad || !producto.precio) && (producto.variantes?.length === 0)) && <span className="text-blue-500 font-semibold">Nuevo</span>}   
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
                               <Link href={`/admin/productos/detalles/${producto.slug}`} className="cursor-pointer hover:underline">
@@ -84,22 +86,50 @@ export default async function ProductosPage() {
                               </Link>
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
+                            { (producto?.imagenes?.length === 0) && 
+                            <div className="relative group inline-flex items-center">
+                              <i className="fa-solid fa-circle-info text-md text-blue-500 mr-2 cursor-pointer"></i>
+                              <div className="absolute left-1/2 -translate-x-1/2 top-5 mb-2 w-35
+                                          hidden group-hover:block
+                                          bg-gray-800 text-white text-xs
+                                          px-2 py-1 rounded whitespace-normal z-10">
+                              Los productos sin imágenes no se muestran en la página principal.
+                              </div>
+                            </div>
+                            }
                               <Link href={`/admin/productos/imagenes/${producto.slug}`} className="hover:underline">
                                   <i className="fa-solid fa-images text-md drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
                                   Administrar Imagenes
                               </Link>
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
-                            <Link href={`/admin/productos/variantes/${producto.slug}`} className="hover:underline">
-                              <i className="fa-solid fa-sitemap text-lg mr-2"></i>
+                            {(producto.cantidad || producto.precio) ? (
+                              <span className="text-gray-500 cursor-default">
+                                <i className="fa-solid fa-sitemap text-lg mr-2"></i>
                                 Variantes del Producto
-                            </Link>
+                              </span>
+                              
+                            ):(
+                              <Link href={`/admin/productos/variantes/${producto.slug}`} className="hover:underline">
+                                <i className="fa-solid fa-sitemap text-lg mr-2"></i>
+                                  Variantes del Producto
+                              </Link>
+                            )}
+                            
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
-                            <Link href={`/admin/productos/individual/${producto.slug}`} className="hover:underline">
-                              <i className="fa-solid fa-tag text-lg mr-2"></i>
-                                Agregar Precio, Cantidad e Imagenes
-                            </Link>
+                            {//CONDICION BLOQUEAR CON VARIANTES
+                            (producto.variantes?.length !== 0 && (!producto.cantidad || !producto.precio)) ? (
+                              <span className="text-gray-500 cursor-default">
+                                <i className="fa-solid fa-tag text-lg mr-2"></i>
+                                Agregar Precio y Cantidad
+                              </span>
+                            ): (
+                              <Link href={`/admin/productos/individual/${producto.slug}`} className="hover:underline">
+                                <i className="fa-solid fa-tag text-lg mr-2"></i>
+                                  Agregar Precio y Cantidad
+                              </Link>
+                            ) }
                           </td>
                           <td className="text-sm text-gray-900 font-light px-6 ">
                             <EliminarProducto producto={producto} /> 

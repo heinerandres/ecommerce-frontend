@@ -3,38 +3,34 @@
 import Link from "next/link";
 import { IProducto } from "@/src/interfaces/producto";
 import { useEffect, useState } from "react";
-import { editarProductoConImagenes } from "@/src/services/api/server/productos";
+import { editarProducto, editarProductoConImagenes } from "@/src/services/api/server/productos";
 import { useRouter } from "next/navigation";
 
 type Props = {
     producto: IProducto | null;
-    categorias: {_id: string, nombre: string}[] | null;
 }
 
-export default function FormProductoIndividual({producto, categorias}:Props) {
+export default function FormProductoIndividual({producto}:Props) {
     const [precio, setPrecio] = useState(producto?.precio ?? '');
     const [cantidad, setCantidad] = useState(producto?.cantidad ?? '');
     const [errorMsg, setErrorMsg] = useState('');
+    const router = useRouter();
 
     const handleEditar = async(e:any) => {
         e.preventDefault();
-
-        const formData = new FormData();
-
-        formData.append("_id", producto?._id!);
-        formData.append("nombre", producto?.nombre!);
-        formData.append("slug", producto?.slug!);
-        formData.append("descripcion", producto?.descripcion!);
-        formData.append("categoria", producto?.categoria!);
-        formData.append("precio", String(precio));
-        formData.append("cantidad", String(cantidad));
         
-        /* const respuestaEditar = await editarProductoConImagenes(formData);
-        if (respuestaEditar.ok) {
-          router.push('/admin/productos');
-        } else {
-          setErrorMsg(respuestaEditar.msg);
-        } */
+        const productoNuevo = {
+            _id: producto?._id,
+            nombre: producto?.nombre,
+            slug: producto?.slug,
+            descripcion: producto?.descripcion,
+            categoria: producto?.categoria._id,
+            precio: String(precio),
+            cantidad: String(cantidad),
+        }
+        const respuestaEditar = await editarProducto(productoNuevo);
+        if (respuestaEditar.ok) router.push('/admin/productos');
+        else setErrorMsg(respuestaEditar); 
     }
 
     return (
@@ -78,7 +74,7 @@ export default function FormProductoIndividual({producto, categorias}:Props) {
                 />
                 <label htmlFor="categoria">Categoria</label>
                 <input
-                    value={categorias?.find(c => c._id === producto?.categoria)?.nombre}
+                    value={producto?.categoria.nombre}
                     disabled
                     type="text"
                     className="border rounded p-2  mb-2 disabled:bg-gray-100 disabled:cursor-default"
@@ -89,7 +85,6 @@ export default function FormProductoIndividual({producto, categorias}:Props) {
                     <label htmlFor="precio">Precio</label>
                     <input
                         minLength={2}
-                        required
                         className="px-5 py-2 bg-white border rounded mb-5"
                         type="number" 
                         placeholder="Precio"
@@ -102,7 +97,6 @@ export default function FormProductoIndividual({producto, categorias}:Props) {
                     <label htmlFor="precio">Cantidad</label>
                     <input
                         minLength={2}
-                        required
                         className="px-5 py-2 bg-white border rounded mb-5"
                         type="number" 
                         placeholder="Cantidad"
@@ -121,7 +115,7 @@ export default function FormProductoIndividual({producto, categorias}:Props) {
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[45%]">
-                        Agregar
+                        Editar
                     </button>
                 </div>
             </form>

@@ -23,10 +23,6 @@ export default async function ProductoPage ({ params }: Props) {
     if(respuestaImagenes.ok) imagenes = respuestaImagenes.imagenes;
     else error = respuesta.msg;
 
-    const respuestaVariantes = await getVariantesByProducto({producto: producto?._id});
-    if(respuestaVariantes.ok) variantes = respuestaVariantes.variantes;
-    else error = respuestaVariantes.msg;
-
   return (
     <div className="flex justify-center h-[80vh] mt-[2%]">
       <div className="flex h-full w-[80%]">
@@ -38,7 +34,7 @@ export default async function ProductoPage ({ params }: Props) {
           <h4 className="text-2xl font-bold">{ producto?.nombre }</h4>
           <p className="mt-[4%]">{ producto?.descripcion }</p>
           
-          <ProductoClient producto={producto} variantes={variantes} />
+          <ProductoClient producto={producto}  />
 
       </div>
       </div>

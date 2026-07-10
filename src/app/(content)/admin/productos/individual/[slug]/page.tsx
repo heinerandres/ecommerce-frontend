@@ -33,8 +33,7 @@ export default async function ProductoIndividualPage( { params }: Props ) {
               </span>
           }
           <FormProductoIndividual
-              producto={producto}
-              categorias={categorias}/>
+              producto={producto}/>
       </div>
   </div>
   )

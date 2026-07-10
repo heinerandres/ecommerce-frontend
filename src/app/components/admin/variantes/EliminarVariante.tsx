@@ -4,13 +4,14 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';*/
 
 import { IProducto } from "@/src/interfaces/producto";
+import { IVariante } from "@/src/interfaces/variante";
 import { eliminarVariante } from "@/src/services/api/server/variantes";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 
 type Props = {
-    variante: {_id: string, producto: string, color: string, talla: string, precio: number, cantidad: number};
+    variante: IVariante;
     producto: IProducto | null;
 } 
 

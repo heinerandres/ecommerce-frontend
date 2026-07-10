@@ -15,7 +15,7 @@ export default function FormEditarProducto({producto, categorias} : Props) {
     const [errorMsg, setErrorMsg] = useState('');
     const [nombre, setNombre] = useState(producto?.nombre);
     const [slug, setSlug] = useState(producto?.slug);
-    const [categoria, setCategoria] = useState(producto?.categoria);
+    const [categoria, setCategoria] = useState(producto?.categoria._id);
     const [descripcion, setDescripcion] = useState(producto?.descripcion);
     const router = useRouter();
 
@@ -58,7 +58,7 @@ export default function FormEditarProducto({producto, categorias} : Props) {
                 /> 
                 <label htmlFor="categoria">Categoria</label>
                 <select
-                    value={categoria}
+                    value={producto?.categoria._id}
                     onChange={(e) => setCategoria(e.target.value)}
                     className="border rounded p-2 mb-5 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
                 >

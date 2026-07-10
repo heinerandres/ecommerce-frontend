@@ -8,7 +8,7 @@ type Props = {
 
 export default function CantidadProducto({cantidad, setCantidad, stock}: Props) {
 
-
+  console.log(cantidad);
   return (
     <div className="">
       <h3 className="font-bold ">Cantidad</h3>
