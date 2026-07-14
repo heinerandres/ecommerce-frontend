@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Navbar } from "../components/main/Navbar";
 import { NavbarAdmin } from "../components/main/NavbarAdmin";
 import { Footer } from "../components/main/Footer";
+import { FiltroProvider } from "@/src/context/FilterContext";
 
 
 /* const geistSans = Geist({
@@ -30,10 +31,12 @@ export default function RootLayout({
   
   return (
     <div>
-      <Navbar />
-      <NavbarAdmin />
-        {children}
-      <Footer />
+      <FiltroProvider>
+        <Navbar />
+        <NavbarAdmin />
+          {children}
+        <Footer />
+      </FiltroProvider>
     </div>
   );
 }

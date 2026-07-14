@@ -66,8 +66,6 @@ export const ProductoClient = ({producto}: Props) => {
         setVariante(varianteSeleccionada);
         setStock(varianteSeleccionada?.cantidad ?? 0);
         setCantidad(varianteSeleccionada?.cantidad ?? 0);
-        console.log(varianteSeleccionada);
-        console.log(cantidad);
       }, [color]);
   
     const handleAgregar = async() => {

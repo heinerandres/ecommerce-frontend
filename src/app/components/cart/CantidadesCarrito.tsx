@@ -8,28 +8,14 @@ import { updateCantidad } from '@/src/redux/slices/carritoSlice';
 
 
 type Props = {
-  producto: IProducto,
+  cantidadEnCarrito: number,
   stock: number,
   setSubtotal: React.Dispatch<React.SetStateAction<number>>,
   precio: number,
+  actualizarCantidad: (cantidad: number) => void; 
 }
 
-export default function CantidadesCarrito({producto, setSubtotal, precio, stock}: Props) {
-  const carritoCompleto = useSelector((state: RootState) => state.carrito);
-  const carrito = carritoCompleto.carrito;
-  const cartProducts = carritoCompleto.productos;
-
-  const dispatch = useDispatch();
-
-const actualizarCantidad = (_id:string, nuevaCantidad: number) => {
-  dispatch(updateCantidad({_id, nuevaCantidad}));
-}; 
-const productoCarrito = carrito.productos.find(_producto => _producto._id === producto._id)!;
-console.log("CantidadesCarrito");
-console.log(producto);
-console.log("productos en el carro");
-console.log(carrito.productos);
-
+export default function CantidadesCarrito({cantidadEnCarrito, stock, precio, setSubtotal, actualizarCantidad}: Props) {
 
   return (
     <div className="">
@@ -37,24 +23,23 @@ console.log(carrito.productos);
       <div className="flex items-center gap-3">
         <button 
           onClick={() => {
-            if(productoCarrito.cantidad > 1){
-              actualizarCantidad(producto._id, productoCarrito.cantidad - 1);
+            if(cantidadEnCarrito > 1){
               setSubtotal(v => v - precio);
+              actualizarCantidad(cantidadEnCarrito - 1);
             }
-            
           }}
           className="rounded-full cursor-pointer"
         >
           <i className="text-xl fa-regular fa-circle-left"></i>
         </button>
 
-        <span className="w-8 text-center">{productoCarrito.cantidad}</span>
+        <span className="w-8 text-center">{cantidadEnCarrito}</span>
 
         <button 
           onClick={ () => {
-            if(productoCarrito.cantidad < stock) {
-              actualizarCantidad(producto._id, productoCarrito!.cantidad+ 1);
+            if(cantidadEnCarrito < stock) {
               setSubtotal(v => v + precio);
+              actualizarCantidad(cantidadEnCarrito + 1); 
             }
           }}
           className="rounded-full cursor-pointer"

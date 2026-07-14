@@ -3,10 +3,11 @@ import { getProductos, getProductosConImagenes } from '@/src/services/api/server
 import { IProducto } from '@/src/interfaces/producto';
 import { Producto } from "../components/ProductosInicio/Producto";
 import { getImagenes } from "@/src/services/api/server/imagenes";
+import ProductoFilter from "../components/ProductosInicio/ProductoFilter";
 
 export default async function Home() {
   let productos: IProducto[] = [];
-  let imagenes: {_id: string, producto: string, url: string}[];
+  let imagenes: {_id: string, producto: string, url: string}[] = [];
   let error = null;
 
   const respuesta = await getProductosConImagenes();
@@ -22,13 +23,11 @@ export default async function Home() {
       <ImageBanner />
       <div className="relative flex justify-center h-[85vh] mt-[-28vh] z-10">
         {error && <p className="text-red-500">{error}</p>}
-        <div className="w-[75vw] grid grid-cols-4 grid-rows-2 gap-4">
-          {
-            productos.map((producto, index) => (
-              <Producto key={ index } producto = { producto } imgs={imagenes.filter(imagen => imagen.producto === producto._id)}/>
-            ))
-          }
-        </div>
+
+        
+        <ProductoFilter productos={productos} imagenes={imagenes}/>
+
+
       </div>
     </div>
   );

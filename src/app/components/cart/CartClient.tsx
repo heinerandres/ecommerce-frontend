@@ -7,38 +7,32 @@ import { useSelector } from "react-redux";
 import Cart from './Cart';
 import { IProducto } from '@/src/interfaces/producto';
 import { currencyFormat } from '@/src/utilities/currencyFormat';
-import { obtenerProductosCarrito } from '@/src/services/api/server/carritos';
+import { obtenerProductosCarrito, removerProductoCarrito } from '@/src/services/api/server/carritos';
+import { IVariante } from '@/src/interfaces/variante';
 
-type Props = {
-  tallas: {_id: string, valor:string}[] | null,
-  colores: {_id: string,nombre:string, valor:string}[] | null,
+interface productoEnCarrito {
+  cantidadCarrito: number,
+  producto: IProducto,
+  stock: number,
+  variante?: IVariante,
 }
 
-export const CartClient = ({ tallas, colores }: Props) => {
+export const CartClient = () => {
   const router = useRouter();
   const [subtotal, setSubtotal] = useState(0);
-  const [productosEnCarrito, setProductosEnCarrito] = useState([]);
+  const [productosEnCarrito, setProductosEnCarrito] = useState<productoEnCarrito[]>([]);
   const [errorMsg, setErrorMsg] = useState('');
   
   //redux, consultar si estoy logueado
   const usuario = useSelector((state: RootState) => state.user);
   const { checking } = useSelector((state: RootState) => state.user);
-  const carrito = useSelector((state: RootState) => state.carrito.carrito);
 
-  //productos
-  //variantes
-
-  const productosCarrito = async () => {
-    try {
-        const idsProductos = carrito.productos.map(p => p.id);
-        console.log(idsProductos);
-        const res = await obtenerProductosCarrito({idsProductos});
-        console.log(res);
-        if(res.ok) setProductosEnCarrito(res.productos);
-        else setErrorMsg(JSON.stringify(res));
-    } catch (error) {
-        console.error(error);
-    }
+  //trae de la base de datos los productos, solo los que estan en el carrito
+  const getProductosCarrito = async () => {
+    const res = await obtenerProductosCarrito({usuarioId: usuario.uid});
+    console.log(res);
+    if(res.ok) setProductosEnCarrito(res.respuesta);
+    else setErrorMsg(JSON.stringify(res));
   }
 
   //redirigir
@@ -47,7 +41,7 @@ export const CartClient = ({ tallas, colores }: Props) => {
     if (!usuario.uid) {
         router.push("/auth/login");
     }
-    productosCarrito();
+    getProductosCarrito();
     console.log(productosEnCarrito);
    }, [usuario, checking]);
 
@@ -59,6 +53,11 @@ export const CartClient = ({ tallas, colores }: Props) => {
   
 
   //remover
+  const handleRemover = async (productoId: string, varianteId: string | undefined) => {
+    const res = await removerProductoCarrito({usuarioId: usuario.uid, productoId, varianteId});
+    if(!res.ok) setErrorMsg(JSON.stringify(res));
+    getProductosCarrito();
+  }
 
   //sumar duplicados al agregar
   
@@ -72,15 +71,19 @@ export const CartClient = ({ tallas, colores }: Props) => {
           <div className="h-[65vh] mt-[2%] overflow-y-auto">
               <p className="text-lg">Agregar más items</p>
               <Link href="/" className="underline cursor-pointer">Continuar comprando</Link>
-              {
 
-                  /* cartProducts?.map((producto: IProducto, index) => (
-                      <Cart key={index}  
-                      producto={producto} 
-                      setSubtotal={setSubtotal} 
-                      tallas={tallas} 
-                      colores={colores} />
-                  )) */
+              {
+                productosEnCarrito.map((productoEnCarrito, index) => {
+                  return(
+                    <Cart
+                      key={index}
+                      usuario={usuario.uid}
+                      productoEnCarrito={productoEnCarrito}
+                      setSubtotal={setSubtotal}
+                      handleRemover={handleRemover}
+                    />
+                  );
+                })
               }
           </div>
         </div>

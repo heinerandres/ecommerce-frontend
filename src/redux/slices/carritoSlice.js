@@ -4,7 +4,7 @@ const initialState = {
     carrito: {
         _id: "",
         usuario_id: "",
-        productos: [{id: "", variante:"", cantidad: 0}],
+        productos: [{id: "", variante: "", cantidad: 0}],
     },
     productos: []
 };
@@ -23,9 +23,12 @@ const carritoSlice = createSlice({
             state.carrito.productos = action.payload;
         },
         updateCantidad: (state, action) => {
-            const {_id, nuevaCantidad } = action.payload;
-            const producto = state.carrito.productos.find(p => p._id === _id);
-            if (producto) producto.cantidad = nuevaCantidad;
+            const { _id, nuevaCantidad } = action.payload;
+            state.carrito.productos = state.carrito.productos.map(producto =>
+                producto.id === _id
+                ? {...producto, cantidad: nuevaCantidad}
+                :producto
+            )
         },
         logoutCart: (state) => {
             state.carrito._id = "";

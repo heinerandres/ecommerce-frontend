@@ -19,7 +19,7 @@ export default function EliminarProducto({producto} : Props) {
             const respuesta = await eliminarProducto({_id: producto?._id});
     
             if (respuesta.ok) {
-              router.push('/admin/colores');
+              router.push('/admin/productos');
             } else {
                 Swal.fire({
                     icon: 'error',

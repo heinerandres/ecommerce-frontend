@@ -46,3 +46,25 @@ export async function obtenerProductosCarrito(data) {
     body: JSON.stringify(data)
   });
 } 
+
+export async function aumentarCantidad(data) {
+  return apiFetch('/api/carrito/aumentarCantidad', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+} 
+
+export async function removerProductoCarrito(data) {
+  return apiFetch('/api/carrito/removerProductoCarrito', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+} 
