@@ -1,14 +1,24 @@
-import Link from "next/link"
+'use client';
+import { RootState } from "@/src/redux/store";
+import { administrators } from "@/src/utilities/administrators";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 
 
 export const NavbarAdmin = () => {
+    const usuario = useSelector((state: RootState) => state.user);
+    if(!administrators.includes(usuario.uid)){
+        return null;
+    }
+
     return (
-        <nav className="w-[30%] flex justify-around bg-white z-10 py-2">
-            <Link href="/admin/colores" className="text-sm 2xl:text-lg">Colores</Link>
-            <Link href="/admin/tallas" className="text-sm 2xl:text-lg">Tallas</Link>
-            <Link href="/admin/productos" className="text-sm 2xl:text-lg">Productos</Link>
-            <Link href="/admin/categorias" className="text-sm 2xl:text-lg">Categorías</Link>
-            <Link href="" className="text-sm 2xl:text-lg">Pedidos</Link>
-        </nav>
+        <div className="flex h-full p-4">
+            <Link href="/admin/productos" className="flex p-3 items-center cursor-pointer border border-gray-300 rounded-xl">
+                <i className="fa-solid fa-gears text-xl ml-2 mr-3"></i>
+                <p className="group-hover:block font-bold mr-4">Administrar Tienda</p>
+                <i className="fa-solid fa-chart-line text-xl ml-2 mr-3"></i>
+            </Link>
+        </div>
+        
     )
 }

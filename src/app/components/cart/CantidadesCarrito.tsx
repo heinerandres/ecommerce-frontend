@@ -8,14 +8,15 @@ import { updateCantidad } from '@/src/redux/slices/carritoSlice';
 
 
 type Props = {
+  productoId: string,
   cantidadEnCarrito: number,
   stock: number,
-  setSubtotal: React.Dispatch<React.SetStateAction<number>>,
+  _actualizarCantidad: ( productoId: string, nuevaCantidad: number ) => void,
   precio: number,
   actualizarCantidad: (cantidad: number) => void; 
 }
 
-export default function CantidadesCarrito({cantidadEnCarrito, stock, precio, setSubtotal, actualizarCantidad}: Props) {
+export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock, precio, _actualizarCantidad, actualizarCantidad}: Props) {
 
   return (
     <div className="">
@@ -24,7 +25,7 @@ export default function CantidadesCarrito({cantidadEnCarrito, stock, precio, set
         <button 
           onClick={() => {
             if(cantidadEnCarrito > 1){
-              setSubtotal(v => v - precio);
+              _actualizarCantidad(productoId, (cantidadEnCarrito - 1));
               actualizarCantidad(cantidadEnCarrito - 1);
             }
           }}
@@ -38,7 +39,7 @@ export default function CantidadesCarrito({cantidadEnCarrito, stock, precio, set
         <button 
           onClick={ () => {
             if(cantidadEnCarrito < stock) {
-              setSubtotal(v => v + precio);
+              _actualizarCantidad(productoId, (cantidadEnCarrito + 1));
               actualizarCantidad(cantidadEnCarrito + 1); 
             }
           }}

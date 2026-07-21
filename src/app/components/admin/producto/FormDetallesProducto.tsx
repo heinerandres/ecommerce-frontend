@@ -5,17 +5,16 @@ import { IProducto } from "@/src/interfaces/producto";
 
 type Props = {
     producto: IProducto | null;
-    categorias: {_id: string, nombre:string}[] | null;
 }
 
-export default function FormDetallesProducto({producto, categorias}:Props) {
+export default function FormDetallesProducto({producto}:Props) {
 
 
     return (
         <>
-            <h1 className=" text-4xl mb-5" >Información del Producto</h1>
-            <div className="flex flex-col">
-                <label htmlFor="nombre">Nombre</label>
+            <div className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className=" text-4xl mb-5 font-semibold">Información del Producto</h1>
+                <label htmlFor="nombre" className="mb-2">Nombre</label>
                 <input
                     minLength={2}
                     disabled
@@ -28,7 +27,7 @@ export default function FormDetallesProducto({producto, categorias}:Props) {
                 />
                 <div className="flex w-full">
                     <div className="flex flex-col flex-1">
-                        <label htmlFor="slug">Slug</label>
+                        <label htmlFor="slug" className="mb-2">Slug</label>
                         <input
                             minLength={2}
                             disabled
@@ -41,7 +40,7 @@ export default function FormDetallesProducto({producto, categorias}:Props) {
                         />
                     </div>
                 </div>
-                <label htmlFor="descripcion">Descripción</label>
+                <label htmlFor="descripcion" className="mb-2">Descripción</label>
                 <textarea
                     minLength={2}
                     disabled
@@ -50,14 +49,14 @@ export default function FormDetallesProducto({producto, categorias}:Props) {
                     name="descripcion"
                     value={producto?.descripcion}
                 />
-                <label htmlFor="categoria">Categoria</label>
+                <label htmlFor="categoria" className="mb-2">Categoria</label>
                 <input
-                    value={categorias?.find(c => c._id === producto?.categoria)?.nombre}
+                    value={producto?.categoria.nombre}
                     disabled
                     type="text"
-                    className="border rounded p-2  mb-2 disabled:bg-gray-100 disabled:cursor-default"
+                    className="border rounded p-2  mb-3 disabled:bg-gray-100 disabled:cursor-default"
                 />
-                
+                <p className="text-xs text-gray-500">Más información sobre el producto seleccionado.</p>
                 <div className="w-full flex justify-around mt-10">
                     <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
                 </div>

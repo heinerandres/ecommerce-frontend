@@ -33,7 +33,6 @@ export default function RootLayout({
     <div>
       <FiltroProvider>
         <Navbar />
-        <NavbarAdmin />
           {children}
         <Footer />
       </FiltroProvider>

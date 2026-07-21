@@ -32,9 +32,9 @@ export default function FormEditarProducto({producto, categorias} : Props) {
 
     return (
         <>
-            <h1 className=" text-4xl mb-5" >Editar Producto</h1>
-            <form onSubmit={handleEditar} className="flex flex-col">
-                <label htmlFor="nombre">Nombre</label>
+            <form onSubmit={handleEditar} className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className=" text-4xl mb-5 font-semibold" >Editar</h1>
+                <label htmlFor="nombre" className="mb-2">Nombre</label>
                 <input
                     minLength={2}
                     required
@@ -45,7 +45,7 @@ export default function FormEditarProducto({producto, categorias} : Props) {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
-                <label htmlFor="slug">Slug</label>
+                <label htmlFor="slug" className="mb-2">Slug</label>
                 <input
                     minLength={2}
                     required
@@ -56,7 +56,7 @@ export default function FormEditarProducto({producto, categorias} : Props) {
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                 /> 
-                <label htmlFor="categoria">Categoria</label>
+                <label htmlFor="categoria" className="mb-2">Categoria</label>
                 <select
                     value={producto?.categoria._id}
                     onChange={(e) => setCategoria(e.target.value)}
@@ -70,28 +70,29 @@ export default function FormEditarProducto({producto, categorias} : Props) {
                         </option>
                     ))}
                 </select>
-                <label htmlFor="descripcion">Descripción</label>
+                <label htmlFor="descripcion" className="mb-2">Descripción</label>
                 <textarea
                     minLength={2}
                     required
-                    className="px-5 py-2 bg-white rounded mb-5 border" 
+                    className="px-5 py-2 bg-white rounded mb-3 border" 
                     placeholder="Descripción"
                     name="descripcion"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                 />
-
+                <p className="text-xs text-gray-500">Editar la información principal del producto seleccionado.</p>
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}
                     </span>
                 }
-                <div className="w-full flex justify-around mt-10">
+                <div className="w-full flex justify-around mt-5">
                     <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[45%]">
-                        Editar
+                            <i className="fa-regular fa-floppy-disk mr-3"></i>
+                        Guardar
                     </button>
                 </div>
                 

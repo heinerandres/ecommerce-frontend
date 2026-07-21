@@ -29,7 +29,7 @@ export default async function ColoresPage() {
           </div>
           
           <Link href="/admin/colores/insertar" 
-            className="flex items-center mr-10 px-3 bg-blue-700 text-white rounded-lg cursor-pointer">
+            className="flex items-center mr-20 px-3 bg-blue-700 text-white rounded-lg cursor-pointer">
               <i className="fa-solid fa-plus mr-2"></i>
               {/* <i className="fa-solid fa-paintbrush ml-2"></i>
               <i className="fa-solid fa-palette mr-2"></i> */}
@@ -62,24 +62,22 @@ export default async function ColoresPage() {
               <tbody>
                 {
                     colores?.map((color, index) => (
-                        <tr key={index} className="bg-white border-b border-gray-300 transition duration-300 ease-in-out hover:bg-gray-100">
+                        <tr key={index} className="bg-white border-b border-gray-300 transition duration-300 ease-in-out">
                             <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <div style={{backgroundColor: color.valor}}  className="border md:w-6 2xl:w-9 md:h-6 2xl:h-9 rounded-full mr-5"></div>
+                                <div style={{backgroundColor: color.valor}}  className="border md:w-6 2xl:w-8 md:h-6 2xl:h-8 rounded-full mr-5"></div>
                                 <p className="font-medium">{color.nombre}</p>
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
                                 <p className="uppercase text-gray-400">{color.valor}</p>
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
-                              <div className="w-10 h-8 flex justify-center items-center bg-blue-100 rounded-lg">
-                                {color.cantidadProductos}
-                              </div>
-                              
+                              {color.cantidadProductos}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">
-                                <Link href={`/admin/colores/${color.nombre}`} style={{borderColor: color.valor}} className="hover:underline border p-3 rounded-lg px-6">
+                                <Link 
+                                  href={`/admin/colores/${color.nombre}`} className="hover:underline p-3 rounded-lg px-6">
                                     <i style={{color: color.valor}}  className="fa-solid fa-paintbrush md:text-sm 2xl:text-md drop-shadow-[0.8px_0.8px_0.8px_black] mr-3"></i>
-                                    Editar
+                                    Editar color
                                 </Link>
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 ">

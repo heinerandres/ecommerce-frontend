@@ -10,7 +10,7 @@ import { aumentarCantidad } from "@/src/services/api/server/carritos";
 
 type Props = {
   productoEnCarrito: { cantidadCarrito: number, producto: IProducto, variante?: IVariante, stock:number}
-  setSubtotal: React.Dispatch<React.SetStateAction<number>>
+  _actualizarCantidad: ( productoId: string, nuevaCantidad: number ) => void,
   usuario: string,
   handleRemover: (productoId: string, varianteId: string | undefined) => Promise<void>;
 }
@@ -19,7 +19,7 @@ type Props = {
 //producto -> de la base de datos
 //cantidad -> del carrito
 
-export default function Cart({ productoEnCarrito, usuario, setSubtotal, handleRemover }:Props) {
+export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, handleRemover }:Props) {
   const dispatch = useDispatch();
 
   const [cantidadEnCarrito, setCantidadEnCarrito] = useState(productoEnCarrito.cantidadCarrito);
@@ -65,13 +65,13 @@ export default function Cart({ productoEnCarrito, usuario, setSubtotal, handleRe
             )
           }
           <CantidadesCarrito 
+            productoId={productoEnCarrito.producto._id}
             cantidadEnCarrito={ cantidadEnCarrito }
             stock={productoEnCarrito.stock}
             precio={!productoEnCarrito.variante ? productoEnCarrito.producto.precio ?? 0 : productoEnCarrito.variante.precio ?? 0}
-            setSubtotal={setSubtotal}
+            _actualizarCantidad={_actualizarCantidad}
             actualizarCantidad={actualizarCantidad}
           />
-          
         </div>
       </div>
     </>

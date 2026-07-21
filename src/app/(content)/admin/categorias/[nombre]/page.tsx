@@ -19,8 +19,8 @@ export default async function EditarCategoria( { params }: Props ) {
         if (respuesta.ok) categoria = respuesta.categoria;
         else errorMsg = respuesta.msg;
     return(
-        <div className="flex justify-center min-h-screen pt-30">
-            <div className="w-[20%]">
+        <div className="flex justify-center w-[80vw] min-h-[82vh] pt-40 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+            <div className="w-[30%]">
                 { errorMsg !== "" && <span className="text-red-500"> {errorMsg} </span> }
                 <FormEditarCategoria categoria={categoria} />
             </div>

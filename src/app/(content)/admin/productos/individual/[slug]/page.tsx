@@ -25,8 +25,7 @@ export default async function ProductoIndividualPage( { params }: Props ) {
   else errorMsg = respuesta.msg;
 
   return (
-    <div className="flex justify-center min-h-screen pt-30">
-      <div className="w-[24%]">
+      <>
           { errorMsg !== "" &&
               <span className="text-red-500">
               {errorMsg}
@@ -34,7 +33,6 @@ export default async function ProductoIndividualPage( { params }: Props ) {
           }
           <FormProductoIndividual
               producto={producto}/>
-      </div>
-  </div>
+      </>
   )
 }

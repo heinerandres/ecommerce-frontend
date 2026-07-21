@@ -40,20 +40,6 @@ export default function FormInsertarVariante({_id, colores, tallas, onSuccess}:P
         <>
             <h1 className=" text-4xl mb-5" >Variante de Producto</h1>
             <form onSubmit={handleInsertar} className="flex flex-col px-10">
-                <label htmlFor="color">Color</label>
-                <select
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                    className="border rounded p-2  mb-2 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
-                >
-                    <option value="">Seleccione la categoria</option>
-
-                    {colores?.map((_color: any) => (
-                        <option key={_color._id} value={_color._id}>
-                            {_color.nombre}
-                        </option>
-                    ))}
-                </select>
                 <label htmlFor="talla">Talla</label>
                 <select
                     value={talla}
@@ -65,6 +51,20 @@ export default function FormInsertarVariante({_id, colores, tallas, onSuccess}:P
                     {tallas?.map((_talla: any) => (
                         <option key={_talla._id} value={_talla._id}>
                             {_talla.valor}
+                        </option>
+                    ))}
+                </select>
+                <label htmlFor="color">Color</label>
+                <select
+                    value={color}
+                    onChange={(e) => setColor(e.target.value)}
+                    className="border rounded p-2  mb-2 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
+                >
+                    <option value="">Seleccione la categoria</option>
+
+                    {colores?.map((_color: any) => (
+                        <option key={_color._id} value={_color._id}>
+                            {_color.nombre}
                         </option>
                     ))}
                 </select>
@@ -101,7 +101,8 @@ export default function FormInsertarVariante({_id, colores, tallas, onSuccess}:P
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[45%]">
-                        Agregar
+                        <i className="fa-regular fa-floppy-disk mr-3"></i>
+                        Guardar
                     </button>
                 </div>
             </form>

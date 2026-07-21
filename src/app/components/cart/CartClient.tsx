@@ -19,7 +19,6 @@ interface productoEnCarrito {
 
 export const CartClient = () => {
   const router = useRouter();
-  const [subtotal, setSubtotal] = useState(0);
   const [productosEnCarrito, setProductosEnCarrito] = useState<productoEnCarrito[]>([]);
   const [errorMsg, setErrorMsg] = useState('');
   
@@ -34,6 +33,28 @@ export const CartClient = () => {
     if(res.ok) setProductosEnCarrito(res.respuesta);
     else setErrorMsg(JSON.stringify(res));
   }
+  //calcular subtotal
+  const subtotal = productosEnCarrito.reduce((total, item) => {
+    const precio = !item.variante
+        ? item.producto.precio
+        : item.variante.precio;
+
+    return total + (precio ?? 0) * item.cantidadCarrito;
+  }, 0);
+
+
+  const actualizarCantidad = (
+    productoId: string,
+    nuevaCantidad: number
+  ) => {
+    setProductosEnCarrito((prev) =>
+      prev.map((p) =>
+        p.producto._id === productoId
+          ? { ...p, cantidadCarrito: nuevaCantidad }
+          : p
+      )
+    );
+  };
 
   //redirigir
   useEffect(() => {
@@ -45,23 +66,12 @@ export const CartClient = () => {
     console.log(productosEnCarrito);
    }, [usuario, checking]);
 
-  //consultar productos del carrito
-   //carrito.productos
-  
-
-  //calcular subtotal
-  
-
   //remover
   const handleRemover = async (productoId: string, varianteId: string | undefined) => {
     const res = await removerProductoCarrito({usuarioId: usuario.uid, productoId, varianteId});
     if(!res.ok) setErrorMsg(JSON.stringify(res));
     getProductosCarrito();
   }
-
-  //sumar duplicados al agregar
-  
-  //guardar los cambios del carro cuando avance o cuando de click en continuar comprando
 
   return (
     <div className="flex w-[60%]">
@@ -79,7 +89,7 @@ export const CartClient = () => {
                       key={index}
                       usuario={usuario.uid}
                       productoEnCarrito={productoEnCarrito}
-                      setSubtotal={setSubtotal}
+                      _actualizarCantidad={actualizarCantidad}
                       handleRemover={handleRemover}
                     />
                   );

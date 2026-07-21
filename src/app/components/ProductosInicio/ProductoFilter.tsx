@@ -12,8 +12,6 @@ type Props = {
 
 export default function ProductoFilter({productos, imagenes} : Props) {
     const {busqueda, categoria} = useFiltro();
-    console.log(busqueda);
-    console.log(categoria);
 
     const productosFiltrados = productos?.filter((producto) => {
         if (busqueda === '' && categoria === '') {

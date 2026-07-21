@@ -5,16 +5,6 @@ import { usePathname } from 'next/navigation';
 
 const links = [
   {
-    href: '/admin/tallas',
-    label: 'Tallas',
-    icon: 'fa-solid fa-ruler'
-  },
-  {
-    href: '/admin/colores',
-    label: 'Colores',
-    icon: 'fa-solid fa-palette'
-  },
-  {
     href: '/admin/productos',
     label: 'Productos',
     icon: 'fa-solid fa-gift'
@@ -23,6 +13,16 @@ const links = [
     href: '/admin/categorias',
     label: 'Categorias',
     icon: "fa-solid fa-tag",
+  },
+  {
+    href: '/admin/tallas',
+    label: 'Tallas',
+    icon: 'fa-solid fa-ruler'
+  },
+  {
+    href: '/admin/colores',
+    label: 'Colores',
+    icon: 'fa-solid fa-palette'
   },
   {
     href: '/admin/pedidos',

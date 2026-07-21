@@ -12,25 +12,26 @@ export default function FormInsertarTalla() {
 
     const handleInsertar = async(e:any) => {
         e.preventDefault();
-        const respuesta = await insertarTalla({valor: valor});
+        const respuesta = await insertarTalla({valor: valor.toUpperCase()});
         if (respuesta.ok) router.push('/admin/tallas');
         else setErrorMsg(respuesta.msg);
     }
     return (
         <>
-            <h1 className="md:text-2xl 2xl:text-4xl mb-5" >Insertar</h1>
-            <form onSubmit={handleInsertar} className="flex flex-col">
-                <label htmlFor="nombre" className="md:text-sm 2xl:text-lg">Nombre</label>
+            <form onSubmit={handleInsertar} className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className="md:text-2xl 2xl:text-4xl mb-5 font-semibold" >Insertar</h1>
+                <label htmlFor="nombre" className="md:text-sm 2xl:text-xl font-semibold mb-5">Talla</label>
                 <input
-                    minLength={2}
                     required
-                    className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-gray-200 rounded mb-5"
+                    className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
                     type="text" 
-                    placeholder="Nombre"
+                    placeholder="Talla"
                     name="nombre"
                     value={valor}
                     onChange={(e) => setValor(e.target.value)}
                 />
+                <p className="text-xs text-gray-500">La talla se muestra en el menú del producto para la elección del cliente</p>
+                <p className="text-xs text-gray-500">"S", "M", "26", "32"</p>
 
                 { errorMsg !== "" &&
                     <span className="text-red-500">
@@ -42,7 +43,8 @@ export default function FormInsertarTalla() {
                 <button
                     type="submit"
                     className="bg-blue-600 md:py-1.5 2xl:py-2 rounded text-white cursor-pointer w-[45%]">
-                    Insertar
+                    <i className="fa-regular fa-floppy-disk mr-3"></i>
+                    Guardar
                 </button>
             </div>
             </form>

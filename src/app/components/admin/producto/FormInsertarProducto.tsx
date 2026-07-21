@@ -34,9 +34,9 @@ export default function FormInsertarProducto({categorias}:Props) {
 
     return (
         <>
-            <h1 className=" text-4xl mb-5" >Nuevo Producto</h1>
-            <form onSubmit={handleInsertar} className="flex flex-col">
-                <label htmlFor="nombre">Nombre</label>
+            <form onSubmit={handleInsertar} className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className=" text-4xl mb-5 font-semibold" >Nuevo Producto</h1>
+                <label htmlFor="nombre" className="text-lg mb-2">Nombre</label>
                 <input
                     minLength={2}
                     required
@@ -62,7 +62,7 @@ export default function FormInsertarProducto({categorias}:Props) {
                 />
                 <div className="flex w-full">
                     <div className="flex flex-col flex-1">
-                        <label htmlFor="slug">Slug</label>
+                        <label htmlFor="slug" className="text-lg mb-2">Slug</label>
                         <input
                             minLength={2}
                             required
@@ -84,11 +84,11 @@ export default function FormInsertarProducto({categorias}:Props) {
                                     hidden group-hover:block
                                     bg-gray-800 text-white text-xs
                                     px-2 py-1 rounded whitespace-normal z-10">
-                        El slug es una versión del nombre en minúsculas, sin espacios ni caracteres especiales. Se utiliza para generar URLs del producto.
+                        El slug es un identificador del producto para crear una URL.
                         </div>
                     </div>
                 </div>
-                <label htmlFor="descripcion">Descripción</label>
+                <label htmlFor="descripcion" className="text-lg mb-2">Descripción</label>
                 <textarea
                     minLength={2}
                     required
@@ -98,11 +98,11 @@ export default function FormInsertarProducto({categorias}:Props) {
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                 />
-                <label htmlFor="categoria">Categoria</label>
+                <label htmlFor="categoria" className="text-lg mb-2">Categoria</label>
                 <select
                     value={categoria}
                     onChange={(e) => setCategoria(e.target.value)}
-                    className="border rounded p-2  mb-2 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
+                    className="border rounded p-2  mb-3 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
                 >
                     <option value="">Seleccione la categoria</option>
 
@@ -112,8 +112,7 @@ export default function FormInsertarProducto({categorias}:Props) {
                         </option>
                     ))}
                 </select>
-                
-
+                <p className="text-xs text-gray-500">Agregar un producto nuevo</p>
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}
@@ -124,7 +123,8 @@ export default function FormInsertarProducto({categorias}:Props) {
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[45%]">
-                        Agregar
+                            <i className="fa-regular fa-floppy-disk mr-3"></i>
+                        Guardar
                     </button>
                 </div>
             </form>

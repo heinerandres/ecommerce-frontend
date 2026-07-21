@@ -81,143 +81,200 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
 
     return (
         <>
-            <div className="flex flex-row">
-                <div className="w-[25%] self-start p-10 mt-40 ml-25 border border-gray-400 rounded-2xl">
-                    <h1 className=" text-2xl mb-5" >Información del Producto</h1>
-                    <div className="flex flex-col">
-                        <label className="font-bold" htmlFor="nombre">Nombre</label>
-                        <input
-                            minLength={2}
-                            disabled
-                            className="px-5 py-2 bg-white rounded mb-5  disabled:cursor-default"
-                            type="text" 
-                            placeholder="Nombre"
-                            name="nombre"
-                            value={producto?.nombre}
-                            
-                        />
-                        <div className="flex w-full">
-                            <div className="flex flex-col flex-1">
-                                <label className="font-bold" htmlFor="slug">Slug</label>
+            <div className="w-[80vw] min-h-[82vh] pt-0 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+                <div className="">
+                    <div className="flex justify-between mt-10 h-15">
+                        <div className="flex ml-20 items-center">
+                            <div className="flex items-center justify-center w-18 h-full bg-blue-200 rounded-xl">
+                            <i className="fa-solid fa-images text-xl text-blue-700"></i>
+                            </div>
+                            <div className="ml-4">
+                            <h5 className="text-2xl font-medium">Imagenes del Producto</h5>
+                            <h3 className="text-gray-400">Gestiona las imágenes del producto.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="self-start w-[23%] p-10 mt-5 ml-25 border border-gray-300 rounded-2xl shadow-md">
+                        <h1 className=" text-2xl mb-8 font-semibold">Información del Producto</h1>
+                        <div className="flex flex-col">
+                            <label className="font-bold" htmlFor="nombre">Nombre</label>
+                            <input
+                                minLength={2}
+                                disabled
+                                className="py-2 bg-white rounded mb-5  disabled:cursor-default"
+                                type="text" 
+                                placeholder="Nombre"
+                                name="nombre"
+                                value={producto?.nombre}
+                                
+                            />
+                            <div className="flex w-full">
+                                <div className="flex flex-col flex-1">
+                                    <label className="font-bold" htmlFor="slug">Slug</label>
+                                    <input
+                                        minLength={2}
+                                        disabled
+                                        className="py-2 bg-white rounded mb-5  disabled:cursor-default"
+                                        type="text" 
+                                        placeholder="Slug"
+                                        name="slug"
+                                        value={producto?.slug}
+                                        
+                                    />
+                                </div>
+                            </div>
+                            <label className="font-bold" htmlFor="descripcion">Descripción</label>
+                            <textarea
+                                minLength={2}
+                                disabled
+                                className="py-2 bg-white rounded disabled:cursor-default"
+                                placeholder="Descripción"
+                                name="descripcion"
+                                value={producto?.descripcion}
+                            />
+                            <label className="font-bold" htmlFor="categoria">Categoria</label>
+                            <input
+                                value={producto?.categoria.nombre}
+                                disabled
+                                type="text"
+                                className="py-2 mb-2"
+                            />
+                        </div>
+                    </div>
+                    <form onSubmit={handleEditar} className="mt-0 w-[35vw] ml-35 px-7 border border-gray-300 rounded-xl shadow-md">
+                        <h1 className="flex text-2xl py-5 font-semibold">Administrar Imágenes</h1>
+                        <div className="flex gap-5 p-2 items-center border border-blue-300 bg-blue-50 rounded-lg mb-3">
+                            <div className="h-23 w-30">
+                                <img className="h-full w-full object-cover rounded-md " src={img1}/>
+                            </div>
+                            <div className="flex flex-col w-full h-23">
+                                <div className="flex gap-10 py-2">
+                                    <label htmlFor="img1" className="font-semibold">Imagen 1</label>
+                                    <div className="flex gap-1 items-center px-2 py-0.5 border text-blue-600 rounded-xl font-semibold text-xs bg-blue-100">
+                                        <i className="fa-solid fa-star"></i>
+                                        <p>Imagen principal</p>
+                                    </div>
+                                </div>
+                                <label
+                                    htmlFor="img1"
+                                    className="inline-flex items-center w-fit gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50 transition"
+                                >
+                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                    Cambiar imagen
+                                </label>
                                 <input
+                                    id="img1"
                                     minLength={2}
-                                    disabled
-                                    className="px-5 py-2 bg-white rounded mb-5  disabled:cursor-default"
-                                    type="text" 
-                                    placeholder="Slug"
-                                    name="slug"
-                                    value={producto?.slug}
-                                    
+                                    required
+                                    className=" hidden mb-5 mt-3 bg-blue-50 rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
+                                    type="file" 
+                                    placeholder="Imagen"
+                                    name="img1"
+                                    accept="image/*"
+                                    onChange={(e) => handleImages(e, setFile1, setImg1)}
                                 />
                             </div>
                         </div>
-                        <label className="font-bold" htmlFor="descripcion">Descripción</label>
-                        <textarea
-                            minLength={2}
-                            disabled
-                            className="px-5 py-2 bg-white rounded disabled:cursor-default"
-                            placeholder="Descripción"
-                            name="descripcion"
-                            value={producto?.descripcion}
-                        />
-                        <label className="font-bold" htmlFor="categoria">Categoria</label>
-                        <input
-                            value={categorias?.find(c => c._id === producto?.categoria)?.nombre}
-                            disabled
-                            type="text"
-                            className="px-5 py-2  mb-2"
-                        />
-                        
-                        {/* <div className="w-full flex justify-around mt-10">
-                            <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
-                        </div> */}
-                    </div>
+                        <div className="flex gap-5 p-2 items-center border border-gray-300 rounded-lg mb-3">
+                            <div className="h-23 w-30">
+                                <img className="h-full w-full object-cover rounded-md " src={img2}/>
+                            </div>
+                            <div className="flex flex-col w-full h-23">
+                                <div className="flex gap-10 py-2">
+                                    <label htmlFor="img2" className="font-semibold">Imagen 2</label>
+                                </div>
+                                <label
+                                    htmlFor="img2"
+                                    className="inline-flex items-center w-fit gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50 transition"
+                                >
+                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                    Cambiar imagen
+                                </label>
+                                <input
+                                    id="img2"
+                                    minLength={2}
+                                    className="hidden mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
+                                    type="file" 
+                                    placeholder="Imagen 2"
+                                    name="img2"
+                                    accept="image/*"
+                                    onChange={(e) => handleImages(e, setFile2, setImg2)}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex gap-5 p-2 items-center border border-gray-300 rounded-lg mb-3">
+                            <div className="h-23 w-30">
+                                <img className="h-full w-full object-cover rounded-md " src={img3}/>
+                            </div>
+                            <div className="flex flex-col w-full h-23">
+                                <div className="flex gap-10 py-2">
+                                    <label htmlFor="img3" className="font-semibold">Imagen 3</label>
+                                </div>
+                                <label
+                                    htmlFor="img3"
+                                    className="inline-flex items-center w-fit gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50 transition"
+                                >
+                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                    Cambiar imagen
+                                </label>
+                                <input
+                                    id="img3"
+                                    minLength={2}
+                                    className="hidden mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
+                                    type="file" 
+                                    placeholder="Imagen 3"
+                                    name="img3"
+                                    accept="image/*"
+                                    onChange={(e) => handleImages(e, setFile3, setImg3)}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex gap-5 p-2 items-center border border-gray-300 rounded-lg">
+                            <div className="h-23 w-30">
+                                <img className="h-full w-full object-cover rounded-md " src={img4}/>
+                            </div>
+                            <div className="flex flex-col w-full h-23">
+                                <div className="flex gap-10 py-2">
+                                    <label htmlFor="img4" className="font-semibold">Imagen 4</label>
+                                </div>
+                                <label
+                                    htmlFor="img4"
+                                    className="inline-flex items-center w-fit gap-2 px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-50 transition"
+                                >
+                                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                                    Cambiar imagen
+                                </label>
+                                <input
+                                    id="img4"
+                                    minLength={2}
+                                    className="hidden mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
+                                    type="file" 
+                                    placeholder="Imagen 4"
+                                    name="img4"
+                                    accept="image/*"
+                                    onChange={(e) => handleImages(e, setFile4, setImg4)}
+                                />
+                            </div>
+                        </div>
+                        { errorMsg !== "" &&
+                            <span className="text-red-500">
+                            {errorMsg}
+                            </span>
+                        }
+                        <div className="w-full flex justify-around py-10">
+                            <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[25%] text-center hover:bg-blue-200">Regresar</Link>
+                            <button
+                                type="submit"
+                                className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[25%]">
+                                <i className="fa-regular fa-floppy-disk mr-3"></i>
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <form onSubmit={handleEditar} className="mt-15 w-[23vw] ml-100 ">
-                    <h1 className="flex justify-center text-2xl mb-5 pt-5">Imágenes del producto</h1>
-                    <div className="flex gap-5 items-center">
-                        <div className="h-15 w-20">
-                            <img className="h-full w-full object-cover rounded-md " src={img1}/>
-                        </div>
-                        <div className="mt-4 flex flex-col w-full">
-                        <label htmlFor="img1">Imagen 1</label>
-                        <input
-                            minLength={2}
-                            required
-                            className="mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
-                            type="file" 
-                            placeholder="Imagen"
-                            name="img1"
-                            accept="image/*"
-                            onChange={(e) => handleImages(e, setFile1, setImg1)}
-                        />
-                        </div>
-                    </div>
-                    <div className="flex gap-5 items-center">
-                        <div className="h-15 w-20">
-                            <img className="h-full w-full object-cover rounded-md " src={img2}/>
-                        </div>
-                        <div className="mt-4 flex flex-col w-full">
-                        <label htmlFor="img2">Imagen 2</label>
-                        <input
-                            minLength={2}
-                            className="mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
-                            type="file" 
-                            placeholder="Imagen 2"
-                            name="img2"
-                            accept="image/*"
-                            onChange={(e) => handleImages(e, setFile2, setImg2)}
-                        />
-                        </div>
-                    </div>
-                    <div className="flex gap-5 items-center">
-                        <div className="h-15 w-20">
-                            <img className="h-full w-full object-cover rounded-md " src={img3}/>
-                        </div>
-                        <div className="mt-4 flex flex-col w-full">
-                        <label htmlFor="img3">Imagen 3</label>
-                        <input
-                            minLength={2}
-                            className="mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
-                            type="file" 
-                            placeholder="Imagen 3"
-                            name="img3"
-                            accept="image/*"
-                            onChange={(e) => handleImages(e, setFile3, setImg3)}
-                        />
-                        </div>
-                    </div>
-                    <div className="flex gap-5 items-center">
-                        <div className="h-15 w-20">
-                            <img className="h-full w-full object-cover rounded-md " src={img4}/>
-                        </div>
-                        <div className="mt-4 flex flex-col w-full">
-                        <label htmlFor="img2">Imagen 4</label>
-                        <input
-                            minLength={2}
-                            className="mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
-                            type="file" 
-                            placeholder="Imagen 4"
-                            name="img4"
-                            accept="image/*"
-                            onChange={(e) => handleImages(e, setFile4, setImg4)}
-                        />
-                        </div>
-                    </div>
-                    { errorMsg !== "" &&
-                        <span className="text-red-500">
-                        {errorMsg}
-                        </span>
-                    }
-                    <div className="w-full flex justify-around mt-10">
-                        <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[35%] text-center hover:bg-blue-200">Regresar</Link>
-                        <button
-                            type="submit"
-                            className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[35%]">
-                            Guardar
-                        </button>
-                    </div>
-                </form>
+                
             </div>
             
         </>

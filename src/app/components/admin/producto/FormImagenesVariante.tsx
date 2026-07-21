@@ -170,6 +170,7 @@ export default function FormImagenesVariante({variante, onSuccess}:Props) {
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[35%]">
+                            <i className="fa-regular fa-floppy-disk mr-3"></i>
                         Guardar
                     </button>
                 </div>

@@ -26,7 +26,7 @@ export const Filtro = ({categorias}: Props) => {
         </select>
         <input 
             type="text" 
-            className="md:w-[37vw] 2xl:w-[40vw] border px-3 border-gray-300"
+            className="md:w-[37vw] 2xl:w-[30vw] border px-3 border-gray-300"
             value={ busqueda }
             onChange={(e) => setBusqueda(e.target.value)}
         />

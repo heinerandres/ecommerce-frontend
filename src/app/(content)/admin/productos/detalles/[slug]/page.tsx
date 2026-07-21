@@ -26,16 +26,15 @@ export default async function DetallesProductoPage( { params }: Props ) {
 
 
   return (
-    <div className="flex justify-center min-h-screen pt-30">
-      <div className="w-[21%]">
+    <div className="flex justify-center w-[80vw] min-h-[82vh] pt-20 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+      <div className="w-[33%]">
           { errorMsg !== "" &&
               <span className="text-red-500">
               {errorMsg}
               </span>
           }
           <FormDetallesProducto 
-              producto={producto}
-              categorias={categorias}/>
+              producto={producto}/>
       </div>
   </div>
   )
