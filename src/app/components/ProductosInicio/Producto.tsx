@@ -15,7 +15,7 @@ export const Producto = ({ producto, imgs }: Props) => {
     <Link 
         href = {`./${producto.slug}`}
         key={producto._id}
-        className="relative flex flex-col items-center bg-white p-4 shadow-lg cursor-pointer"
+        className="relative flex flex-col h-100 items-center bg-white p-4 shadow-lg cursor-pointer"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         >

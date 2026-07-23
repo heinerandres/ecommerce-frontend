@@ -41,9 +41,8 @@ export default function EliminarVariante({variante, producto} : Props) {
         }
     }  
     return(
-        <button onClick={handleEliminar} className="hover:underline text-red-400 cursor-pointer">
-            <i className="fa-solid fa-trash mr-2"></i>
-                Eliminar variante
+        <button onClick={handleEliminar} className="hover:underline cursor-pointer">
+            Eliminar
         </button>
     )
 }

@@ -14,20 +14,15 @@ export default async function DetallesProductoPage( { params }: Props ) {
 
   const _params = await params;
   let producto : IProducto | null = null;
-  let errorMsg, categorias = null;
+  let errorMsg = null;
 
   const respuestaProducto = await getProductoBySlug(_params.slug);
   if(respuestaProducto.ok) producto = respuestaProducto.producto;
   else errorMsg = respuestaProducto.msg;
 
-  const respuesta = await getCategorias();
-  if(respuesta.ok) categorias = respuesta.categorias;
-  else errorMsg = respuesta.msg;
-
 
   return (
-    <div className="flex justify-center w-[80vw] min-h-[82vh] pt-20 ml-10 border-gray-100 shadow-lg rounded-2xl border">
-      <div className="w-[33%]">
+    <div className="flex w-[80vw] min-h-[82vh] pt-20 ml-10 border-gray-100 shadow-lg rounded-2xl border">
           { errorMsg !== "" &&
               <span className="text-red-500">
               {errorMsg}
@@ -35,7 +30,6 @@ export default async function DetallesProductoPage( { params }: Props ) {
           }
           <FormDetallesProducto 
               producto={producto}/>
-      </div>
   </div>
   )
 }

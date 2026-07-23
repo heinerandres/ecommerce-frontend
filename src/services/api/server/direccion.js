@@ -21,3 +21,14 @@ export async function obtenerDireccion(data){
     body: JSON.stringify(data)
   });
 }
+
+export async function editarDireccion(data){
+  return apiFetch('/api/direccion/editar', {
+    method: 'PUT',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+}

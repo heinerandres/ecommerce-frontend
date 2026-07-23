@@ -43,7 +43,18 @@ export default function FormEditarProducto({producto, categorias} : Props) {
                     placeholder="Nombre"
                     name="nombre"
                     value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    onChange={(e) => {
+                        setNombre(e.target.value)
+
+                        setSlug(
+                            (nombre ?? "")
+                                .toLowerCase()
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '')
+                                .replace(/\s+/g, '_')
+                                .replace(/[^a-z0-9_]/g, '')
+                        );
+                    }}
                 />
                 <label htmlFor="slug" className="mb-2">Slug</label>
                 <input

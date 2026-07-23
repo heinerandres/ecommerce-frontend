@@ -16,6 +16,7 @@ type Props = {
 export default function CheckCart({ producto }:Props) {
   const base = "http://localhost:4000/uploads/";
   const precio = !producto.variante ? producto.producto.precio : producto.variante.precio;
+  
 
   return (
     <div className="flex h-[25%] p-3">

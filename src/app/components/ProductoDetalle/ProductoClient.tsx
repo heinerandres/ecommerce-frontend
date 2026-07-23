@@ -48,7 +48,7 @@ export const ProductoClient = ({producto}: Props) => {
       else {
         const stock = producto.cantidad;
         setStock(stock?? 0);
-        setCantidad(stock?? 0);
+        setCantidad(stock?? 0 < 5 ? 5 : stock ?? 0);
       }
     }, []);
     //filtra colores cuando selecciona talla
@@ -65,7 +65,7 @@ export const ProductoClient = ({producto}: Props) => {
         const varianteSeleccionada = producto?.variantes?.find(v=> v.talla._id === talla && v.color._id === color) ?? null;
         setVariante(varianteSeleccionada);
         setStock(varianteSeleccionada?.cantidad ?? 0);
-        setCantidad(varianteSeleccionada?.cantidad ?? 0);
+        setCantidad(varianteSeleccionada?.cantidad ?? 0 < 5 ? 5 : varianteSeleccionada?.cantidad ?? 0 );
       }, [color]);
   
     const handleAgregar = async() => {

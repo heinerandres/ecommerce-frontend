@@ -29,7 +29,6 @@ export const CartClient = () => {
   //trae de la base de datos los productos, solo los que estan en el carrito
   const getProductosCarrito = async () => {
     const res = await obtenerProductosCarrito({usuarioId: usuario.uid});
-    console.log(res);
     if(res.ok) setProductosEnCarrito(res.respuesta);
     else setErrorMsg(JSON.stringify(res));
   }

@@ -194,6 +194,7 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
                                 </label>
                                 <input
                                     id="img2"
+                                    required
                                     minLength={2}
                                     className="hidden mb-5 mt-3 bg-white rounded file:border file:px-3 file:py-1 file:mr-8 file:bg-white file:cursor-pointer"
                                     type="file" 

@@ -12,6 +12,7 @@ import FormImagenesVariante from "./FormImagenesVariante";
 import { IVariante } from "@/src/interfaces/variante";
 import { IColor } from "@/src/interfaces/color";
 import { ITalla } from "@/src/interfaces/talla";
+import { currencyFormat } from '../../../../utilities/currencyFormat';
 
 type Props = {
     producto: IProducto | null;
@@ -126,25 +127,29 @@ export default function FormVariantesProducto({producto, colores, tallas}:Props)
                                 <thead className="bg-gray-200 border-b border-gray-300">
                                     <tr>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Color
+                                            Talla
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Talla
+                                            Color
+                                        </th>
+                                        
+                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Precio
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Precio
+                                            Cantidad
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Cantidad
+                                            <i className="fa-solid fa-pen text-md mr-2"></i>
+                                            Editar
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Editar
+                                            <i className="fa-solid fa-images text-lg mr-2"></i>
+                                            Imagenes
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Imagenes
-                                        </th>
-                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Eliminar
+                                            <i className="fa-solid fa-trash mr-2"></i>
+                                            Eliminar
                                         </th>
                                     </tr>
                                 </thead>
@@ -152,28 +157,26 @@ export default function FormVariantesProducto({producto, colores, tallas}:Props)
                                 {
                                     producto?.variantes?.map((variante, index) => (
                                         <tr key={index} className="bg-white border-b border-gray-300 transition duration-300 ease-in-out hover:bg-gray-100">
+                                            <td className="text-sm text-gray-900 font-light px-6 ">
+                                                {variante.talla.valor}
+                                            </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4">
                                                 {variante.color.nombre}
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 ">
-                                                {variante.talla.valor}
-                                            </td>
-                                            <td className="text-sm text-gray-900 font-light px-6 ">
-                                                {variante.precio}
+                                                {currencyFormat(variante.precio)}
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 ">
                                                 {variante.cantidad}
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 ">
                                                 <button onClick={() =>  handleEditar(variante)} className="hover:underline cursor-pointer">
-                                                    <i className="fa-solid fa-pen-to-square text-lg drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
-                                                    Editar variante
+                                                    Editar
                                                 </button>
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 ">
                                                 <button onClick={() =>  handleAdministrarImagenes(variante)} className="hover:underline cursor-pointer">
-                                                    <i className="fa-solid fa-images text-lg drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
-                                                    Administrar Imagenes
+                                                    Imagenes
                                                 </button>
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 ">

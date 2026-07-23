@@ -35,7 +35,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-75 ml-5 min-h-[82vh] text-black shadow-lg border border-gray-100 rounded-2xl">
+    <aside className="relative w-75 ml-5 mt-5 min-h-[82vh] text-black shadow-lg border border-gray-100 rounded-2xl">
       <div className="p-7 ">
         <h1 className="text-2xl font-bold">
           Administrador(a)
@@ -63,6 +63,7 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+      <img className="absolute bottom-0" src="/asideimg2.PNG"></img>
     </aside>
   );
 }

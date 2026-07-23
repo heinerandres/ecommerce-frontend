@@ -13,8 +13,8 @@ export default function FormInsertarColor() {
 
     const handleInsertar = async(e:any) => {
         e.preventDefault();
-
-        const respuestaInsertar = await insertarColor({nombre: nombre, valor: valor});
+        const _nombre = nombre ? nombre.charAt(0).toUpperCase() + nombre?.slice(1).toLowerCase() : "";
+        const respuestaInsertar = await insertarColor({nombre: _nombre, valor: valor});
         console.log(respuestaInsertar);
         if (respuestaInsertar.ok) router.push('/admin/colores');
         else setErrorMsg(respuestaInsertar.msg);

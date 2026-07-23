@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { insertarDireccion, obtenerDireccion } from "@/src/services/api/server/direccion";
+import { editarDireccion, insertarDireccion, obtenerDireccion } from "@/src/services/api/server/direccion";
 import { useSelector } from "react-redux";
 import { RootState } from '@/src/redux/store';
 
@@ -25,20 +25,22 @@ export default function FormInsertarDireccion() {
 
     useEffect(() => {
         const obtenerDatos = async () => {
+          //if carrito_id es para que no entre al useEffect si no ha consultado la sesión
             if(carrito._id){
-                console.log(carrito._id);
                 const respuesta = await obtenerDireccion({carrito: carrito._id});
                 if(respuesta.ok){
                     const direccion = respuesta.direccion;
-                    setNombres(direccion.nombres);
-                    setApellidos(direccion.apellidos);
-                    setDireccion(direccion.direccion);
-                    setDireccion2(direccion.direccion2);
-                    setCodigoPostal(direccion.codigoPostal);
-                    setCiudad(direccion.ciudad);
-                    setPais(direccion.pais);
-                    setTelefono(direccion.telefono);
-                    setExisteDireccion(true);
+                    if(direccion){
+                      setNombres(direccion.nombres);
+                      setApellidos(direccion.apellidos);
+                      setDireccion(direccion.direccion);
+                      setDireccion2(direccion.direccion2);
+                      setCodigoPostal(direccion.codigoPostal);
+                      setCiudad(direccion.ciudad);
+                      setPais(direccion.pais);
+                      setTelefono(direccion.telefono);
+                      setExisteDireccion(true);
+                    }
                 }
                 else setErrorMsg(JSON.stringify(respuesta));
             }
@@ -49,7 +51,24 @@ export default function FormInsertarDireccion() {
     const handleDireccion = async(e:any) => {
         e.preventDefault();
         if(existeDireccion){
-            router.push('/checkout');
+            const _direccion = {
+              carrito: carrito._id,
+              nombres,
+              apellidos,
+              direccion,
+              direccion2,
+              codigoPostal,
+              ciudad,
+              pais,
+              telefono,
+            }
+            const respuesta = await editarDireccion(_direccion);
+            console.log(respuesta);
+            if(respuesta.ok){
+              router.push('/checkout');
+              return;
+            }
+            else setErrorMsg(JSON.stringify(respuesta));
             return;
         }
         const respuesta = await insertarDireccion({carrito: carrito._id, nombres, apellidos, direccion, direccion2, codigoPostal, ciudad, pais, telefono});

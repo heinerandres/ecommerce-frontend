@@ -9,6 +9,7 @@ import { obtenerProductosCarrito } from "@/src/services/api/server/carritos";
 import { IProducto } from "@/src/interfaces/producto";
 import { IVariante } from "@/src/interfaces/variante";
 import { obtenerDireccion } from "@/src/services/api/server/direccion";
+import { currencyFormat } from "@/src/utilities/currencyFormat";
 
 interface productoEnCarrito {
   cantidadCarrito: number,
@@ -35,7 +36,6 @@ export const CheckoutCartClient = () => {
     const [ciudad, setCiudad] = useState('');
     const [pais, setPais] = useState('');
     const [telefono, setTelefono] = useState('');
-    const [existeDireccion, setExisteDireccion] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -58,7 +58,6 @@ export const CheckoutCartClient = () => {
             setCiudad(direccion.ciudad);
             setPais(direccion.pais);
             setTelefono(direccion.telefono);
-            setExisteDireccion(true);
         }
         else setErrorMsg(JSON.stringify(respuesta));
     }
@@ -73,6 +72,14 @@ export const CheckoutCartClient = () => {
     getDireccion();
     console.log(productosEnCarrito);
     }, [usuario, checking]);
+
+    const subtotal = productosEnCarrito.reduce(
+        (total, item) =>
+            total +
+            (item.variante?.precio ?? item.producto.precio ?? 0) *
+            item.cantidadCarrito,
+        0
+    );
 
 
     return (
@@ -93,7 +100,10 @@ export const CheckoutCartClient = () => {
               <h4 className="text-xl font-bold">Información de entrega</h4>
               <div className="mb-4">
                 <p className="">{nombres + " " + apellidos}</p>
-                <p>{ciudad}</p>
+                <div className="flex flex-row gap-2">
+                    <p>{ciudad + ","}</p>  
+                    <p>{pais}</p>
+                </div>
                 <p>{direccion}</p>
                 <p>{direccion2}</p>
                 <p>{codigoPostal}</p>
@@ -114,7 +124,7 @@ export const CheckoutCartClient = () => {
               </div>
               <div className="flex justify-between">
                 <p>Subtotal</p>
-                <p className="">$100</p>
+                <p className="">{currencyFormat(subtotal)}</p>
               </div>
               <div className="flex justify-between">
                 <p>Impuestos (11%)</p>
@@ -122,7 +132,7 @@ export const CheckoutCartClient = () => {
               </div>
               <div className="flex justify-between mt-4">
                 <p className="text-xl font-bold">Total</p>
-                <p className="text-xl font-bold">$110</p>
+                <p className="text-xl font-bold">{currencyFormat(subtotal * 1.11)}</p>
               </div>
               
               <div className="flex flex-col mt-4">
