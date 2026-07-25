@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { obtenerProductosCarrito } from "@/src/services/api/server/carritos";
+import { colocarOrden } from "@/src/services/api/server/pedidos";
 import { IProducto } from "@/src/interfaces/producto";
 import { IVariante } from "@/src/interfaces/variante";
 import { obtenerDireccion } from "@/src/services/api/server/direccion";
@@ -20,8 +21,6 @@ interface productoEnCarrito {
 
 export const CheckoutCartClient = () => {
     const router = useRouter();
-
-
     const usuario = useSelector((state: RootState) => state.user);
     const carrito = useSelector((state: RootState) => state.carrito.carrito);
 
@@ -82,10 +81,18 @@ export const CheckoutCartClient = () => {
     );
 
 
+    const handleColocarOrden = async () => {
+        const res = await colocarOrden({IdCarrito: carrito._id});
+        console.log(res);
+        if(res.ok) router.push('pedidos/123')
+        else setErrorMsg(JSON.stringify(res));
+    }
+
     return (
         <div className="flex w-[60%]">
             <div className="w-[50%] p-[2%]">
                 <h5 className="text-4xl font-bold">Verificar orden</h5>
+                {errorMsg && <p className="text-red-500">{errorMsg}</p>}
                 <div className="h-[65vh] mt-[2%] overflow-y-auto">
                     <p className="text-lg">Ajustar elementos</p>
                     <Link href="/cart" className="underline cursor-pointer">Editar carrito</Link>
@@ -139,12 +146,12 @@ export const CheckoutCartClient = () => {
                 <p className="mb-4">
                     <span className="text-xs">Al hacer click en "Colocar orden", aceptas nuestros <a href="#" className="underline">términos y condiciones</a> y <a href="#" className="underline">política de privacidad</a></span>
                 </p>
-                <Link 
-                href="/pedidos/123"
-                className="text-center w-full py-2 bg-blue-500 text-white rounded cursor-pointer"
-                >
-                    Colocar orden
-                </Link>
+                <button 
+                    onClick={handleColocarOrden}
+                    className="text-center w-full py-2 bg-blue-500 text-white rounded cursor-pointer"
+                    >
+                        Colocar orden
+                </button>
               </div>
               
             </div>

@@ -28,6 +28,18 @@ const links = [
     href: '/admin/pedidos',
     label: 'Pedidos',
     icon: "fa-solid fa-bag-shopping",
+    children: [
+      {
+        href: '/admin/pedidos/enpagina',
+        label: 'En página',
+        icon: "fa-brands fa-internet-explorer"
+      },
+      {
+        href: '/admin/pedidos/entienda',
+        label: 'En tienda',
+        icon: "fa-solid fa-store"
+      }
+    ]
   },
 ];
 
@@ -43,25 +55,54 @@ export default function Sidebar() {
       </div>
 
       <nav className="flex flex-col p-4 gap-2">
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`rounded-lg px-4 py-3 transition-colors font-semibold ${
-              pathname === link.href
-                ? 'bg-blue-200 text-blue-700'
-                : 'hover:bg-blue-100 hover:text-blue-700'
-            }`}
-          >
-            <i className={`mr-3 text-black/60
-                ${link.icon}  
-                ${pathname === link.href
-                    ? 'text-blue-700'
-                    : ''
-                }`}></i>
-            {link.label}
-          </Link>
-        ))}
+        {links.map((link) => {
+          if (link.children) {
+              return (
+                  <div key={link.label}>
+                      <div 
+                        className="rounded-lg px-4 py-3 font-semibold">
+                          <i className={`${link.icon} mr-3 text-black/60`}></i>
+                          {link.label}
+                      </div>
+                      <div className="ml-8 flex flex-col gap-1">
+                          {link.children.map(child => (
+                              <Link
+                                  key={child.href}
+                                  href={child.href}
+                                  className={`rounded-lg px-4 py-2 transition-colors ${
+                                      pathname === child.href
+                                          ? "bg-blue-200 text-blue-700"
+                                          : "hover:bg-blue-100 hover:text-blue-700"
+                                  }`}
+                              >
+                                  <i className={`${child.icon} mr-3 text-black/60`}></i>
+                                  {child.label}
+                              </Link>
+                          ))}
+                      </div>
+                  </div>
+              );
+          }
+          return (
+              <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-lg px-4 py-3 transition-colors font-semibold ${
+                      pathname === link.href
+                          ? "bg-blue-200 text-blue-700"
+                          : "hover:bg-blue-100 hover:text-blue-700"
+                  }`}
+              >
+                  <i
+                      className={`${link.icon} mr-3 ${
+                          pathname === link.href ? "text-blue-700" : "text-black/60"
+                      }`}
+                  ></i>
+
+                  {link.label}
+              </Link>
+          );
+      })}
       </nav>
       <img className="absolute bottom-0" src="/asideimg2.PNG"></img>
     </aside>
