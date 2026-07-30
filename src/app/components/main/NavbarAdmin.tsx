@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 
 
 export const NavbarAdmin = () => {
-    const usuario = useSelector((state: RootState) => state.user);
+    /* const usuario = useSelector((state: RootState) => state.user);
     if(!administrators.includes(usuario.uid)){
         return null;
-    }
+    } */
 
     return (
         <div className="flex h-full p-4">

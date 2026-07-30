@@ -47,7 +47,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="relative w-75 ml-5 mt-5 min-h-[82vh] text-black shadow-lg border border-gray-100 rounded-2xl">
+    <aside className="relative w-75 ml-5 mt-5 min-h-[82vh] h-full text-black shadow-lg border border-gray-100 rounded-2xl">
       <div className="p-7 ">
         <h1 className="text-2xl font-bold">
           Administrador(a)

@@ -44,7 +44,7 @@ export default function FormVariantesProducto({producto, colores, tallas}:Props)
 
     return (
         <>
-            <div className="w-[80vw] min-h-[82vh] pt-0 ml-10 border border-gray-100 shadow-lg rounded-2xl ">
+            <div className="w-[80vw] min-h-[82vh] pt-0 mt-5 ml-10 border border-gray-100 shadow-lg rounded-2xl ">
                 <div className="">
                     <div className="flex justify-between mt-10 h-15">
                         <div className="flex ml-20 items-center">
