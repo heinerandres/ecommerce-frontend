@@ -2,7 +2,6 @@ import { ProductoClient } from "@/src/app/components/ProductoDetalle/ProductoCli
 import { ProductoSlides } from "@/src/app/components/ProductoDetalle/ProductoSlices";
 import { getProductoBySlug } from "@/src/services/api/server/productos";
 import { getImagenesByProducto } from '@/src/services/api/server/imagenes';
-import { getVariantesByProducto } from "@/src/services/api/server/variantes";
 
 interface Props {
     params: {
@@ -13,7 +12,7 @@ interface Props {
 export default async function ProductoPage ({ params }: Props) {
     const _params = await params;
 
-    let error, producto, imagenes, variantes = null;
+    let error, producto, imagenes = null;
 
     const respuesta = await getProductoBySlug(_params.slug);
     if (respuesta.ok) producto = respuesta.producto;
@@ -29,7 +28,7 @@ export default async function ProductoPage ({ params }: Props) {
         <div className="w-[50%]">
           <ProductoSlides imagenes={imagenes} />
         </div>
-        <div className="p-[2%] md:w-[40%] 2xl:w-[30%] md:h-[65%] 2xl:h-[55%] ml-[10%] rounded-xl shadow-xl">
+        <div className="lg:p-5 p-10 h-fit ml-[10%] rounded-xl shadow-xl border border-gray-400">
           {error && <p className="text-red-500">{error}</p>}
           <h4 className="text-2xl font-bold">{ producto?.nombre }</h4>
           <p className="mt-[4%]">{ producto?.descripcion }</p>

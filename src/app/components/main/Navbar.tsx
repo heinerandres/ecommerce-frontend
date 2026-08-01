@@ -18,19 +18,31 @@ export const Navbar = async () => {
   else errorMsg = respuesta.msg;
 
   return (
-     <nav className="max-w-screen h-[10vh] bg-white border-b border-gray-200 shadow-md z-20"> 
-        <div className="flex items-center justify-around h-full w-full max-w-screen">
-            <Link href='/'><img className="h-full w-[5vw] md:w-[8vw] 2xl:w-[10vw]" src="/next.svg" /></Link>
-            <NavbarAdmin />
-            <Filtro categorias={ categorias }/>
-            
-            <div className="flex md:w-[35vw] 2xl:w-[26vw]">
+     <nav className="xl:h-17 2xl:h-[10vh] shadow-md">
+      <div className="flex items-center h-full px-4 gap-4">
+          <Link className="" href="/">
+              <img
+                  src="/next.svg"
+                  className="h-6 xl:h-6 2xl:h-10 w-auto"
+              />
+          </Link>
+          <NavbarAdmin />
+          <div className="flex-1 min-w-0">
+              <Filtro categorias={categorias} />
+          </div>
+          <div className="flex items-center gap-4 shrink-0">
               <Identificate />
-              <Link href="/pedidos" className="flex items-center font-bold px-[4%] cursor-pointer md:text-sm lg:text-lg"><i className="fa fa-gift mr-[5%]"></i>Pedidos</Link>
+              <Link
+                  href="/pedidos"
+                  className="flex items-center font-bold whitespace-nowrap"
+              >
+                  <i className="fa fa-gift mr-2"></i>
+                  Pedidos
+              </Link>
               <NavCart />
               <LogOut />
-            </div>
-        </div>
-    </nav>
+          </div>
+      </div>
+  </nav>
   )
 }

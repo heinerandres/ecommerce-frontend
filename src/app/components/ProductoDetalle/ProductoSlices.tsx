@@ -11,7 +11,6 @@ import 'swiper/css/thumbs';
 import './slideshow.css';
 import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
-import { IProducto } from "@/src/interfaces/producto";
 
 type Props = {
   imagenes: {_id: string, producto: string, url: string}[] | null,
@@ -60,7 +59,7 @@ export const ProductoSlides = ({imagenes}: Props) => {
 
       <Swiper
         onSwiper={setThumbsSwiper}
-        spaceBetween={10}
+        spaceBetween={15}
         slidesPerView={4}
         freeMode={true}
         watchSlidesProgress={true}
@@ -75,7 +74,7 @@ export const ProductoSlides = ({imagenes}: Props) => {
                         height={ 1000 }
                         src={ base + image.url }
                         alt={ title }
-                        className="rounded-lg object-fill cursor-pointer"
+                        className="rounded-lg object-fill cursor-pointer "
                         unoptimized
                     />
                 </SwiperSlide>

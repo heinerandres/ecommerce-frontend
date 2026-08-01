@@ -19,9 +19,9 @@ export default async function Home() {
   else error = respuestaImagenes.msg;
 
   return (
-    <div className="md:text-sm 2xl:text-lg">
+    <div className="">
       <ImageBanner />
-      <div className="relative flex justify-center mt-[-28vh] z-10">
+      <div className="relative flex justify-center mt-[-18.7vh] xl:mt-[-26.6vh] 2xl:mt-[-28vh] z-10">
         {error && <p className="text-red-500">{error}</p>}
 
         

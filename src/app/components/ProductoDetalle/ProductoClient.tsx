@@ -138,7 +138,6 @@ export const ProductoClient = ({producto}: Props) => {
         });
       }
     }
-    console.log(cantidad);
 
   return (
     <div className="flex">
@@ -152,7 +151,7 @@ export const ProductoClient = ({producto}: Props) => {
 
         <button onClick={handleAgregar} className="py-3 px-3 border border-black/50 rounded-xl cursor-pointer">Agregar al Carrito</button>
       </div>
-      <div className="my-2 border h-fit p-4 rounded-xl">
+      <div className="ml-7 my-2 border h-fit p-4 rounded-xl">
         {
           tieneVariantes ? (
             <>
@@ -167,8 +166,6 @@ export const ProductoClient = ({producto}: Props) => {
             </>
           )
         }
-        
-
       </div>
     </div>
   )

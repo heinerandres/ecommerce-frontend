@@ -25,6 +25,6 @@ export const LogOut = () => {
     }
 
   return (
-    <button onClick={handleLogout} className="flex items-center font-bold px-[4%] cursor-pointer md:text-sm 2xl:text-lg">Salir<i className="fa fa-sign-out-alt ml-[20%]"></i></button>
+    <button onClick={handleLogout} className="flex items-center font-bold px-2 cursor-pointer">Salir<i className="fa fa-sign-out-alt ml-3"></i></button>
   )
 }

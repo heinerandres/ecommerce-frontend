@@ -1,15 +1,6 @@
-import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { IPedido } from "@/src/interfaces/pedido";
 import { currencyFormat } from '../../../../../../utilities/currencyFormat';
-
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-
-const estados = [
-    "Pendiente",
-    "Enviado",
-];
-
 
 export const PedidosColumns = (
     cambiarEstado: (idPedido: string, estado: string) => void

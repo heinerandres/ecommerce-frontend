@@ -1,2 +1,15 @@
 @import "tailwindcss";
 
+@layer base {
+  * {
+    outline: none;
+  }
+
+  *:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  body {
+    @apply lg:text-[9px] xl:text-xs 2xl:text-lg;
+  }
+}

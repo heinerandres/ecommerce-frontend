@@ -13,10 +13,10 @@ export const NavbarAdmin = () => {
 
     return (
         <div className="flex h-full p-4">
-            <Link href="/admin/productos" className="flex p-3 items-center cursor-pointer border border-gray-300 rounded-xl">
-                <i className="fa-solid fa-gears text-xl ml-2 mr-3"></i>
-                <p className="group-hover:block font-bold mr-4">Administrar Tienda</p>
-                <i className="fa-solid fa-chart-line text-xl ml-2 mr-3"></i>
+            <Link href="/admin/productos" className="flex lg:p-2 xl:px-3 2xl:px-5 items-center cursor-pointer border border-gray-300 rounded-md">
+                <i className="fa-solid fa-gears"></i>
+                <p className="group-hover:block font-bold px-1 xl:px-2 2xl:px-3">Administrar Tienda</p>
+                <i className="fa-solid fa-chart-line"></i>
             </Link>
         </div>
         

@@ -22,7 +22,7 @@ export const ColorSelector = ({color, setColor, disponibles}:Props) => {
                         onClick={() => onColorChanged(_color._id)}
                         style={{backgroundColor: _color.valor}} 
                         className={
-                            clsx("h-8 w-8 my-2 mr-2 border border-black rounded-full cursor-pointer",
+                            clsx("h-7 w-7 2xl:h-8 2xl:w-8 my-2 mr-2 border border-black rounded-full cursor-pointer",
                                 {'border-3 border-blue-500': _color._id === color}
                             )
                         } />
