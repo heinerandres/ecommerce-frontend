@@ -1,10 +1,8 @@
 'use client';
-/* import { eliminarColor } from '@/src/services/api/server/colores';
-import { useRouter } from 'next/navigation';
-import Swal from 'sweetalert2';*/
-
 import { IProducto } from "@/src/interfaces/producto";
+import { eliminarProducto } from "@/src/services/api/server/productos";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 
 type Props = {
@@ -13,13 +11,15 @@ type Props = {
 
 export default function EliminarProducto({producto} : Props) {
     const router = useRouter();
+
     
-    /* const handleEliminar = async() => {
-        if((color?.cantidadProductos ?? 0) === 0){
-            const respuesta = await eliminarColor({_id: color?._id});
+    
+    const handleEliminar = async() => {
+        if(producto?.variantes?.length === 0){
+            const respuesta = await eliminarProducto({_id: producto?._id});
     
             if (respuesta.ok) {
-              router.push('/admin/colores');
+              router.push('/admin/productos');
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -32,15 +32,14 @@ export default function EliminarProducto({producto} : Props) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No puede eliminar colores con productos asociados'
+                text: 'No puede eliminar productos con variantes asociadas'
             });
-        }
+        } 
             
-    }  */
+    } 
     return(
-        <button className="hover:underline text-red-400 cursor-pointer">
-            <i className="fa-solid fa-trash mr-2"></i>
-                Eliminar producto
+        <button onClick={handleEliminar} className="hover:underline cursor-pointer">
+                Eliminar
         </button>
     )
 }

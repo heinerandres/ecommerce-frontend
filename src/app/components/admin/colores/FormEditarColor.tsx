@@ -16,21 +16,17 @@ export default function FormEditarColor({color} : Props) {
 
     const handleEditar = async(e:any) => {
         e.preventDefault();
-
-        const respuesta = await editarColor({_id: color?._id, nombre: nombre, valor: valor});
-
-        if (respuesta.ok) {
-          router.push('/admin/colores');
-        } else {
-          setErrorMsg(respuesta.msg);
-        }
+        const _nombre = nombre ? nombre.charAt(0).toUpperCase() + nombre?.slice(1).toLowerCase() : "";
+        const respuesta = await editarColor({_id: color?._id, nombre: _nombre, valor});
+        if (respuesta.ok) router.push('/admin/colores');
+        else setErrorMsg(respuesta.msg);
     }
 
     return (
         <>
-            <h1 className="md:text-2xl 2xl:text-4xl mb-5" >Editar Color</h1>
-            <form onSubmit={handleEditar} className="flex flex-col">
-                <label htmlFor="nombre" className="md:text-sm 2xl:text-lg">Nombre</label>
+            <form onSubmit={handleEditar} className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className="md:text-2xl 2xl:text-4xl mb-5 font-semibold" >Editar</h1>
+                <label htmlFor="nombre" className="md:text-sm 2xl:text-lg font-semibold mb-5">Nombre</label>
                 <input
                     minLength={2}
                     required
@@ -41,18 +37,18 @@ export default function FormEditarColor({color} : Props) {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
-                <label htmlFor="color" className="md:text-sm 2xl:text-lg">Color</label>
+                <label htmlFor="color" className="md:text-sm 2xl:text-lg font-semibold mb-5">Color</label>
                 <input
                     minLength={2}
                     required
-                    className="md:px-2 2xl:px-1 py-1 bg-gray-200 rounded-lg mb-8 w-full h-12 cursor-pointer"
+                    className="md:px-2 2xl:px-1 py-1 bg-gray-200 rounded-lg mb-2 w-full h-12 cursor-pointer"
                     type="color" 
                     placeholder="Color"
                     name="valor"
                     value={valor}
                     onChange={(e) => setValor(e.target.value)}
                 /> 
-
+                <p className="text-xs text-gray-500">El color se muestra en el menú del producto para la elección del cliente</p>
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}
@@ -63,7 +59,8 @@ export default function FormEditarColor({color} : Props) {
                     <button
                         type="submit"
                         className="bg-blue-600 md:py-1.5 2xl:py-2 rounded text-white cursor-pointer w-[45%]">
-                        Editar
+                        <i className="fa-regular fa-floppy-disk mr-3"></i>
+                        Guardar
                     </button>
                 </div>
                 

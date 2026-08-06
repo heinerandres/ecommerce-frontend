@@ -1,15 +1,15 @@
+import { ICategoria } from "./categoria";
+import { IImagenes } from "./imagenes";
+import { IVariante } from "./variante";
+
 export interface IProducto {
   _id: string;
   nombre: string;
   slug: string;
-  categoria: string;
-  img1: string;
-  img2: string;
-  img3: string;
-  img4: string;
+  categoria: ICategoria;
   descripcion: string;
-  talla: string;
-  color: string;
-  precio: number;
-  cantidad: number;
+  precio?: number;
+  cantidad?: number;
+  variantes?: IVariante[];
+  imagenes?: IImagenes [];
 }

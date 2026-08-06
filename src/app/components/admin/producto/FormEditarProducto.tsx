@@ -4,189 +4,106 @@ import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { IProducto } from "@/src/interfaces/producto";
+import { editarProducto } from "@/src/services/api/server/productos";
 
 type Props = {
-    productoA: IProducto[] | null;
+    producto: IProducto | null;
+    categorias: {_id: string, nombre:string}[] | null;
 }
 
-export default function FormEditarProducto({productoA} : Props) {
-    const producto = productoA?.[0];
+export default function FormEditarProducto({producto, categorias} : Props) {
     const [errorMsg, setErrorMsg] = useState('');
     const [nombre, setNombre] = useState(producto?.nombre);
     const [slug, setSlug] = useState(producto?.slug);
-    const [categoria, setCategoria] = useState(producto?.categoria);
-    const [img1, setImg1] = useState(producto?.img1);
-    const [img2, setImg2] = useState(producto?.img2);
-    const [img3, setImg3] = useState(producto?.img3);
-    const [img4, setImg4] = useState(producto?.img4);
+    const [categoria, setCategoria] = useState(producto?.categoria._id);
     const [descripcion, setDescripcion] = useState(producto?.descripcion);
-    const [talla, setTalla] = useState(producto?.talla);
-    const [color, setColor] = useState(producto?.color);
-    const [precio, setPrecio] = useState<number | undefined>(producto?.precio);
-    const [cantidad, setCantidad] = useState<number | undefined>(producto?.cantidad);
     const router = useRouter();
 
     const handleEditar = async(e:any) => {
         e.preventDefault();
 
-        /* const respuesta = await editarProducto(
-            {_id: color?._id, 
-                nombre: nombre, 
-                valor: valor});
-
+        const respuesta = await editarProducto({_id: producto?._id, nombre, slug, categoria, descripcion});
         if (respuesta.ok) {
           router.push('/admin/productos');
         } else {
           setErrorMsg(respuesta.msg);
-        } */
+        } 
     }
 
     return (
         <>
-            <h1 className=" text-4xl mb-5" >Editar Producto</h1>
-            <form onSubmit={handleEditar} className="flex flex-col">
-                <label htmlFor="nombre">Nombre</label>
+            <form onSubmit={handleEditar} className="flex flex-col border border-gray-200 shadow-lg p-10 rounded-2xl">
+                <h1 className=" text-4xl mb-5 font-semibold" >Editar</h1>
+                <label htmlFor="nombre" className="mb-2">Nombre</label>
                 <input
                     minLength={2}
                     required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
+                    className="px-5 py-2 bg-white rounded mb-5 border"
                     type="text" 
                     placeholder="Nombre"
                     name="nombre"
                     value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    onChange={(e) => {
+                        setNombre(e.target.value)
+
+                        setSlug(
+                            (nombre ?? "")
+                                .toLowerCase()
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '')
+                                .replace(/\s+/g, '_')
+                                .replace(/[^a-z0-9_]/g, '')
+                        );
+                    }}
                 />
-                <label htmlFor="slug">Slug</label>
+                <label htmlFor="slug" className="mb-2">Slug</label>
                 <input
                     minLength={2}
                     required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
+                    className="px-5 py-2 bg-white rounded mb-5 border"
                     type="text" 
                     placeholder="Slug"
                     name="slug"
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                 /> 
-                <label htmlFor="categoria">Categoria</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Categoria"
-                    name="categoria"
-                    value={categoria}
+                <label htmlFor="categoria" className="mb-2">Categoria</label>
+                <select
+                    value={producto?.categoria._id}
                     onChange={(e) => setCategoria(e.target.value)}
-                /> 
-                <label htmlFor="img1">Imagen 1</label>
-                <input
+                    className="border rounded p-2 mb-5 disabled:bg-gray-100 cursor-pointer disabled:cursor-default"
+                >
+                    <option value="">Seleccione la categoria</option>
+
+                    {categorias?.map((categoria: any) => (
+                        <option key={categoria._id} value={categoria._id}>
+                            {categoria.nombre}
+                        </option>
+                    ))}
+                </select>
+                <label htmlFor="descripcion" className="mb-2">Descripción</label>
+                <textarea
                     minLength={2}
                     required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Imagen"
-                    name="img1"
-                    value={img1}
-                    onChange={(e) => setImg1(e.target.value)}
-                />
-                <label htmlFor="img2">Imagen 2</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Imagen"
-                    name="img2"
-                    value={img2}
-                    onChange={(e) => setImg2(e.target.value)}
-                />
-                <label htmlFor="img3">Imagen 3</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Imagen"
-                    name="img3"
-                    value={img3}
-                    onChange={(e) => setImg3(e.target.value)}
-                />
-                <label htmlFor="img1">Imagen 4</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Imagen"
-                    name="img4"
-                    value={img4}
-                    onChange={(e) => setImg4(e.target.value)}
-                />
-                <label htmlFor="descripcion">Descripción</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
+                    className="px-5 py-2 bg-white rounded mb-3 border" 
                     placeholder="Descripción"
                     name="descripcion"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                 />
-                <label htmlFor="talla">Talla</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Talla"
-                    name="talla"
-                    value={talla}
-                    onChange={(e) => setTalla(e.target.value)}
-                />
-                <label htmlFor="color">Color</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="text" 
-                    placeholder="Talla"
-                    name="color"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                />
-                <label htmlFor="precio">Precio</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="number" 
-                    name="precio"
-                    value={precio}
-                    onChange={(e) => setPrecio(Number(e.target.value))}
-                />
-                <label htmlFor="cantidad">Cantidad</label>
-                <input
-                    minLength={2}
-                    required
-                    className="px-5 py-2 bg-gray-200 rounded mb-5"
-                    type="number" 
-                    name="cantidad"
-                    value={cantidad}
-                    onChange={(e) => setCantidad(Number(e.target.value))}
-                />
-
+                <p className="text-xs text-gray-500">Editar la información principal del producto seleccionado.</p>
                 { errorMsg !== "" &&
                     <span className="text-red-500">
                     {errorMsg}
                     </span>
                 }
-                <div className="w-full flex justify-around mt-10">
-                    <Link href="./" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
+                <div className="w-full flex justify-around mt-5">
+                    <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
                     <button
                         type="submit"
                         className="bg-blue-600 py-2 rounded text-white cursor-pointer w-[45%]">
-                        Editar
+                            <i className="fa-regular fa-floppy-disk mr-3"></i>
+                        Guardar
                     </button>
                 </div>
                 

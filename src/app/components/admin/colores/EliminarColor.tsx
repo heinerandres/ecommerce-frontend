@@ -14,9 +14,8 @@ export default function EliminarColor({color} : Props) {
         if((color?.cantidadProductos ?? 0) === 0){
             const respuesta = await eliminarColor({_id: color?._id});
     
-            if (respuesta.ok) {
-              router.push('/admin/colores');
-            } else {
+            if (respuesta.ok) router.push('/admin/colores');
+            else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',

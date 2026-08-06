@@ -11,8 +11,9 @@ export const Identificate = () => {
   return (
     <Link 
         href="/" 
-        className="font-bold px-[4%] text-center cursor-pointer md:text-sm 2xl:text-lg">
-            Hola {user === null ? "Identificate": user}
+        className="font-bold text-center cursor-pointer">
+            <p>Hola</p> 
+            <p>{user === null ? "Identificate": user}</p>
     </Link>
   )
 }

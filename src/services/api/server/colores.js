@@ -18,7 +18,6 @@ export async function getColorByNombre(data){
 }
 
 export async function editarColor(data){
-  console.log(data);
   return apiFetch('/api/color/editar', {
     method: 'PUT',
     cache: 'no-store',
@@ -30,7 +29,6 @@ export async function editarColor(data){
 }
 
 export async function insertarColor(data){
-  console.log(data);
   return apiFetch('/api/color/insertar', {
     method: 'POST',
     cache: 'no-store',
@@ -42,7 +40,6 @@ export async function insertarColor(data){
 }
 
 export async function eliminarColor(data){
-  console.log(data);
   return apiFetch('/api/color/eliminar', {
     method: 'DELETE',
     cache: 'no-store',

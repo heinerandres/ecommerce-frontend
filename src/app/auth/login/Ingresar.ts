@@ -43,18 +43,30 @@ export const Ingresar = async({email, password, setErrorMessage, loginType, disp
         } 
       //consultar carrito
       const resConsulta = await getCarrito(response?.user.uid);
-      if(!resConsulta.ok) setErrorMessage(resConsulta.msg);
-      if(resConsulta.ok && resConsulta.carrito === null){
-        const resCrear = await crearCarrito({usuario_id: response?.user.uid, productos: []})
-        if(!resCrear.ok) setErrorMessage(resCrear.msg);
+      if(!resConsulta.ok) {
+        setErrorMessage(resConsulta.msg);
+        return;
+      }
+      let carrito = resConsulta.carrito;
+      let productos = resConsulta.productos;
+
+      if(resConsulta.carrito === null){
+        const resCrear = await crearCarrito({usuario_id: response?.user.uid, productos: []});
+
+        if(!resCrear.ok) {
+            setErrorMessage(resCrear.msg);
+            return;
+        }
+        carrito = resCrear.carrito;
+        productos = [];
       }
       //almacenar en estado global
       dispatch(login({user: response?.user.email, email: response?.user.email, uid:response?.user.uid}));
       dispatch(setCarritox({
-          _id: resConsulta.carrito._id, 
-          usuario_id: response?.user.uid, 
-          productosCarrito: resConsulta.carrito.productos, 
-          productos: resConsulta.productos}));
+          _id: carrito._id, 
+          usuario_id: carrito.usuario_id, 
+          productosCarrito: carrito.productos, 
+          productos: productos}));
       router.replace("/");
     }
     catch(error:any){

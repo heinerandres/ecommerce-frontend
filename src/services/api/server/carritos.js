@@ -25,8 +25,8 @@ export async function crearCarrito(data){
     body: JSON.stringify(data)
   });
 }
-export async function actualizarCarrito(data){
-  return apiFetch('/api/carrito/actualizarCarrito', {
+export async function agregarProductoCarrito(data){
+  return apiFetch('/api/carrito/insertarProducto', {
     method: 'PUT',
     cache: 'no-store',
     headers: {
@@ -36,9 +36,35 @@ export async function actualizarCarrito(data){
   });
 }
 
-/* export async function createProducto(data) {
-  return apiFetch('/api/producto/insertar', {
+export async function obtenerProductosCarrito(data) {
+  return apiFetch('/api/carrito/obtenerProductosCarrito', {
     method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data)
   });
-} */
+} 
+
+export async function aumentarCantidad(data) {
+  return apiFetch('/api/carrito/aumentarCantidad', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+} 
+
+export async function removerProductoCarrito(data) {
+  return apiFetch('/api/carrito/removerProductoCarrito', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  });
+} 
