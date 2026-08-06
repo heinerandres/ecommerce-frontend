@@ -19,7 +19,7 @@ export const TallaSelector = ({talla, setTalla, disponibles}: Props) => {
                         key= { size._id }
                         onClick= { () => onSizeChanged(size._id)}
                         className= 
-                        {clsx("mx-2 hover:underline text-lg cursor-pointer",
+                        {clsx("mx-2 hover:underline xl:text-base 2xl:text-lg cursor-pointer",
                             {'underline': size._id === talla}
                         )}
                     >

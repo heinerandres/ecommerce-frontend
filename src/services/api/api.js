@@ -1,16 +1,20 @@
 export async function apiFetch(endpoint, options = {}) {
   //const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
-  const res = await fetch(`http://localhost:4000${endpoint}`, {
-    ...options,
-    headers: {
-      ...options.headers
-    }
-  });
 
-
-  if (!res.ok) {
-    console.log('Error en la petición');
+  try{
+    const res = await fetch(`http://localhost:4000${endpoint}`, {
+      ...options,
+      headers: {
+        ...options.headers
+      }
+    });
+    return res.json();
   }
-
-  return res.json();
+  catch(error){
+    console.log(error);
+    return {
+      ok: false,
+      msg: "Conexión no disponible, por favor hable con el administrador"
+    };
+  }
 }

@@ -19,7 +19,6 @@ export async function getTallaByValor(data){
 }
 
 export async function editarTalla(data){
-  console.log(data);
   return apiFetch('/api/talla/editar', {
     method: 'PUT',
     cache: 'no-store',
@@ -31,7 +30,6 @@ export async function editarTalla(data){
 }
 
 export async function insertarTalla(data){
-  console.log(data);
   return apiFetch('/api/talla/insertar', {
     method: 'POST',
     cache: 'no-store',
@@ -43,7 +41,6 @@ export async function insertarTalla(data){
 }
 
 export async function eliminarTalla(data){
-  console.log(data);
   return apiFetch('/api/talla/eliminar', {
     method: 'DELETE',
     cache: 'no-store',

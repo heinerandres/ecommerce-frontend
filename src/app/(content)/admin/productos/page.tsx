@@ -1,95 +1,44 @@
 'use server';
 
-import EliminarProducto from "@/src/app/components/admin/producto/EliminarProducto";
-import { getCategorias } from "@/src/services/api/server/categorias";
 import Link from "next/link";
-import { getGeneralInformation } from "@/src/utilities/getGeneralInfo";
+import { getProductos } from "@/src/services/api/server/productos";
+import { IProducto } from "@/src/interfaces/producto";
+import TablaProductos from "@/src/app/components/admin/producto/tabla/TablaProductos";
 
 
 export default async function ProductosPage() {
-  let errorMsgCategorias = null;
-    const {productos, tallas, colores, errorMsg} = await getGeneralInformation();
-    let categorias : {_id: string, nombre:string }[] | null = null;
+  let errorMsg = null;
+  let productos : IProducto[] | null = null;
 
-    const respuestaCategoria = await getCategorias();
-    if(respuestaCategoria.ok) categorias = respuestaCategoria.categorias;
-    else errorMsgCategorias = respuestaCategoria.msg;
+  const respuestaProductos = await getProductos();
+  if(respuestaProductos.ok) productos = respuestaProductos.productos;
+  else errorMsg = respuestaProductos.msg;
 
     return (
-        <div className="min-h-[70vh]">
-      <h5 className="mt-10 ml-20 text-2xl font-bold">Productos</h5>
-      {errorMsg && <p className="text-red-500">{errorMsg}</p>}
-      {errorMsgCategorias && <p className="text-red-500">{errorMsgCategorias}</p>}
-      <div className="mt-10 px-20">
-        <Link href="/admin/productos/insertar" 
-            className=" px-4 py-4 cursor-pointer rounded-lg bg-blue-300 text-sm font-medium">
-                Agregar Producto Nuevo
-                <i className="fa-solid fa-gift ml-2"></i>
-                <i className="fa-solid fa-tag ml-1"></i>
-        </Link>
-        <table className="min-w-full mt-6">
-          <thead className="bg-gray-200 border-b border-gray-300">
-            <tr>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Nombre
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Categoría
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Talla
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Color
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Ver detalles
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Editar
-              </th>
-              <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Eliminar
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-                productos?.map((producto, index) => (
-                    <tr key={index} className="bg-white border-b border-gray-300 transition duration-300 ease-in-out hover:bg-gray-100">
-                        <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {producto.nombre}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                          {categorias?.find(categoria => categoria._id === producto.categoria)?.nombre}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                          {tallas?.find(talla => talla._id === producto.talla)?.valor}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                          {colores?.find(color => color._id === producto.color)?.nombre}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                            <button className="cursor-pointer hover:underline">
-                              <i className="fa-solid fa-circle-info mr-2"></i>
-                              Ver detalles
-                            </button>
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                            <Link href={`/admin/productos/${producto.slug}`} className="hover:underline">
-                                <i className="fa-solid fa-pen-to-square text-xl drop-shadow-[0.8px_0.8px_0.8px_black] mr-2"></i>
-                                 Editar producto
-                            </Link>
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 ">
-                          <EliminarProducto producto={producto} /> 
-                      </td>
-                    </tr>
-                ))
-            }
-          </tbody>
-        </table>
+        <div className="admin-div-principal">
+          <div className="flex justify-between h-15">
+            <div className="flex items-center">
+              <div className="div-icono">
+                <i className="fa-solid fa-gift text-xl text-blue-700"></i>
+              </div>
+              <div className="ml-4">
+                <h5 className="text-2xl font-medium">Productos</h5>
+                <h3 className="text-gray-400">Gestiona los productos disponibles en tu tienda.</h3>
+              </div>
+            </div>
+            
+            <Link href="/admin/productos/insertar" 
+              className="btn-agregar">
+                <i className="fa-solid fa-plus mr-2"></i>
+                {/* <i className="fa-solid fa-paintbrush ml-2"></i>
+                <i className="fa-solid fa-palette mr-2"></i> */}
+                Agregar Producto
+            </Link>
+          </div>
+        <div className="mt-10">
+          {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+          <TablaProductos productos = { productos } />
+        </div>
       </div>
-    </div>
     )
 }

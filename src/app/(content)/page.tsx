@@ -1,44 +1,30 @@
+'use server';
 import { ImageBanner } from "../components/main/ImageBanner";
-import { getProductos } from '@/src/services/api/server/productos';
+import { getProductos, getProductosConImagenes } from '@/src/services/api/server/productos';
 import { IProducto } from '@/src/interfaces/producto';
 import { Producto } from "../components/ProductosInicio/Producto";
+import { getImagenes } from "@/src/services/api/server/imagenes";
+import ProductoFilter from "../components/ProductosInicio/ProductoFilter";
 
 export default async function Home() {
   let productos: IProducto[] = [];
+  let imagenes: {_id: string, producto: string, url: string}[] = [];
   let error = null;
 
-  try {
-    const respuesta = await getProductos();
+  const respuesta = await getProductosConImagenes();
+  if (respuesta.ok) productos = respuesta.productos;
+  else error = respuesta.msg;
 
-    if (respuesta.ok) {
-      //productos = respuesta.producto;
-      //agrupa los productos por slug
-      productos = [
-        ...new Map<string, IProducto>(
-          respuesta.productos?.map((producto: IProducto) => [producto.slug, producto])
-        ).values()
-      ];
-      console.log(productos);
-    } else {
-      error = respuesta.msg;
-    }
-  }
-  catch (error) {
-    console.log(error);
-    error = "Error cargando productos";
-  }
+  const respuestaImagenes = await getImagenes();
+  if(respuestaImagenes.ok) imagenes = respuestaImagenes.imagenes;
+  else error = respuestaImagenes.msg;
+
   return (
-    <div className="md:text-sm 2xl:text-lg">
+    <div className="">
       <ImageBanner />
-      <div className="relative flex justify-center h-[85vh] mt-[-28vh] z-10">
+      <div className="relative flex justify-center mt-[-18.7vh] xl:mt-[-26.6vh] 2xl:mt-[-28vh] z-10">
         {error && <p className="text-red-500">{error}</p>}
-        <div className="w-[75vw] grid grid-cols-4 grid-rows-2 gap-4">
-          {
-            productos.map((producto, index) => (
-              <Producto key={ index } producto = { producto }/>
-            ))
-          }
-        </div>
+        <ProductoFilter productos={productos} imagenes={imagenes}/>
       </div>
     </div>
   );

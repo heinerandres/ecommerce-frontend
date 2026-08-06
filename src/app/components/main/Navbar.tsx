@@ -1,34 +1,49 @@
+'use server';
 import Link from "next/link";
 
 import { LogOut } from "./navbar/Logout";
 import { Identificate } from "./navbar/Identificate";
 import { NavCart } from "./navbar/NavCart";
+import { getCategorias } from "@/src/services/api/server/categorias";
+import { Filtro } from "./navbar/Filtro";
+import { NavbarAdmin } from "./NavbarAdmin";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+
+  let categorias: {_id: string, nombre: string, cantidadProductos: number}[] | null = null;
+  let errorMsg = null;
+
+  const respuesta = await getCategorias();
+  if (respuesta.ok) categorias = respuesta.categorias;
+  else errorMsg = respuesta.msg;
+
   return (
-     <nav className="max-w-screen h-[10vh] bg-white border-b border-gray-200 shadow-lg z-20"> 
-        <div className="flex items-center justify-around h-full w-full max-w-screen ">
-            <Link href='/'><img className="h-full w-[5vw] md:w-[8vw] 2xl:w-[10vw]" src="/next.svg" /></Link>
-            <div className="flex h-[45%] ml-[2%] ">
-              <select className="text-black bg-gray-200 rounded-l-lg px-[1%] md:w-[11vw] 2xl:w-[10vw] md:text-sm 2xl:text-lg">
-                <option>Todas las Categorías</option>
-                <option>Camisetas</option>
-                <option>Pantalonetas</option>
-                <option>Pijamas</option>
-              </select>
-              <input type="text" className="md:w-[37vw] 2xl:w-[40vw] border border-gray-300"></input>
-              <button className="h-full w-[5%] bg-amber-400 rounded-r-lg cursor-pointer">
-                <i className="fa fa-search "></i>
-              </button>
-            </div>
-            <div className="flex md:w-[35vw] 2xl:w-[26vw]">
-              
+     <nav className="xl:h-17 2xl:h-[10vh] shadow-md">
+      <div className="flex items-center h-full px-4 gap-4">
+          <Link className="flex gap-2 px-4 items-center h-[70%] border rounded-xl" href="/">
+                <div className="flex flex-col items-center">
+                    <p className="text-xs">Logo -</p>
+                    <p className="text-xs">Ir a la página principal</p>
+                </div>
+                
+          </Link>
+          <NavbarAdmin />
+          <div className="flex-1 min-w-0">
+              <Filtro categorias={categorias} />
+          </div>
+          <div className="flex items-center gap-4 shrink-0">
               <Identificate />
-              <Link href="/pedidos" className="flex items-center font-bold px-[4%] cursor-pointer md:text-sm lg:text-lg"><i className="fa fa-gift mr-[5%]"></i>Pedidos</Link>
+              <Link
+                  href="/pedidos"
+                  className="flex items-center font-bold whitespace-nowrap"
+              >
+                  <i className="fa fa-gift mr-2"></i>
+                  Pedidos
+              </Link>
               <NavCart />
               <LogOut />
-            </div>
-        </div>
-    </nav>
+          </div>
+      </div>
+  </nav>
   )
 }

@@ -46,14 +46,13 @@ export default async function OrdersPage( { params }: Props ) {
                     }>
                         <i className="fa-solid fa-credit-card"></i>
                         <span className="mx-2">Pagada</span>
-
                     </div>
 
 
                     {
-                        Carts.map((cart, index) => (
+                        /* Carts.map((cart, index) => (
                             <CheckCart key={index} cart = {cart} index = { index } />
-                        ))
+                        )) */
                     }
                 </div>
             </div>

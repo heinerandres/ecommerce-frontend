@@ -21,8 +21,8 @@ export const ImageBanner = () => {
   }, []);
 
   return (
-    <div className="h-[60vh] flex justify-center z-[-1]">
-        <div className="relative w-[80%] overflow-hidden">
+    <div className="h-[40vh] xl:h-[57vh] 2xl:h-[60vh] flex justify-center z-[-1]">
+        <div className="relative w-[87%] xl:w-[85%] 2xl:w-[80%] overflow-hidden">
             {
                 images.map((img, i) =>(
                     <img 

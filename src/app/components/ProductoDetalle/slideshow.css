@@ -32,9 +32,10 @@
 }
 
 .mySwiper .swiper-slide {
-  width: 25%;
-  height: 100%;
+  width: 10% !important;
+  height: 50% !important;
   opacity: 0.4;
+  border: 1px solid gray;
 }
 
 .mySwiper .swiper-slide-thumb-active {

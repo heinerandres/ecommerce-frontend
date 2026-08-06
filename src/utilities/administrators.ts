@@ -1,0 +1,1 @@
+export const administrators = ['gJPfwCw7mDVVnRRJSlJo9sJPbEn1',]
