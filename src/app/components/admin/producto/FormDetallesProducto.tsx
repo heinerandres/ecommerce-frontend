@@ -57,8 +57,10 @@ export default function FormDetallesProducto({producto}:Props) {
                     className="border rounded p-2  mb-3 disabled:bg-gray-100 disabled:cursor-default"
                 />
                 <p className="text-xs text-gray-500">Más información sobre el producto seleccionado.</p>
-                <div className="w-full flex justify-around mt-10">
-                    <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">Regresar</Link>
+                <div className="w-full flex justify-around mt-7">
+                    <Link href="/admin/productos" className="border border-blue-600 py-2 rounded text-black cursor-pointer w-[45%] text-center hover:bg-blue-200">
+                        Regresar
+                    </Link>
                 </div>
             </div>
             {

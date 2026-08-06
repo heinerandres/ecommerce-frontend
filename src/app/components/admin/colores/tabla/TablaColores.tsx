@@ -20,7 +20,7 @@ export default function TablaColores({colores}: Props) {
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageSize: 8,
+                pageSize: 7,
                 pageIndex: 0,
             }
         },
@@ -36,7 +36,7 @@ export default function TablaColores({colores}: Props) {
                 onChange={(e)=>table.setGlobalFilter(e.target.value)}
                 placeholder="Buscar color"
             />
-            <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-md pb-10">
+            <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-md pb-5">
                 <table className="min-w-full">
                     <thead className="bg-gray-200 border-b border-gray-300">
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -82,12 +82,12 @@ export default function TablaColores({colores}: Props) {
                     <button
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Anterior
                     </button>
 
-                    <span>
+                    <span className="text-sm">
                         Página {table.getState().pagination.pageIndex + 1} de{" "}
                         {table.getPageCount()}
                     </span>
@@ -95,7 +95,7 @@ export default function TablaColores({colores}: Props) {
                     <button
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Siguiente
                     </button>

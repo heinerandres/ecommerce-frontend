@@ -21,7 +21,7 @@ export default function TablaProductos({productos}: Props) {
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageSize: 8,
+                pageSize: 7,
                 pageIndex: 0,
             }
         },
@@ -32,6 +32,7 @@ export default function TablaProductos({productos}: Props) {
     return (
         <>
             <input
+                name="buscar"
                 className="h-10 border border-gray-300 p-4 mb-5 rounded-md"
                 value={table.getState().globalFilter}
                 onChange={(e)=>table.setGlobalFilter(e.target.value)}
@@ -45,7 +46,7 @@ export default function TablaProductos({productos}: Props) {
                                 {headerGroup.headers.map((header) => (
                                 <th
                                     key={header.id}
-                                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                                    className="text-xs 2xl:text-sm font-medium text-gray-900 px-6 py-4 text-left"
                                 >
                                     {header.isPlaceholder
                                     ? null
@@ -67,7 +68,7 @@ export default function TablaProductos({productos}: Props) {
                             {row.getVisibleCells().map((cell) => (
                                 <td
                                 key={cell.id}
-                                className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                className="text-xs 2xl:text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                 >
                                 {flexRender(
                                     cell.column.columnDef.cell,
@@ -83,12 +84,12 @@ export default function TablaProductos({productos}: Props) {
                     <button
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Anterior
                     </button>
 
-                    <span>
+                    <span className="text-base">
                         Página {table.getState().pagination.pageIndex + 1} de{" "}
                         {table.getPageCount()}
                     </span>
@@ -96,7 +97,7 @@ export default function TablaProductos({productos}: Props) {
                     <button
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Siguiente
                     </button>

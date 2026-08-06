@@ -42,7 +42,7 @@ export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, 
     <>
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}
       <div className="flex h-[25%] p-3" key={productoEnCarrito.producto._id}>
-        <div className="w-50 border">
+        <div className="w-30 2xl:w-50 border">
           <img 
             src={ base + productoEnCarrito.producto.imagenes?.[0].url }
             className="h-full w-full"

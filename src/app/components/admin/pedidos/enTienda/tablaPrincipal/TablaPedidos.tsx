@@ -31,7 +31,7 @@ export default function TablaPedidos({pedidos}: Props) {
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageSize: 8,
+                pageSize: 6,
                 pageIndex: 0,
             }
         },
@@ -94,12 +94,12 @@ export default function TablaPedidos({pedidos}: Props) {
                     <button
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Anterior
                     </button>
 
-                    <span>
+                    <span className="text-base">
                         Página {table.getState().pagination.pageIndex + 1} de{" "}
                         {table.getPageCount()}
                     </span>
@@ -107,7 +107,7 @@ export default function TablaPedidos({pedidos}: Props) {
                     <button
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
-                        className="px-4 py-2 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-auto"
+                        className="btn-paginacion"
                     >
                         Siguiente
                     </button>

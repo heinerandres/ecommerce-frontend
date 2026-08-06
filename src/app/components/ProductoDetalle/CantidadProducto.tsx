@@ -7,11 +7,9 @@ type Props = {
 }
 
 export default function CantidadProducto({cantidad, setCantidad, stock}: Props) {
-
-  console.log(cantidad);
   return (
-    <div className="">
-      <h3 className="font-bold ">Cantidad</h3>
+    <div className="mt-3">
+      <h3 className="font-bold mb-1">Cantidad</h3>
       <div className="flex items-center gap-3 mb-4">
         <button 
           onClick={() => setCantidad(v => Math.max(1, v - 1))}

@@ -20,11 +20,12 @@ export const Navbar = async () => {
   return (
      <nav className="xl:h-17 2xl:h-[10vh] shadow-md">
       <div className="flex items-center h-full px-4 gap-4">
-          <Link className="" href="/">
-              <img
-                  src="/next.svg"
-                  className="h-6 xl:h-6 2xl:h-10 w-auto"
-              />
+          <Link className="flex gap-2 px-4 items-center h-[70%] border rounded-xl" href="/">
+                <div className="flex flex-col items-center">
+                    <p className="text-xs">Logo -</p>
+                    <p className="text-xs">Ir a la página principal</p>
+                </div>
+                
           </Link>
           <NavbarAdmin />
           <div className="flex-1 min-w-0">

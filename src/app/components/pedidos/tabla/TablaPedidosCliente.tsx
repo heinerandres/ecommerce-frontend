@@ -1,29 +1,44 @@
 'use client';
+
 import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable, getFilteredRowModel } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IPedido } from "@/src/interfaces/pedido";
 import { PedidosColumns } from "./PedidosColumns";
 import { useRouter } from "next/navigation";
-import { actualizarEstadoPedido } from "@/src/services/api/server/pedidos";
+import { actualizarEstadoPedido, getPedidosCliente } from '@/src/services/api/server/pedidos';
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
 
-type Props = {
-    pedidos: IPedido[] | null;
-}
 
-export default function TablaPedidos({pedidos}: Props) {
+export default function TablaPedidosCliente() {
+
+    const [pedidos, setPedidos] = useState<IPedido[]>([]);
     const [globalFilter, setGlobalFilter] = useState("");
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const router = useRouter();
 
-    const cambiarEstado = async ( idPedido: string, estado: string) => {
-        const respuesta = await actualizarEstadoPedido({idPedido, estado});
-        if(respuesta.ok) router.push("/admin/pedidos/enpagina");
-        else setErrorMsg(JSON.stringify(respuesta));
-    };
+    //redux, consultar si estoy logueado
+    const usuario = useSelector((state: RootState) => state.user);
+    const { checking } = useSelector((state: RootState) => state.user);
+
+    const getPedidos = async () => {
+        const res = await getPedidosCliente({usuario_id: usuario.uid});
+        if(res.ok) setPedidos(res.pedidos.filter( (pedido: IPedido) => pedido.tipoPedido === "EnPagina" ));
+        else setErrorMsg(JSON.stringify(res));
+    }
+
+    //redirigir
+    useEffect(() => {
+        if(checking) return;
+        if (!usuario.uid) {
+            router.push("/auth/login");
+        }
+        getPedidos();
+    }, [usuario, checking]);
 
     const table = useReactTable({
         data: pedidos ?? [],
-        columns: PedidosColumns(cambiarEstado),
+        columns: PedidosColumns(),
         state: {
             globalFilter
         },
@@ -117,4 +132,3 @@ export default function TablaPedidos({pedidos}: Props) {
         </>
     )
 }
-

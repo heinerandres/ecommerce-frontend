@@ -8,15 +8,15 @@ export default async function EnPagina() {
     let errorMsg = null;
     let pedidos : IPedido[] | null = null;
 
-  const respuestaProductos = await getPedidos();
+    const respuestaProductos = await getPedidos();
     if(respuestaProductos.ok) pedidos = respuestaProductos.pedidos;
     else errorMsg = respuestaProductos.msg;
 
   return (
-    <div className="min-h-[82vh] mt-5 w-[80vw] border ml-10 border-gray-100 shadow-lg rounded-2xl">
-      <div className="flex justify-between mt-10 h-15">
-        <div className="flex ml-20 items-center">
-          <div className="flex items-center justify-center w-18 h-full bg-blue-200 rounded-xl">
+    <div className="admin-div-principal">
+      <div className="flex justify-between h-15">
+        <div className="flex items-center">
+          <div className="div-icono">
             <i className="fa-solid fa-cloud text-xl text-blue-700"></i>
           </div>
           <div className="ml-4">
@@ -25,7 +25,7 @@ export default async function EnPagina() {
           </div>
         </div>
       </div>
-      <div className="mt-10 px-19">
+      <div className="mt-5">
         {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         <TablaPedidos pedidos = { (pedidos?? []).filter(p=> p.tipoPedido === "EnPagina") } />
       </div>

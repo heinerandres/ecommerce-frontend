@@ -23,7 +23,7 @@ export default async function EditarProductoPage( { params }: Props ) {
     else errorMsg = respuesta.msg;
 
     return(
-        <div className="flex justify-center w-[80vw] min-h-[82vh] pt-20 mt-5 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+        <div className="flex justify-center w-[80vw] min-h-[85vh] pt-10 mt-5 ml-10 border-gray-100 shadow-lg rounded-2xl border">
             <div className="w-[32%]">
                 { errorMsg !== "" &&
                     <span className="text-red-500">

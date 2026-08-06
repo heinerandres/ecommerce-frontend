@@ -185,7 +185,7 @@ export default function FormInsertarPedidoEnTienda({productos}: Props) {
         <div className="px-10 w-full">
             <div className="flex justify-between w-full h-fit">
                 <div className="flex items-stretch ">
-                    <div className="flex items-center px-6 bg-blue-200 rounded-xl">
+                    <div className="div-icono">
                         <i className="fa-solid fa-store text-xl text-blue-700"></i>
                     </div>
                     <div className="ml-4">
@@ -195,11 +195,11 @@ export default function FormInsertarPedidoEnTienda({productos}: Props) {
                 </div>
                 <div className="flex items-center gap-5">
                     <p><span className="font-semibold">Subtotal:</span> {currencyFormat(pedidoNuevo.total)}</p>
-                    <button onClick={limpiarPedido} className="h-full border text-blue-400 font-semibold rounded-xl px-4 cursor-pointer">
+                    <button onClick={limpiarPedido} className="h-[80%] text-base border text-blue-400 font-semibold rounded-xl px-4 cursor-pointer">
                         <i className="fa-solid fa-broom mr-2"></i>
                         Limpiar pedido
                     </button>
-                    <button onClick={handleInsertar} className="h-full border text-white bg-blue-700 font-semibold rounded-xl px-4 cursor-pointer">
+                    <button onClick={handleInsertar} className="h-[80%] text-base border text-white bg-blue-700 font-semibold rounded-xl px-4 cursor-pointer">
                         <i className="fa-regular fa-save mr-2"></i>
                         Guardar Pedido
                     </button>
@@ -212,7 +212,7 @@ export default function FormInsertarPedidoEnTienda({productos}: Props) {
             <div className="mt-10">
                 <div className="flex justify-between w-full h-fit mb-10">
                     <div className="flex items-stretch ">
-                        <div className="flex items-center px-6 bg-blue-200 rounded-xl">
+                        <div className="div-icono">
                             <i className="fa-solid fa-cart-plus text-xl text-blue-700"></i>
                         </div>
                         <div className="ml-4">

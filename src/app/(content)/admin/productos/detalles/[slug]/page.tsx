@@ -22,7 +22,7 @@ export default async function DetallesProductoPage( { params }: Props ) {
 
 
   return (
-    <div className="flex w-[80vw] mt-5 min-h-[82vh] pt-20 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+    <div className="flex w-[80vw] mt-5 min-h-[85vh] ml-10 border-gray-100 shadow-lg rounded-2xl border">
           { errorMsg !== "" &&
               <span className="text-red-500">
               {errorMsg}

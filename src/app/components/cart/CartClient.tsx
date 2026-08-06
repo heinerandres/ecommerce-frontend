@@ -75,11 +75,11 @@ export const CartClient = () => {
   return (
     <div className="flex w-[60%]">
         <div className="w-[50%] p-[2%]">
-          <h5 className="text-4xl font-bold">Carrito</h5>
+          <h5 className="text-3xl 2xl:text-4xl font-bold">Carrito</h5>
           {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           <div className="h-[65vh] mt-[2%] overflow-y-auto">
-              <p className="text-lg">Agregar más items</p>
-              <Link href="/" className="underline cursor-pointer">Continuar comprando</Link>
+              <p className="text-base 2xl:text-lg">Agregar más items</p>
+              <Link href="/" className="text-xs 2xl:text-base underline cursor-pointer">Continuar comprando</Link>
 
               {
                 productosEnCarrito.map((productoEnCarrito, index) => {

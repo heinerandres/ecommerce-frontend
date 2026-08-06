@@ -23,11 +23,7 @@ export default async function Home() {
       <ImageBanner />
       <div className="relative flex justify-center mt-[-18.7vh] xl:mt-[-26.6vh] 2xl:mt-[-28vh] z-10">
         {error && <p className="text-red-500">{error}</p>}
-
-        
         <ProductoFilter productos={productos} imagenes={imagenes}/>
-
-
       </div>
     </div>
   );

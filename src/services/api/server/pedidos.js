@@ -17,6 +17,17 @@ export async function getPedidos() {
   });
 }
 
+export async function getPedidosCliente(data) {
+  return apiFetch('/api/pedidos/obtenerPedidosCliente', {
+    method: 'POST',
+    cache: 'no-store',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
 export async function colocarPedidoEnTienda(data) {
   return apiFetch('/api/pedidos/colocarPedidoEnTienda', {
     method: 'POST',

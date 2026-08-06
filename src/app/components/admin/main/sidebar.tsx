@@ -47,20 +47,20 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="relative w-75 ml-5 mt-5 min-h-[82vh] h-full text-black shadow-lg border border-gray-100 rounded-2xl">
-      <div className="p-7 ">
-        <h1 className="text-2xl font-bold">
+    <aside className="relative xl:w-60 2xl:w-75 ml-5 mt-5 xl:min-h-[80vh] 2xl:min-h-[85vh] text-black shadow-lg border border-gray-100 rounded-2xl">
+      <div className="p-5 2xl:p-7">
+        <h1 className="text-xl 2xl:text-2xl font-bold">
           Administrador(a)
         </h1>
       </div>
 
-      <nav className="flex flex-col p-4 gap-2">
+      <nav className="flex flex-col p-4 gap-2 xl:text-xs 2xl:text-base">
         {links.map((link) => {
           if (link.children) {
               return (
                   <div key={link.label}>
                       <div 
-                        className="rounded-lg px-4 py-3 font-semibold">
+                        className="rounded-lg px-4 py-2 font-semibold">
                           <i className={`${link.icon} mr-3 text-black/60`}></i>
                           {link.label}
                       </div>
@@ -87,7 +87,7 @@ export default function Sidebar() {
               <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-lg px-4 py-3 transition-colors font-semibold ${
+                  className={`rounded-lg px-4 py-2 transition-colors font-semibold ${
                       pathname === link.href
                           ? "bg-blue-200 text-blue-700"
                           : "hover:bg-blue-100 hover:text-blue-700"

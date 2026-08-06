@@ -20,7 +20,7 @@ export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock
 
   return (
     <div className="">
-      <h3 className="font-bold ">Cantidad</h3>
+      <h3 className="font-bold">Cantidad</h3>
       <div className="flex items-center gap-3">
         <button 
           onClick={() => {
@@ -31,7 +31,7 @@ export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock
           }}
           className="rounded-full cursor-pointer"
         >
-          <i className="text-xl fa-regular fa-circle-left"></i>
+          <i className="text-base 2xl:text-xl fa-regular fa-circle-left"></i>
         </button>
 
         <span className="w-8 text-center">{cantidadEnCarrito}</span>
@@ -45,7 +45,7 @@ export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock
           }}
           className="rounded-full cursor-pointer"
         >
-          <i className="text-xl fa-regular fa-circle-right"></i>
+          <i className="text-base 2xl:text-xl fa-regular fa-circle-right"></i>
         </button>
       </div>
       

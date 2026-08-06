@@ -149,9 +149,9 @@ export const ProductoClient = ({producto}: Props) => {
 
         {(!tieneVariantes) && <CantidadProducto cantidad={cantidad} setCantidad={setCantidad} stock={stock}/>}
 
-        <button onClick={handleAgregar} className="py-3 px-3 border border-black/50 rounded-xl cursor-pointer">Agregar al Carrito</button>
+        <button onClick={handleAgregar} className="mt-5 py-3 px-3 border border-black/50 rounded-xl cursor-pointer">Agregar al Carrito</button>
       </div>
-      <div className="ml-7 my-2 border h-fit p-4 rounded-xl">
+      <div className="ml-15 my-2 border h-fit p-4 rounded-xl">
         {
           tieneVariantes ? (
             <>

@@ -81,7 +81,7 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
 
     return (
         <>
-            <div className="w-[80vw] min-h-[82vh] pt-0 mt-5 ml-10 border-gray-100 shadow-lg rounded-2xl border">
+            <div className="w-[80vw] min-h-[85vh] pt-0 mt-5 ml-10 border-gray-100 shadow-lg rounded-2xl border">
                 <div className="">
                     <div className="flex justify-between mt-10 h-15">
                         <div className="flex ml-20 items-center">
@@ -143,7 +143,7 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
                             />
                         </div>
                     </div>
-                    <form onSubmit={handleEditar} className="mt-0 w-[35vw] ml-35 px-7 border border-gray-300 rounded-xl shadow-md">
+                    <form onSubmit={handleEditar} className="mt-[-50] w-[35vw] ml-35 px-7 border border-gray-300 rounded-xl shadow-md">
                         <h1 className="flex text-2xl py-5 font-semibold">Administrar Imágenes</h1>
                         <div className="flex gap-5 p-2 items-center border border-blue-300 bg-blue-50 rounded-lg mb-3">
                             <div className="h-23 w-30">

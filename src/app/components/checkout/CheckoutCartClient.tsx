@@ -84,18 +84,18 @@ export const CheckoutCartClient = () => {
     const handleColocarOrden = async () => {
         const res = await colocarOrden({IdCarrito: carrito._id});
         console.log(res);
-        if(res.ok) router.push('pedidos/123')
+        if(res.ok) router.push('pedidos/')
         else setErrorMsg(JSON.stringify(res));
     }
 
     return (
-        <div className="flex w-[60%]">
+        <div className="flex lg:w-[90%] 2xl:w-[60%]">
             <div className="w-[50%] p-[2%]">
-                <h5 className="text-4xl font-bold">Verificar orden</h5>
+                <h5 className="xl:text-2xl 2xl:text-4xl font-bold">Verificar orden</h5>
                 {errorMsg && <p className="text-red-500">{errorMsg}</p>}
                 <div className="h-[65vh] mt-[2%] overflow-y-auto">
-                    <p className="text-lg">Ajustar elementos</p>
-                    <Link href="/cart" className="underline cursor-pointer">Editar carrito</Link>
+                    <p className="xl:text-base 2xl:text-lg">Ajustar elementos</p>
+                    <Link href="/cart" className="xl:text-xs 2xl:text-base underline cursor-pointer">Editar carrito</Link>
                     {
                         productosEnCarrito.map((producto, index) => (
                             <CheckCart key={index} producto={producto} />
@@ -103,7 +103,7 @@ export const CheckoutCartClient = () => {
                     }
                 </div>
             </div>
-            <div className="md:w-[47%] 2xl:w-[35%] md:h-[85%] 2xl:h-[68%] mt-[5%] md:ml-[15%] 2xl:ml-[5%] p-8 rounded-2xl shadow-xl">
+            <div className="md:w-[47%] 2xl:w-[35%] mt-[5%] h-fit md:ml-[15%] 2xl:ml-[5%] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold">Información de entrega</h4>
               <div className="mb-4">
                 <p className="">{nombres + " " + apellidos}</p>

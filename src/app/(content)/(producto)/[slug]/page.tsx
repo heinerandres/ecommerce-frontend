@@ -28,7 +28,7 @@ export default async function ProductoPage ({ params }: Props) {
         <div className="w-[50%]">
           <ProductoSlides imagenes={imagenes} />
         </div>
-        <div className="lg:p-5 p-10 h-fit ml-[10%] rounded-xl shadow-xl border border-gray-400">
+        <div className="p-10 lg:p-5 2xl:p-13 h-fit ml-[10%] rounded-xl shadow-xl border border-gray-400">
           {error && <p className="text-red-500">{error}</p>}
           <h4 className="text-2xl font-bold">{ producto?.nombre }</h4>
           <p className="mt-[4%]">{ producto?.descripcion }</p>

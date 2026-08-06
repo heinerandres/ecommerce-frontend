@@ -76,16 +76,16 @@ export default function FormInsertarDireccion() {
         else setErrorMsg(JSON.stringify(respuesta));
     }
     return (
-        <form onSubmit={handleDireccion} className="w-full  xl:w-250 flex flex-col justify-center text-left">
-        <h5 className="md:text-3xl 2xl:text-4xl font-bold mt-[5%]">Dirección</h5>
-        <h3 className="md:text-sm 2xl:text-lg py-[2%]">Dirección de entrega</h3>
-        <div className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2">
+        <form onSubmit={handleDireccion} className="w-full lg:w-200 xl:w-250 2xl:w-300 flex flex-col justify-center text-left">
+        <h5 className="xl:text-3xl 2xl:text-4xl font-bold mt-5 2xl:mt-[5%]">Dirección</h5>
+        <h3 className="xl:text-sm 2xl:text-lg xl:py-2 2xl:py-[2%]">Dirección de entrega</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
           <div className="flex flex-col mb-2">
             <span>Nombres</span>
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Nombres"
                 name="nombre"
@@ -98,7 +98,7 @@ export default function FormInsertarDireccion() {
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Apellidos"
                 name="apelllidos"
@@ -111,7 +111,7 @@ export default function FormInsertarDireccion() {
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Dirección"
                 name="direccion"
@@ -122,7 +122,7 @@ export default function FormInsertarDireccion() {
           <div className="flex flex-col mb-2">
             <span>Dirección 2 (opcional)</span>
             <input
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Dirección2"
                 name="direccion2"
@@ -135,7 +135,7 @@ export default function FormInsertarDireccion() {
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Codigo Postal"
                 name="codigoPostal"
@@ -148,7 +148,7 @@ export default function FormInsertarDireccion() {
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Ciudad"
                 name="ciudad"
@@ -172,7 +172,7 @@ export default function FormInsertarDireccion() {
             <input
                 minLength={2}
                 required
-                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5"
+                className="px-5 md:text-sm 2xl:text-lg md:py-2 2xl:py-2 bg-white border rounded mb-5 xl:mb-2"
                 type="text" 
                 placeholder="Teléfono"
                 name="telefono"
@@ -185,7 +185,7 @@ export default function FormInsertarDireccion() {
                 {errorMsg}
                 </span>
             }
-          <div className="flex flex-col mb-2 sm:mt-10">
+          <div className="flex flex-col mb-2 mt-0 2xl:mt-10">
             <button 
               type="submit"
               className="bg-blue-600 text-white py-[1%] rounded flex w-full sm:w-1/2 justify-center cursor-pointer">
