@@ -11,6 +11,7 @@ import 'swiper/css/thumbs';
 import './slideshow.css';
 import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
+import { _base } from "@/src/utilities/url-imgBase";
 
 type Props = {
   imagenes: {_id: string, producto: string, url: string}[] | null,
@@ -18,7 +19,7 @@ type Props = {
 
 export const ProductoSlides = ({imagenes}: Props) => {
     const title = "Imagen";
-    const base = "http://localhost:4000/uploads/";
+    const base = _base;
 
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>(); 
 

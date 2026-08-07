@@ -1,5 +1,6 @@
 import { IProducto } from "@/src/interfaces/producto";
 import { IVariante } from "@/src/interfaces/variante";
+import { _base } from "@/src/utilities/url-imgBase";
 
 
 interface productoEnCarrito {
@@ -14,7 +15,7 @@ type Props = {
 }
 
 export default function CheckCart({ producto }:Props) {
-  const base = "http://localhost:4000/uploads/";
+  const base = _base;
   const precio = !producto.variante ? producto.producto.precio : producto.variante.precio;
   
 

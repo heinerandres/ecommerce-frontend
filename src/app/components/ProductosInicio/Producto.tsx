@@ -1,5 +1,6 @@
 'use client';
 import { IProducto } from "@/src/interfaces/producto";
+import { _base } from "@/src/utilities/url-imgBase";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -10,7 +11,7 @@ type Props = {
 
 export const Producto = ({ producto, imgs }: Props) => {
     const [hover, setHover] = useState(false);
-    const base = "http://localhost:4000/uploads/";
+    const base = _base;
   return (
     <Link 
         href = {`./${producto.slug}`}

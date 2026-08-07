@@ -2,8 +2,9 @@ import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { IProducto } from "@/src/interfaces/producto";
+import { _base } from "@/src/utilities/url-imgBase";
 
-const base = "http://localhost:4000/uploads/";
+const base = _base;
 
 
 export const ProductoColumns = (

@@ -3,8 +3,9 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { IProducto } from "@/src/interfaces/producto";
 import { IProductoPedido } from "@/src/interfaces/productoPedido";
+import { _base } from "@/src/utilities/url-imgBase";
 
-const base = "http://localhost:4000/uploads/";
+const base = _base;
 
 export const PedidoColumns = (
     actualizarCantidad: (idProducto: string, idVariante: string | null, cantidad: number) => void,

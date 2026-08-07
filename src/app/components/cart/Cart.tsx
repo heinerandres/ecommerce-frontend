@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { updateCantidad } from "@/src/redux/slices/carritoSlice";
 import { IVariante } from "@/src/interfaces/variante";
 import { aumentarCantidad } from "@/src/services/api/server/carritos";
+import { _base } from "@/src/utilities/url-imgBase";
 
 type Props = {
   productoEnCarrito: { cantidadCarrito: number, producto: IProducto, variante?: IVariante, stock:number}
@@ -36,7 +37,7 @@ export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, 
     }
     else setErrorMsg(JSON.stringify(respuestaCantidad));
   };
-  const base = "http://localhost:4000/uploads/";
+  const base = _base;
   console.log(productoEnCarrito);
   return (
     <>
