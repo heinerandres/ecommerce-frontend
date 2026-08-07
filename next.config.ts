@@ -4,9 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '4000',
+        protocol: 'https',
+        hostname: 'ecommerce-back-gbe4fndmdxfdctab.canadacentral-01.azurewebsites.net/',
         pathname: '/uploads/**',
       },
     ],
