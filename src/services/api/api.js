@@ -3,7 +3,7 @@ export async function apiFetch(endpoint, options = {}) {
 
   try{
     //const res = await fetch(`http://localhost:4000${endpoint}`, {
-    const res = await fetch(`https://ecommerce-backend-3c9u.onrender.com/${endpoint}`, {
+    const res = await fetch(`https://ecommerce-backend-3c9u.onrender.com${endpoint}`, {
       ...options,
       headers: {
         ...options.headers
