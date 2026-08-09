@@ -1,3 +1,4 @@
+'use server';
 import { ImageBanner } from "../components/main/ImageBanner";
 import { getProductos, getProductosConImagenes } from '@/src/services/api/server/productos';
 import { IProducto } from '@/src/interfaces/producto';
