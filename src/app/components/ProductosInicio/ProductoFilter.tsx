@@ -31,7 +31,7 @@ export default function ProductoFilter({productos, imagenes} : Props) {
             
     
     return(
-        <div className="w-[78vw] xl:w-[78vw] 2xl:w-[75vw] grid grid-cols-4 grid-rows-2 gap-4">
+        <div className="w-[78vw] xl:w-[78vw] 2xl:w-[75vw] grid grid-cols-4 gap-5">
           {
             productosFiltrados?.map((producto, index) => (
               <Producto key={ index } producto = { producto } imgs={imagenes.filter(imagen => imagen.producto === producto._id)}/>
