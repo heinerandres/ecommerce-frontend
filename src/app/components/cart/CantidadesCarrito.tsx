@@ -19,9 +19,9 @@ type Props = {
 export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock, precio, _actualizarCantidad, actualizarCantidad}: Props) {
 
   return (
-    <div className="">
-      <h3 className="font-bold">Cantidad</h3>
-      <div className="flex items-center gap-3">
+    <div className="items-center">
+      <h3 className="text-sm">Cantidad</h3>
+      <div className="flex items-center">
         <button 
           onClick={() => {
             if(cantidadEnCarrito > 1){
@@ -29,12 +29,12 @@ export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock
               actualizarCantidad(cantidadEnCarrito - 1);
             }
           }}
-          className="rounded-full cursor-pointer"
+          className="rounded-l-sm px-2 xl:py-1 2xl:py-0 cursor-pointer border border-gray-300"
         >
-          <i className="text-base 2xl:text-xl fa-regular fa-circle-left"></i>
+          <i className="text-sm 2xl:text-sm fa-solid fa-minus"></i>
         </button>
 
-        <span className="w-8 text-center">{cantidadEnCarrito}</span>
+        <span className="w-12 text-center xl:py-1 2xl:py-0 border-y border-gray-300">{cantidadEnCarrito}</span>
 
         <button 
           onClick={ () => {
@@ -43,9 +43,9 @@ export default function CantidadesCarrito({ productoId, cantidadEnCarrito, stock
               actualizarCantidad(cantidadEnCarrito + 1); 
             }
           }}
-          className="rounded-full cursor-pointer"
+          className="rounded-r-sm px-2 xl:py-1 2xl:py-0 cursor-pointer border border-gray-300"
         >
-          <i className="text-base 2xl:text-xl fa-regular fa-circle-right"></i>
+          <i className="text-sm 2xl:text-sm fa-solid fa-plus"></i>
         </button>
       </div>
       

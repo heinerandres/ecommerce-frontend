@@ -38,44 +38,60 @@ export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, 
     else setErrorMsg(JSON.stringify(respuestaCantidad));
   };
   const base = _base;
-  console.log(productoEnCarrito);
   return (
-    <>
+    <div className="shadow-md border border-gray-300 my-3 rounded-xl">
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}
       <div className="flex h-[25%] p-3" key={productoEnCarrito.producto._id}>
-        <div className="w-30 2xl:w-50 border">
+        <div className="w-40 2xl:w-50 border">
           <img 
             src={ base + productoEnCarrito.producto.imagenes?.[0].url }
             className="h-full w-full"
           />
         </div>
-        <div className="p-0 pl-6 w-full">
+        <div className="flex flex-col justify-between relative p-0 pl-6 w-full">
           <div className="flex justify-between">
             <p className="font-bold">{ productoEnCarrito.producto.nombre }</p>
-            <p onClick={() => handleRemover(productoEnCarrito.producto._id, productoEnCarrito.variante?._id)} className="underline cursor-pointer">Remover</p>
+            <p onClick={() => handleRemover(productoEnCarrito.producto._id, productoEnCarrito.variante?._id)} className="cursor-pointer text-xs hover:underline">Remover</p>
           </div>
           {
             productoEnCarrito.variante ? (
               <>
-                <p>{ currencyFormat(productoEnCarrito.variante.precio ?? 0) }</p>
-                <p>{ productoEnCarrito.variante.talla.valor }</p> 
-                <p>{ productoEnCarrito.variante.color.nombre }</p>
+                <p className="font-bold text-base">{ currencyFormat(productoEnCarrito.variante.precio ?? 0) }</p>
+                <div className="flex gap-2 text-sm">
+                  <div className="bg-gray-100 p-2 rounded-lg flex items-center">
+                    <div className="border w-4 h-4 rounded-full mr-2" style={{backgroundColor: productoEnCarrito.variante.color.valor}}></div>
+                    <span className="font-semibold mr-1">Color: </span>{ productoEnCarrito.variante.color.nombre }
+                  </div>
+                  <p className="bg-gray-100 p-2 rounded-lg"><span className="font-semibold">Talla: </span>{ productoEnCarrito.variante.talla.valor }</p> 
+                </div>
               </>
             ) : (
-              <p>{ currencyFormat(productoEnCarrito.producto.precio ?? 0) }</p>
+              <p className="font-bold text-base">{ currencyFormat(productoEnCarrito.producto.precio ?? 0) }</p>
             )
           }
-          <CantidadesCarrito 
-            productoId={productoEnCarrito.producto._id}
-            cantidadEnCarrito={ cantidadEnCarrito }
-            stock={productoEnCarrito.stock}
-            precio={!productoEnCarrito.variante ? productoEnCarrito.producto.precio ?? 0 : productoEnCarrito.variante.precio ?? 0}
-            _actualizarCantidad={_actualizarCantidad}
-            actualizarCantidad={actualizarCantidad}
-          />
+          <div className="flex flex-row justify-between pt-3">
+            <p className=" shrink-0 h-fit p-1 px-3 rounded-lg xl:text-sm 2xl:text-base text-green-400 bg-green-100"><i className="fa-solid fa-check mr-2"></i>Disponibles</p>
+            <div className="flex gap-10 items-center self-end">
+              <CantidadesCarrito 
+              productoId={productoEnCarrito.producto._id}
+              cantidadEnCarrito={ cantidadEnCarrito }
+              stock={productoEnCarrito.stock}
+              precio={!productoEnCarrito.variante ? productoEnCarrito.producto.precio ?? 0 : productoEnCarrito.variante.precio ?? 0}
+              _actualizarCantidad={_actualizarCantidad}
+              actualizarCantidad={actualizarCantidad}
+            />
+            <div>
+              <p className="text-sm">Subtotal</p>
+            <p className="font-semibold">{ currencyFormat(productoEnCarrito.producto.precio ? productoEnCarrito.producto.precio * productoEnCarrito.cantidadCarrito : (productoEnCarrito.variante?.precio ?? 0) * productoEnCarrito.cantidadCarrito)}</p>
+            </div>
+            </div>
+            
+
+          </div>
+          
         </div>
       </div>
-    </>
+    </div>
     
   )
 }

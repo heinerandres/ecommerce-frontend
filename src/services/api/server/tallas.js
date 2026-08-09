@@ -7,6 +7,7 @@ export async function getTallas() {
 }
 
 export async function getTallaByValor(data){
+  console.log(data)
   return apiFetch('/api/talla/tallaByValor', {
     method: 'POST',
     cache: 'no-store',

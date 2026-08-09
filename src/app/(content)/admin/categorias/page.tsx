@@ -22,8 +22,8 @@ export default async function CategoriasPage() {
               <i className="fa-solid fa-tag text-xl text-blue-700"></i>
             </div>
             <div className="ml-4">
-              <h5 className="text-2xl font-medium">Categorías</h5>
-              <h3 className="text-gray-400">Gestiona las categorías disponibles en tu tienda.</h3>
+              <h5 className="text-2xl font-medium">CategorÃ­as</h5>
+              <h3 className="text-gray-400">Gestiona las categorÃ­as disponibles en tu tienda.</h3>
             </div>
           </div>
           
@@ -32,7 +32,7 @@ export default async function CategoriasPage() {
               <i className="fa-solid fa-plus mr-2"></i>
               {/* <i className="fa-solid fa-paintbrush ml-2"></i>
               <i className="fa-solid fa-palette mr-2"></i> */}
-              Agregar Categoría
+              Agregar CategorÃ­a
           </Link>
         </div>
 
@@ -43,3 +43,4 @@ export default async function CategoriasPage() {
       </div>
     )
 }
+
