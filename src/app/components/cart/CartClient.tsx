@@ -73,13 +73,15 @@ export const CartClient = () => {
   }
 
   return (
-    <div className="flex w-[60%]">
-        <div className="w-[50%] p-[2%]">
+    <div className="flex gap-15 w-[90%]">
+        <div className="w-[60%] p-[2%]">
           <h5 className="text-3xl 2xl:text-4xl font-bold">Carrito</h5>
           {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           <div className="h-[65vh] mt-[2%] overflow-y-auto">
-              <p className="text-base 2xl:text-lg">Agregar más items</p>
-              <Link href="/" className="text-xs 2xl:text-base underline cursor-pointer">Continuar comprando</Link>
+              <p className="text-base 2xl:text-sm text-gray-500">Reviza los productos antes de continuar con la compra.</p>
+
+              
+              {/* <Link href="/" className="text-xs 2xl:text-base underline cursor-pointer">Continuar comprando</Link> */}
 
               {
                 productosEnCarrito.map((productoEnCarrito, index) => {
@@ -94,35 +96,82 @@ export const CartClient = () => {
                   );
                 })
               }
+              <div className="flex text-sm p-3 shadow-md">
+                <div className="flex items-center gap-4">
+                  <i className="shrink-0 h-fit fa-solid text-yellow-300 fa-bag-shopping p-4 2xl:p-4 bg-yellow-100 rounded-full"></i>
+                  <div>
+                    <p className="font-bold">¿Te hace falta algo más?</p>
+                    <p className="text-gray-700">Explora nuestros productos y encuentra más opciones</p>
+                  </div>
+                </div>
+                  <Link href="/" 
+                    className="flex items-center px-3 text-xs 2xl:text-base cursor-pointer ml-auto border border-gray-400 rounded-lg"
+                    >
+                  Continuar comprando
+                  </Link>
+              </div>
           </div>
         </div>
-        <div className="md:w-[45%] 2xl:w-[35%] md:h-[50%] 2xl:h-[40%] mt-[5%] ml-[5%] p-8 rounded-2xl shadow-xl">
-          <h4 className="text-xl font-bold">Resumen de orden</h4>
-          <div className="flex justify-between mt-4">
-            <p>Número de productos</p>
-            {/* <p className="">{ cartProducts?.length }</p> */}
+        <div className="md:w-[35%] 2xl:w-[28%]">
+          <div className=" mt-[5%] p-8 rounded-2xl shadow-md">
+            <h4 className="text-xl font-bold">Resumen de orden</h4>
+            <div className="flex justify-between mt-4">
+              <div className="flex items-center gap-4">
+                <i className="fa-solid fa-box"></i>
+                <p>Número de productos ({productosEnCarrito?.length})</p>
+              </div>
+              <p className="">{currencyFormat(subtotal)}</p>
+            </div>
+            <div className="flex justify-between mt-3">
+              <div className="flex items-center gap-4">
+                <i className="fa-solid fa-tag"></i>
+                <p>Impuestos(11%)</p>
+              </div>
+              <p className="">{currencyFormat(subtotal * 0.11)}</p>
+            </div>
+            <div className="flex justify-between mt-4 pt-2 border-t border-gray-300">
+              <p className="text-xl font-bold">Total</p>
+              <p className="text-xl font-bold">{currencyFormat(subtotal * 1.11)}</p>
+            </div>
+            <div className="flex items-center gap-4 pl-7 p-3 bg-green-100 text-sm border border-green-300 rounded-lg mt-4">
+              <i className="fa-solid fa-truck"></i>
+              <div>
+                <p className="font-semibold">¡Envio gratis aplicado!</p>
+                <p className="">Disfruta de envio gratis en tu pedido</p>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <Link 
+                href="/checkout/address" 
+                className="w-full mt-[8%] text-center py-2 bg-blue-500 text-white rounded cursor-pointer"
+              >
+                Checkout
+              </Link>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <p>Subtotal</p>
-            <p className="">{currencyFormat(subtotal)}</p>
+          <div className="mt-5 text-sm shadow-md rounded-lg">
+            <div className="flex gap-4 items-center flex-row mx-5 px-5 py-2 border-b border-gray-200">
+              <i className="shrink-0 h-fit fa-solid fa-shield-heart p-4 2xl:p-4 text-green-500 bg-green-200 rounded-full"></i>
+              <div className="h-fit">
+                <p className="font-semibold">Compra segura</p>
+                <p className="text-gray-600">Tus pagos están protegidos con encriptación</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-center flex-row mx-5 px-5 py-2 border-b border-gray-200">
+              <i className="shrink-0 h-fit fa-solid fa-truck p-4 2xl:p-4 text-purple-500 bg-purple-200 rounded-full"></i>
+              <div className="h-fit">
+                <p className="font-semibold">Envio rápido y gratis</p>
+                <p className="text-gray-600">En pedidos mayores a $15.000 en todo Costa Rica</p>
+              </div>
+            </div>
+            <div className="flex gap-4 items-center flex-row mx-5 px-5 py-2 border-b border-gray-200">
+              <i className="shrink-0 h-fit fa-solid fa-rotate p-4 2xl:p-4 text-yellow-500 bg-yellow-200 rounded-full"></i>
+              <div className="h-fit">
+                <p className="font-semibold">Devoluciones fáciles</p>
+                <p className="text-gray-600">Tienes 30 días para cambios o devoluciones</p>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <p>Impuestos(11%)</p>
-            <p className="">{currencyFormat(subtotal * 0.11)}</p>
-          </div>
-          <div className="flex justify-between mt-4">
-            <p className="text-xl font-bold">Total</p>
-            <p className="text-xl font-bold">{currencyFormat(subtotal * 1.11)}</p>
-          </div>
-          <div className="flex flex-col">
-            <Link 
-              href="/checkout/address" 
-              className="w-full mt-[8%] text-center py-2 bg-blue-500 text-white rounded cursor-pointer"
-            >
-              Checkout
-            </Link>
-          </div>
-          
         </div>
       </div>
   )
