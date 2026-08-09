@@ -6,6 +6,7 @@ import { editarVariante } from "@/src/services/api/server/variantes";
 import { editarImagenesVariante, getImagenesByVariante } from "@/src/services/api/server/imagenes";
 import Link from "next/link";
 import { IVariante } from "@/src/interfaces/variante";
+import { _base } from "@/src/utilities/url-imgBase";
 
 type Props = {
     variante: IVariante | null;
@@ -29,7 +30,7 @@ export default function FormImagenesVariante({variante, onSuccess}:Props) {
     //inicializar la función antes de llamarla
     //crea la url de imagenes para mostrarlas
     const setImages = (data: {_id: string, variante: string, url: string }[] | null) => {
-        const base = "http://localhost:4000/uploads/";
+        const base = _base;
         setImg1(data?.[0] ? base + data[0].url : undefined);
         setImg2(data?.[1] ? base + data[1].url : undefined);
         setImg3(data?.[2] ? base + data[2].url : undefined);

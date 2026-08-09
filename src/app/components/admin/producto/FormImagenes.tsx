@@ -9,6 +9,7 @@ import EliminarVariante from "../variantes/EliminarVariante";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { editarProductoConImagenes } from "@/src/services/api/server/productos";
+import { _base } from "@/src/utilities/url-imgBase";
 
 type Variante = {
   _id: string;
@@ -58,7 +59,8 @@ export default function FormImagenes({producto, imagenes, categorias}:Props) {
     }
     useEffect(() => {
         const setImages = (data: {_id: string, producto: string, url: string }[] | null) => {
-            const base = "http://localhost:4000/uploads/";
+            const base = _base;
+            
 
             setImg1(data?.[0] ? base + data[0].url : undefined);
             setImg2(data?.[1] ? base + data[1].url : undefined);
