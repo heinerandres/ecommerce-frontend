@@ -2,7 +2,7 @@ export async function apiFetch(endpoint, options = {}) {
   //const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
 
   try{
-    const res = await fetch(`https://ecommerce-back-gbe4fndmdxfdctab.canadacentral-01.azurewebsites.net${endpoint}`, {
+    const res = await fetch(`https://ecommerce-backend-3c9u.onrender.com/${endpoint}`, {
       ...options,
       headers: {
         ...options.headers
