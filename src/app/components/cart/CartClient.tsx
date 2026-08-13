@@ -74,15 +74,12 @@ export const CartClient = () => {
 
   return (
     <div className="flex gap-15 w-[90%]">
-        <div className="w-[60%] p-[2%]">
+        <div className="w-[62%] p-[2%]">
           <h5 className="text-3xl 2xl:text-4xl font-bold">Carrito</h5>
           {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+          <p className="text-base 2xl:text-sm mt-2 text-gray-500">Reviza los productos antes de continuar con la compra.</p>
+
           <div className="h-[65vh] mt-[2%] overflow-y-auto">
-              <p className="text-base 2xl:text-sm text-gray-500">Reviza los productos antes de continuar con la compra.</p>
-
-              
-              {/* <Link href="/" className="text-xs 2xl:text-base underline cursor-pointer">Continuar comprando</Link> */}
-
               {
                 productosEnCarrito.map((productoEnCarrito, index) => {
                   return(
@@ -112,8 +109,8 @@ export const CartClient = () => {
               </div>
           </div>
         </div>
-        <div className="md:w-[35%] 2xl:w-[28%]">
-          <div className=" mt-[5%] p-8 rounded-2xl shadow-md">
+        <div className="md:w-[35%] 2xl:w-[24%]">
+          <div className=" mt-20 p-8 rounded-2xl shadow-md">
             <h4 className="text-xl font-bold">Resumen de orden</h4>
             <div className="flex justify-between mt-4">
               <div className="flex items-center gap-4">

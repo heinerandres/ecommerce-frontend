@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Providers } from "@/src/redux/provider";
 
 import "./globals.css";
@@ -20,6 +20,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>{children}</Providers> 
+        <GoogleAnalytics gaId="G-91SJZG5HQ4" />
       </body>
     </html>
   );

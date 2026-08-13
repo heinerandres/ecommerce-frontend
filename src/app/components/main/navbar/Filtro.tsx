@@ -13,6 +13,7 @@ export const Filtro = ({categorias}: Props) => {
   return (
     <div className="flex h-7 xl:h-9 2xl:h-11">
         <select 
+            name="select-filtro-categorias"
             className="text-black bg-white border cursor-pointer border-gray-300 rounded-l-md px-[1%] 2xl:w-45 2xl:text-base"
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
@@ -25,6 +26,7 @@ export const Filtro = ({categorias}: Props) => {
             ))}
         </select>
         <input 
+            name="input-filtro-productos"
             type="text" 
             className="md:w-[37vw] 2xl:w-[30vw] border px-3 border-gray-300"
             value={ busqueda }

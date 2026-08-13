@@ -26,14 +26,14 @@
 
 
 .mySwiper {
-  height: 18vh;
+  height: 10vh;
   box-sizing: border-box;
   padding: 10px 0;
 }
 
 .mySwiper .swiper-slide {
   width: 10% !important;
-  height: 50% !important;
+  height: 100% !important;
   opacity: 0.4;
   border: 1px solid gray;
 }
