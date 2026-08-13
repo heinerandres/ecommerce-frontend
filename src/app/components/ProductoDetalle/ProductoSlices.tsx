@@ -75,7 +75,7 @@ export const ProductoSlides = ({imagenes}: Props) => {
                         height={ 1000 }
                         src={ base + image.url }
                         alt={ title }
-                        className="rounded-lg object-fill cursor-pointer "
+                        className="rounded-lg object-fill cursor-pointer"
                         unoptimized
                     />
                 </SwiperSlide>

@@ -2,6 +2,7 @@ import { ProductoClient } from "@/src/app/components/ProductoDetalle/ProductoCli
 import { ProductoSlides } from "@/src/app/components/ProductoDetalle/ProductoSlices";
 import { getProductoBySlug } from "@/src/services/api/server/productos";
 import { getImagenesByProducto } from '@/src/services/api/server/imagenes';
+import { BenefitsBanner } from "@/src/app/components/main/BenefitsBanner";
 
 interface Props {
     params: {
@@ -23,7 +24,7 @@ export default async function ProductoPage ({ params }: Props) {
     else error = respuesta.msg;
 
   return (
-    <div className="flex justify-center h-[80vh] mt-[2%]">
+    <div className="flex flex-col items-center h-fit mt-[2%]">
       <div className="flex h-full w-[80%]">
         <div className="w-[50%]">
           <ProductoSlides imagenes={imagenes} />
@@ -35,7 +36,10 @@ export default async function ProductoPage ({ params }: Props) {
           
           <ProductoClient producto={producto}  />
 
+        </div>
       </div>
+      <div className="w-full mt-4">
+        <BenefitsBanner />
       </div>
     </div>
   )
