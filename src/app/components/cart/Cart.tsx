@@ -41,14 +41,14 @@ export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, 
   return (
     <div className="shadow-md border border-gray-300 my-3 rounded-xl">
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}
-      <div className="flex h-[25%] p-3" key={productoEnCarrito.producto._id}>
+      <div className="flex p-3" key={productoEnCarrito.producto._id}>
         <div className="w-40 2xl:w-50 border">
           <img 
             src={ base + productoEnCarrito.producto.imagenes?.[0].url }
             className="h-full w-full"
           />
         </div>
-        <div className="flex flex-col justify-between relative p-0 pl-6 w-full">
+        <div className="relative flex flex-col justify-between p-0 pl-6 w-full">
           <div className="flex justify-between">
             <p className="font-bold">{ productoEnCarrito.producto.nombre }</p>
             <p onClick={() => handleRemover(productoEnCarrito.producto._id, productoEnCarrito.variante?._id)} className="cursor-pointer text-xs hover:underline">Remover</p>
@@ -73,13 +73,13 @@ export default function Cart({ productoEnCarrito, usuario, _actualizarCantidad, 
             <p className=" shrink-0 h-fit p-1 px-3 rounded-lg xl:text-sm 2xl:text-base text-green-400 bg-green-100"><i className="fa-solid fa-check mr-2"></i>Disponibles</p>
             <div className="flex gap-10 items-center self-end">
               <CantidadesCarrito 
-              productoId={productoEnCarrito.producto._id}
-              cantidadEnCarrito={ cantidadEnCarrito }
-              stock={productoEnCarrito.stock}
-              precio={!productoEnCarrito.variante ? productoEnCarrito.producto.precio ?? 0 : productoEnCarrito.variante.precio ?? 0}
-              _actualizarCantidad={_actualizarCantidad}
-              actualizarCantidad={actualizarCantidad}
-            />
+                productoId={productoEnCarrito.producto._id}
+                cantidadEnCarrito={ cantidadEnCarrito }
+                stock={productoEnCarrito.stock}
+                precio={!productoEnCarrito.variante ? productoEnCarrito.producto.precio ?? 0 : productoEnCarrito.variante.precio ?? 0}
+                _actualizarCantidad={_actualizarCantidad}
+                actualizarCantidad={actualizarCantidad}
+              />
             <div>
               <p className="text-sm">Subtotal</p>
             <p className="font-semibold">{ currencyFormat(productoEnCarrito.producto.precio ? productoEnCarrito.producto.precio * productoEnCarrito.cantidadCarrito : (productoEnCarrito.variante?.precio ?? 0) * productoEnCarrito.cantidadCarrito)}</p>
