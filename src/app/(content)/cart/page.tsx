@@ -6,7 +6,7 @@ import { getTallas } from '@/src/services/api/server/tallas';
 export default async function CartPage() {
 
   return (
-    <div className="flex justify-center h-[80vh]">
+    <div className="flex justify-center h-[80vh] md:text-sm 2xl:text-lg">
       <CartClient/>
     </div>
   )
